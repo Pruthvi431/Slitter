@@ -1,0 +1,774 @@
+﻿<Window x:Class="SlittersWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:SlittersWPF"
+        mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
+        Title="ANC SLITTER Version 2.1" Height="1080" Width="1920">
+    <Window.Resources>
+        <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}"   
+         x:Name="Bd" BorderBrush="Black"  
+         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <Border Margin= "5 10 5 5" Background="DarkGray" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="211*"/>
+                <ColumnDefinition Width="230*"/>
+                <ColumnDefinition Width="565*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\Clouds.jpg"/>
+            </Grid.Background>
+            <StackPanel Margin="0,0,0,0" Grid.ColumnSpan="3" >
+
+                <!-- Slitter Version Top Row-->
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="62*" />
+                        <ColumnDefinition Width="139*"/>
+                        <ColumnDefinition Width="201*" />
+                        <ColumnDefinition Width="201*" />
+                        <ColumnDefinition Width="202*" />
+                        <ColumnDefinition Width="201*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name ="OrderInfoTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="This holds order information coming from Wrapline" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue" TextWrapping="Wrap"/>
+                    <TextBox x:Name ="ModbusMessageTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Captures Communication Failures for Rx3i PLC" Grid.Column="4" Grid.ColumnSpan="2" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue"/>
+                    <TextBox x:Name ="DateTimeTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Date Time" Grid.Column="5" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue"/>
+                </Grid>
+
+
+                <TextBox Text="Rolls" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" FontSize="14" Margin="0" HorizontalAlignment="Left" />
+
+
+                <!-- Configuraton for Order Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Roll1" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Background="LightBlue" TextChanged="Roll1_TextChanged" />
+                    <TextBox x:Name="Roll2" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Background="LightBlue" TextChanged="Roll2_TextChanged" />
+                    <TextBox x:Name="Roll3" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Background="LightBlue" TextChanged="Roll3_TextChanged" />
+                    <TextBox x:Name="Roll4" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Background="LightBlue" TextChanged="Roll4_TextChanged" />
+                    <TextBox x:Name="Roll5" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Background="LightBlue" TextChanged="Roll5_TextChanged" />
+                    <TextBox x:Name="Roll6" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Background="LightBlue" TextChanged="Roll6_TextChanged" />
+                    <TextBox x:Name="Roll7" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Background="LightBlue" TextChanged="Roll7_TextChanged" />
+                    <TextBox x:Name="Roll8" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Background="LightBlue" TextChanged="Roll8_TextChanged" />
+                    <TextBox x:Name="Roll9" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Background="LightBlue" TextChanged="Roll9_TextChanged" />
+                    <TextBox x:Name="Roll10" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Background="LightBlue" TextChanged="Roll10_TextChanged" />
+                    <TextBox x:Name="Roll11" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Background="LightBlue" TextChanged="Roll11_TextChanged" />
+                    <TextBox x:Name="Roll12" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Background="LightBlue" TextChanged="Roll12_TextChanged" />
+                    <TextBox x:Name="Roll13" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Background="LightBlue" TextChanged="Roll13_TextChanged" />
+                    <TextBox x:Name="Roll14" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Background="LightBlue" TextChanged="Roll14_TextChanged"/>
+                    <TextBox x:Name="Roll15" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Background="LightBlue" TextChanged="Roll15_TextChanged" />
+                    <TextBox x:Name="Roll16" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Background="LightBlue" TextChanged="Roll16_TextChanged" />
+                    <TextBox x:Name="Roll17" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Background="LightBlue" TextChanged="Roll17_TextChanged" />
+                    <TextBox x:Name="Roll18" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Background="LightBlue" TextChanged="Roll18_TextChanged" />
+
+                </Grid>
+
+
+                <TextBox x:Name="ShrinkTxtLbl" Template="{StaticResource SlitterTxt}" Text="Shrink" HorizontalContentAlignment="Center" FontSize="14" Margin="0" HorizontalAlignment="Left"/>
+
+                <!-- Configuraton for Order Text Boxes With Shrinkage -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Text Box for Order -->
+                    <TextBox x:Name="Roll1ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="0" Text="Shrk1" Background="LightBlue" />
+                    <TextBox x:Name="Roll2ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="1" Text="Shrk2" Background="LightBlue" />
+                    <TextBox x:Name="Roll3ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="2" Text="Shrk3" Background="LightBlue" />
+                    <TextBox x:Name="Roll4ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="3" Text="Shrk4" Background="LightBlue" />
+                    <TextBox x:Name="Roll5ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="4" Text="Shrk5" Background="LightBlue" />
+                    <TextBox x:Name="Roll6ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="5" Text="Shrk6" Background="LightBlue" />
+                    <TextBox x:Name="Roll7ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="6" Text="Shrk7" Background="LightBlue" />
+                    <TextBox x:Name="Roll8ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="7" Text="Shrk8" Background="LightBlue" />
+                    <TextBox x:Name="Roll9ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="8" Text="Shrk9" Background="LightBlue" />
+                    <TextBox x:Name="Roll10ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="9" Text="Shrk10" Background="LightBlue" />
+                    <TextBox x:Name="Roll11ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="10" Text="Shrk11" Background="LightBlue" />
+                    <TextBox x:Name="Roll12ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="11" Text="Shrk12" Background="LightBlue" />
+                    <TextBox x:Name="Roll13ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="12" Text="Shrk13" Background="LightBlue" />
+                    <TextBox x:Name="Roll14ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="13" Text="Shrk14" Background="LightBlue" />
+                    <TextBox x:Name="Roll15ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="14" Text="Shrk15" Background="LightBlue" />
+                    <TextBox x:Name="Roll16ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="15" Text="Shrk16" Background="LightBlue" />
+                    <TextBox x:Name="Roll17ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="16" Text="Shrk17" Background="LightBlue" />
+                    <TextBox x:Name="Roll18ShrinkTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 10" Grid.Column="17" Text="Shrk18" Background="LightBlue" />
+
+                </Grid>
+
+
+
+
+
+                <!-- Configuraton for Slitter Labels -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="S1Lbl" Text=" S1" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="0" />
+                    <TextBox x:Name="S2Lbl" Text=" S2" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="1" />
+                    <TextBox x:Name="S3Lbl" Text=" S3" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="2" />
+                    <TextBox x:Name="S4Lbl" Text=" S4" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="3" />
+                    <TextBox x:Name="S5Lbl" Text=" S5" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="4" />
+                    <TextBox x:Name="S6Lbl" Text=" S6" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="5" />
+                    <TextBox x:Name="S7Lbl" Text=" S7" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="6" />
+                    <TextBox x:Name="S8Lbl" Text=" S8" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="7" />
+                    <TextBox x:Name="S9Lbl" Text=" S9" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center"  Margin="15 10 15 10" Grid.Column="8" />
+                    <TextBox x:Name="S10Lbl" Text="S10" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="9" />
+                    <TextBox x:Name="S11Lbl" Text="S11" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="10" />
+                    <TextBox x:Name="S12Lbl" Text="S12" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="11" />
+                    <TextBox x:Name="S13Lbl" Text="S13" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="12" />
+                    <TextBox x:Name="S14Lbl" Text="S14" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="13" />
+                    <TextBox x:Name="S15Lbl" Text="S15" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="14" />
+                    <TextBox x:Name="S16Lbl" Text="S16" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="15" />
+                    <TextBox x:Name="S17Lbl" Text="S17" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="16" />
+                    <TextBox x:Name="S18Lbl" Text="S18" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="17" />
+                    <TextBox x:Name="S19Lbl" Text="S19" IsReadOnly="True" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="18" />
+
+                </Grid>
+
+
+                <!-- Configuraton for Disable and Out of Service -->
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox x:Name="S1LblEn" Margin="10 5 5 5" Grid.Column="0" Background="LimeGreen" Checked="S1LblEn_Checked" Unchecked="S1LblEn_Unchecked"/>
+                    <CheckBox x:Name="S1LblServ" Margin="10 5 0 5" Grid.Column="1" Background="LimeGreen" Checked="S1LblServ_Checked" Unchecked="S1LblServ_Unchecked"/>
+                    <CheckBox x:Name="S2LblEn" Margin="10 5 5 5" Grid.Column="2" Background="LimeGreen" Checked="S2LblEn_Checked" Unchecked="S2LblEn_Unchecked"/>
+                    <CheckBox x:Name="S2LblServ" Margin="10 5 0 5" Grid.Column="3" Background="LimeGreen" Checked="S2LblServ_Checked" Unchecked="S2LblServ_Unchecked"/>
+                    <CheckBox x:Name="S3LblEn" Margin="10 5 5 5" Grid.Column="4" Background="LimeGreen" Checked="S3LblEn_Checked" Unchecked="S3LblEn_Unchecked"/>
+                    <CheckBox x:Name="S3LblServ" Margin="10 5 0 5" Grid.Column="5" Background="LimeGreen" Checked="S3LblServ_Checked" Unchecked="S3LblServ_Unchecked"/>
+                    <CheckBox x:Name="S4LblEn" Margin="10 5 5 5" Grid.Column="6" Background="LimeGreen" Checked="S4LblEn_Checked" Unchecked="S4LblEn_Unchecked"/>
+                    <CheckBox x:Name="S4LblServ" Margin="10 5 0 5" Grid.Column="7" Background="LimeGreen" Checked="S4LblServ_Checked" Unchecked="S4LblServ_Unchecked"/>
+                    <CheckBox x:Name="S5LblEn" Margin="10 5 5 5" Grid.Column="8" Background="LimeGreen" Checked="S5LblEn_Checked" Unchecked="S5LblEn_Unchecked"/>
+                    <CheckBox x:Name="S5LblServ" Margin="10 5 0 5" Grid.Column="9" Background="LimeGreen" Checked="S5LblServ_Checked" Unchecked="S5LblServ_Unchecked"/>
+                    <CheckBox x:Name="S6LblEn" Margin="10 5 5 5" Grid.Column="10" Background="LimeGreen" Checked="S6LblEn_Checked" Unchecked="S6LblEn_Unchecked"/>
+                    <CheckBox x:Name="S6LblServ" Margin="10 5 0 5" Grid.Column="11" Background="LimeGreen" Checked="S6LblServ_Checked" Unchecked="S6LblServ_Unchecked"/>
+                    <CheckBox x:Name="S7LblEn" Margin="10 5 5 5" Grid.Column="12" Background="LimeGreen" Checked="S7LblEn_Checked" Unchecked="S7LblEn_Unchecked"/>
+                    <CheckBox x:Name="S7LblServ" Margin="10 5 0 5" Grid.Column="13" Background="LimeGreen" Checked="S7LblServ_Checked" Unchecked="S7LblServ_Unchecked"/>
+                    <CheckBox x:Name="S8LblEn" Margin="10 5 5 5" Grid.Column="14" Background="LimeGreen" Checked="S8LblEn_Checked" Unchecked="S8LblEn_Unchecked"/>
+                    <CheckBox x:Name="S8LblServ" Margin="10 5 0 5" Grid.Column="15" Background="LimeGreen" Checked="S8LblServ_Checked" Unchecked="S8LblServ_Unchecked"/>
+                    <CheckBox x:Name="S9LblEn" Margin="10 5 5 5" Grid.Column="16" Background="LimeGreen" Checked="S9LblEn_Checked" Unchecked="S9LblEn_Unchecked"/>
+                    <CheckBox x:Name="S9LblServ" Margin="10 5 0 5" Grid.Column="17" Background="LimeGreen" Checked="S9LblServ_Checked" Unchecked="S9LblServ_Unchecked"/>
+                    <CheckBox x:Name="S10LblEn" Margin="10 5 5 5" Grid.Column="18" Background="LimeGreen" Checked="S10LblEn_Checked" Unchecked="S10LblEn_Unchecked"/>
+                    <CheckBox x:Name="S10LblServ" Margin="10 5 0 5" Grid.Column="19" Background="LimeGreen" Checked="S10LblServ_Checked" Unchecked="S10LblServ_Unchecked"/>
+                    <CheckBox x:Name="S11LblEn" Margin="10 5 5 5" Grid.Column="20" Background="LimeGreen" Checked="S11LblEn_Checked" Unchecked="S11LblEn_Unchecked"/>
+                    <CheckBox x:Name="S11LblServ" Margin="10 5 0 5" Grid.Column="21" Background="LimeGreen" Checked="S11LblServ_Checked" Unchecked="S11LblServ_Unchecked"/>
+                    <CheckBox x:Name="S12LblEn" Margin="10 5 5 5" Grid.Column="22" Background="LimeGreen" Checked="S12LblEn_Checked" Unchecked="S12LblEn_Unchecked"/>
+                    <CheckBox x:Name="S12LblServ" Margin="10 5 0 5" Grid.Column="23" Background="LimeGreen" Checked="S12LblServ_Checked" Unchecked="S12LblServ_Unchecked"/>
+                    <CheckBox x:Name="S13LblEn" Margin="10 5 5 5" Grid.Column="24" Background="LimeGreen" Checked="S13LblEn_Checked" Unchecked="S13LblEn_Unchecked"/>
+                    <CheckBox x:Name="S13LblServ" Margin="10 5 0 5" Grid.Column="25" Background="LimeGreen" Checked="S13LblServ_Checked" Unchecked="S13LblServ_Unchecked"/>
+                    <CheckBox x:Name="S14LblEn" Margin="10 5 5 5" Grid.Column="26" Background="LimeGreen" Checked="S14LblEn_Checked" Unchecked="S14LblEn_Unchecked"/>
+                    <CheckBox x:Name="S14LblServ" Margin="10 5 0 5" Grid.Column="27" Background="LimeGreen" Checked="S14LblServ_Checked" Unchecked="S14LblServ_Unchecked"/>
+                    <CheckBox x:Name="S15LblEn" Margin="10 5 5 5" Grid.Column="28" Background="LimeGreen" Checked="S15LblEn_Checked" Unchecked="S15LblEn_Unchecked"/>
+                    <CheckBox x:Name="S15LblServ" Margin="10 5 0 5" Grid.Column="29" Background="LimeGreen" Checked="S15LblServ_Checked" Unchecked="S15LblServ_Unchecked"/>
+                    <CheckBox x:Name="S16LblEn" Margin="10 5 5 5" Grid.Column="30" Background="LimeGreen" Checked="S16LblEn_Checked" Unchecked="S16LblEn_Unchecked"/>
+                    <CheckBox x:Name="S16LblServ" Margin="10 5 0 5" Grid.Column="31" Background="LimeGreen" Checked="S16LblServ_Checked" Unchecked="S16LblServ_Unchecked"/>
+                    <CheckBox x:Name="S17LblEn" Margin="10 5 5 5" Grid.Column="32" Background="LimeGreen" Checked="S17LblEn_Checked" Unchecked="S17LblEn_Unchecked"/>
+                    <CheckBox x:Name="S17LblServ" Margin="10 5 0 5" Grid.Column="33" Background="LimeGreen" Checked="S17LblServ_Checked" Unchecked="S17LblServ_Unchecked"/>
+                    <CheckBox x:Name="S18LblEn" Margin="10 5 5 5" Grid.Column="34" Background="LimeGreen" Checked="S18LblEn_Checked" Unchecked="S18LblEn_Unchecked"/>
+                    <CheckBox x:Name="S18LblServ" Margin="10 5 0 5" Grid.Column="35" Background="LimeGreen" Checked="S18LblServ_Checked" Unchecked="S18LblServ_Unchecked"/>
+                    <CheckBox x:Name="S19LblEn" Margin="10 5 5 5" Grid.Column="36" Background="LimeGreen" Checked="S19LblEn_Checked" Unchecked="S19LblEn_Unchecked"/>
+                    <CheckBox x:Name="S19LblServ" Margin="10 5 0 5" Grid.Column="37" Background="LimeGreen" Checked="S19LblServ_Checked" Unchecked="S19LblServ_Unchecked"/>
+                </Grid>
+
+
+                <!-- Configuraton for Band Set Point Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="BandStpt1" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="Stpt1" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt2" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="Stpt2" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt3" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="Stpt3" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt4" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="Stpt4" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt5" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="Stpt5" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt6" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="Stpt6" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt7" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="Stpt7" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt8" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="Stpt8" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt9" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="Stpt9" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt10" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="Stpt10" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt11" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="Stpt11" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt12" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="Stpt12" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt13" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="Stpt13" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt14" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="Stpt14" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt15" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="Stpt15" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt16" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="Stpt16" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt17" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="Stpt17" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt18" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="Stpt18" Background="LightBlue" />
+                    <TextBox x:Name="BandStpt19" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="Stpt19" Background="LightBlue" />
+
+                </Grid>
+
+
+                <TextBox x:Name="BandTxtBx" Text="Band" Template="{StaticResource SlitterTxt}" Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+
+                <!-- Configuraton for Band Position Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Band1Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="Band1" Background="LightGreen" />
+                    <TextBox x:Name="Band2Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="Band2" Background="LightGreen" />
+                    <TextBox x:Name="Band3Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="Band3" Background="LightGreen" />
+                    <TextBox x:Name="Band4Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="Band4" Background="LightGreen" />
+                    <TextBox x:Name="Band5Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="Band5" Background="LightGreen" />
+                    <TextBox x:Name="Band6Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="Band6" Background="LightGreen" />
+                    <TextBox x:Name="Band7Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="Band7" Background="LightGreen" />
+                    <TextBox x:Name="Band8Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="Band8" Background="LightGreen" />
+                    <TextBox x:Name="Band9Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="Band9" Background="LightGreen" />
+                    <TextBox x:Name="Band10Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="Band10" Background="LightGreen" />
+                    <TextBox x:Name="Band11Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="Band11" Background="LightGreen" />
+                    <TextBox x:Name="Band12Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="Band12" Background="LightGreen" />
+                    <TextBox x:Name="Band13Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="Band13" Background="LightGreen" />
+                    <TextBox x:Name="Band14Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="Band14" Background="LightGreen" />
+                    <TextBox x:Name="Band15Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="Band15" Background="LightGreen" />
+                    <TextBox x:Name="Band16Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="Band16" Background="LightGreen" />
+                    <TextBox x:Name="Band17Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="Band17" Background="LightGreen" />
+                    <TextBox x:Name="Band18Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="Band18" Background="LightGreen" />
+                    <TextBox x:Name="Band19Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="Band19" Background="LightGreen" />
+
+                </Grid>
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+                <!-- Configuration for Band Position Error Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Band1Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="B1Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band2Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="B2Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band3Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="B3Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band4Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="B4Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band5Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="B5Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band6Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="B6Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band7Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="B7Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band8Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="B8Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band9Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="B9Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band10Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="B10Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band11Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="B11Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band12Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="B12Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band13Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="B13Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band14Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="B14Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band15Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="B15Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band16Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="B16Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band17Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="BErr17" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band18Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="BErr18" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Band19Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="BErr19" Background="PaleGoldenrod" />
+
+                </Grid>
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+                <!-- Configuration for Blade Position Error Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Blade1Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="B1Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade2Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="B2Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade3Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="B3Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade4Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="B4Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade5Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="B5Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade6Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="B6Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade7Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="B7Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade8Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="B8Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade9Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="B9Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade10Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="B10Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade11Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="B11Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade12Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="B12Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade13Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="B13Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade14Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="B14Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade15Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="B15Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade16Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="B16Err" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade17Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="BErr17" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade18Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="BErr18" Background="PaleGoldenrod" />
+                    <TextBox x:Name="Blade19Err" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="BErr19" Background="PaleGoldenrod" />
+
+                </Grid>
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+                <!-- Configuraton for Blade Position Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="Blade1Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="Blade1" Background="LightGreen" />
+                    <TextBox x:Name="Blade2Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="Blade2" Background="LightGreen" />
+                    <TextBox x:Name="Blade3Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="Blade3" Background="LightGreen" />
+                    <TextBox x:Name="Blade4Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="Blade4" Background="LightGreen" />
+                    <TextBox x:Name="Blade5Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="Blade5" Background="LightGreen" />
+                    <TextBox x:Name="Blade6Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="Blade6" Background="LightGreen" />
+                    <TextBox x:Name="Blade7Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="Blade7" Background="LightGreen" />
+                    <TextBox x:Name="Blade8Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="Blade8" Background="LightGreen" />
+                    <TextBox x:Name="Blade9Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="Blade9" Background="LightGreen" />
+                    <TextBox x:Name="Blade10Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="Blade10" Background="LightGreen" />
+                    <TextBox x:Name="Blade11Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="Blade11" Background="LightGreen" />
+                    <TextBox x:Name="Blade12Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="Blade12" Background="LightGreen" />
+                    <TextBox x:Name="Blade13Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="Blade13" Background="LightGreen" />
+                    <TextBox x:Name="Blade14Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="Blade14" Background="LightGreen" />
+                    <TextBox x:Name="Blade15Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="Blade15" Background="LightGreen" />
+                    <TextBox x:Name="Blade16Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="Blade16" Background="LightGreen" />
+                    <TextBox x:Name="Blade17Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="Blade17" Background="LightGreen" />
+                    <TextBox x:Name="Blade18Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="Blade18" Background="LightGreen" />
+                    <TextBox x:Name="Blade19Posn" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="Blade19" Background="LightGreen" />
+
+                </Grid>
+
+
+                <TextBox x:Name="BladeTxtBx" Text="Blade" Margin="0" FontSize="14" Template="{StaticResource SlitterTxt}"  HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+
+                <!-- Configuraton for Blade Set Point Text Boxes -->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Text Box for Order -->
+                    <TextBox x:Name="BladeStpt1" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Text="Stpt1" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt2" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Text="Stpt2" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt3" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Text="Stpt3" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt4" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Text="Stpt4" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt5" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Text="Stpt5" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt6" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Text="Stpt6" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt7" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Text="Stpt7" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt8" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Text="Stpt8" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt9" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Text="Stpt9" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt10" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Text="Stpt10" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt11" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Text="Stpt11" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt12" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Text="Stpt12" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt13" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Text="Stpt13" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt14" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Text="Stpt14" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt15" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Text="Stpt15" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt16" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Text="Stpt16" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt17" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Text="Stpt17" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt18" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Text="Stpt18" Background="LightBlue" />
+                    <TextBox x:Name="BladeStpt19" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Text="Stpt19" Background="LightBlue" />
+
+                </Grid>
+
+                <!-- Buttons for Slitter Section -->
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+                <!-- Buttons -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+
+                    </Grid.RowDefinitions>
+                    <Button x:Name="ResetBtn" Content="Reset Faults" Style="{DynamicResource SlitterBtn}" Grid.Column="0" Margin="60 0" Click="ResetBtn_Click" />
+                    <Button x:Name="AcceptBtn" Content="Accept" Style="{DynamicResource SlitterBtn}" Grid.Column="1" Margin="60 0" Click="AcceptBtn_Click" />
+                    <Button x:Name="ExecuteBtn" Content="Execute" Style="{DynamicResource SlitterBtn}" Grid.Column="2" Margin="60 0" Click="ExecuteBtn_Click" />
+                    <xctk:DoubleUpDown x:Name="ShrinkIncDecBtn" Grid.Column="3" Margin="60 0" Increment="0.01" Maximum="0.3" Minimum="0" FormatString="F2" BorderThickness="2" BorderBrush="Black" Background="Transparent"  ValueChanged="ShrinkIncDecBtn_ValueChanged" TextAlignment="Center" />
+                    <Button x:Name="CoreChucksBtn" Content="CoreChucks" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Margin="60 0" Click="CoreChucksBtn_Click" />
+                    <Button x:Name="CalibOrdBtn" Content="Calibrate" Style="{DynamicResource SlitterBtn}" Grid.Column="5" Margin="60 0" Click="CalibOrdBtn_Click"/>
+
+                </Grid>
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+
+                <!-- Fault Message List Box  and Label and Text Boxes-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="FltMsgListBx" Height="150" Background="Black"  Foreground="Red" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+                    <Label x:Name="OrderWidthLbl" Content="Order Width" Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="OrderWidthTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Margin="80 10" Text="8420.00" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
+                    <Label x:Name="ShrkWidthLbl" Content="Total Trim" Grid.Column="3" Grid.Row="0"  HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="ShrkWidthTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="8450.00" Margin="80 0" Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="OrderInfoLbl" Content="Order Number" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="OrderNoTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="A123456" Margin="80 5" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="0" Background="LightGreen"/>
+                    <Label x:Name="DSTrimLbl" Content="DS Trim" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="DSTrimPosnTxtBx" Template="{StaticResource SlitterTxt}"   Text="50.00" IsReadOnly="True" Margin="80 10" Grid.Column="2" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="TSTrimLbl" Content="TS Trim" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="TSTrimPosnTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="50.01" Margin="80 10" Grid.Column="3" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="RemainingLbl" Content="Remaining" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="RemainingTrimTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="100.00" Margin="80 10" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="ShrinkmmLbl" Content="Shrk mm" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="ShrinkmmTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Shrkmm" Margin="80 10" Grid.Column="5" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <CheckBox x:Name="DiagChkBx" Content="Diag" Grid.Column="5" Grid.Row="4" Margin="100 0" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="Yellow" IsChecked="False" Checked="DiagChkBx_Checked" Unchecked="DiagChkBx_Unchecked" />
+
+                </Grid>
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="S1CalibLbl" Text=" S1" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="0" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S2CalibLbl" Text=" S2" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="1" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S3CalibLbl" Text=" S3" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="2" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S4CalibLbl" Text=" S4" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="3" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S5CalibLbl" Text=" S5" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="4" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S6CalibLbl" Text=" S6" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="5" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S7CalibLbl" Text=" S7" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="6" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S8CalibLbl" Text=" S8" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="7" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S9CalibLbl" Text=" S9" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="8" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S10CalibLbl" Text="S10" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="9" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S11CalibLbl" Text="S11" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="10" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S12CalibLbl" Text="S12" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="11" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S13CalibLbl" Text="S13" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="12" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S14CalibLbl" Text="S14" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="13" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S15CalibLbl" Text="S15" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="14" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S16CalibLbl" Text="S16" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="15" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S17CalibLbl" Text="S17" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="16" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S18CalibLbl" Text="S18" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="17" Background="PaleGoldenrod" />
+                    <TextBox x:Name="S19CalibLbl" Text="S19" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="18" Background="PaleGoldenrod" />
+
+                </Grid>
+
+                <!-- Configuraton for Calibration Set Point Text Boxes -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Text Box for Order -->
+                    <TextBox x:Name="BandCalibTxt1" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="0" Background="LightBlue" TextChanged="BandCalibTxt1_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt2" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="1" Background="LightBlue" TextChanged="BandCalibTxt2_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt3" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="2" Background="LightBlue" TextChanged="BandCalibTxt3_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt4" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="3" Background="LightBlue" TextChanged="BandCalibTxt4_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt5" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="4" Background="LightBlue" TextChanged="BandCalibTxt5_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt6" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="5" Background="LightBlue" TextChanged="BandCalibTxt6_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt7" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="6" Background="LightBlue" TextChanged="BandCalibTxt7_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt8" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="7" Background="LightBlue" TextChanged="BandCalibTxt8_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt9" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="8" Background="LightBlue" TextChanged="BandCalibTxt9_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt10" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="9" Background="LightBlue" TextChanged="BandCalibTxt10_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt11" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="10" Background="LightBlue" TextChanged="BandCalibTxt11_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt12" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="11" Background="LightBlue" TextChanged="BandCalibTxt12_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt13" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="12" Background="LightBlue" TextChanged="BandCalibTxt13_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt14" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="13" Background="LightBlue" TextChanged="BandCalibTxt14_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt15" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="14" Background="LightBlue" TextChanged="BandCalibTxt15_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt16" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="15" Background="LightBlue" TextChanged="BandCalibTxt16_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt17" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="16" Background="LightBlue" TextChanged="BandCalibTxt17_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt18" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="17" Background="LightBlue" TextChanged="BandCalibTxt18_TextChanged"/>
+                    <TextBox x:Name="BandCalibTxt19" Template="{StaticResource SlitterTxt}"  HorizontalContentAlignment="Center" Margin="0 0 5 0" Grid.Column="18" Background="LightBlue" TextChanged="BandCalibTxt19_TextChanged"/>
+
+                </Grid>
+
+                <Label  Margin="0" FontSize="14" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                <!-- Lables and Calibration Buttons-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width=" *" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Button x:Name="LoadParambtn" Content="Load Param" Style="{DynamicResource SlitterBtn}"  Grid.Column="0" Grid.Row="0" Margin="60 0" Click="LoadParambtn_Click" />
+                    <Button x:Name="TransferOffsetsToPLCBtn" Content="Transfer" Style="{DynamicResource SlitterBtn}"  Grid.Column="1" Grid.Row="0" Margin="60 0" Click="TransferOffsetsToPLCBtn_Click"/>
+                    <Button x:Name="CleanOnBtn" Content="Clean On" Style="{DynamicResource SlitterBtn}" Grid.Column="3" Grid.Row="0" Margin="60 0" Click="CleanOnBtn_Click"/>
+                    <Button x:Name="CLeanOffBtn" Content="Clean Off" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Grid.Row="0" Margin="60 0" Click="CLeanOffBtn_Click"/>
+                    <Button x:Name="LifeCycleBtn" Content="LifeCycle" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Grid.Row="0" Margin="60 0" Click="LifeCycleBtn_Click"/>
+                    <CheckBox x:Name="AutoCtrTrimChkBx" Content="Center Trim" Grid.Column="2" Grid.Row="0" Margin="50 0" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="Yellow" IsChecked="false" Checked="AutoCtrTrimChkBx_Checked" Unchecked="AutoCtrTrimChkBx_Unchecked" />
+                    <Label x:Name="NoRollsLbl" Content="No. Of Rolls" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="NumbOfRollsTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Numb Of Rolls" Margin="100 10" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="ActCtsLbl" Content="Act Posn Cts" Grid.Column="1"  Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="TotalActSlitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Calc'd" Margin="100 10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Label x:Name="ParkCtsLbl" Content="Park Posn Cts" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="TotalParkSlitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Park" Margin="100 10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
+                    <Label x:Name="ParkLimitLbl" Content="Park Posn LImit" Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="TotalParkSlitLimitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Max Lmt" Margin="100 10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
+                    <Label x:Name="ShrinkageLbl" Content="Shrinkage" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="ShrkTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Shrinkage" Margin="100 10" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                </Grid>
+
+
+
+            </StackPanel>
+        </Grid>
+
+    </Border>
+</Window>
