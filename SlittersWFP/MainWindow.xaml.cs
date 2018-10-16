@@ -22,7 +22,7 @@ using System.IO;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml  Version 2.5
+    /// Interaction logic for MainWindow.xaml  Version 2.6
     /// </summary>
     
    
