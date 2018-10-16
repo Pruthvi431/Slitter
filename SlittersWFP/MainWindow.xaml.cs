@@ -49,6 +49,7 @@ namespace SlittersWPF
         public Int32 TimeSlice = 0;
         public Boolean DiagOn = false;
         Boolean OutOfTolerance = false;
+        Boolean OutofToleranceDisable = false;
         
         
 
@@ -227,6 +228,8 @@ namespace SlittersWPF
                 LoadParambtn.Visibility = Visibility.Hidden;
                 TransferOffsetsToPLCBtn.Visibility = Visibility.Hidden;
                 DiagChkBx.IsChecked = false;
+                //Disable Out of Tolerance code when order is sent from Wrapmation
+                OutofToleranceDisable = true;
             }
             TCPServSocket.SortRequest = false;
             TimerCycle1();
@@ -427,7 +430,7 @@ namespace SlittersWPF
                
             }
             // If RollWidth is out of 2.00 mm tolerance send command to plc to prevent thread for next set.
-            if(PLC.WinderRunning && !OutOfTolerance)
+            if(PLC.WinderRunning && !OutOfTolerance && !OutofToleranceDisable)
             {
                 OutOfTolerance = TM.RollWidthCheck();
                 if (OutOfTolerance)
@@ -646,7 +649,7 @@ namespace SlittersWPF
 
             }
 
-            
+            OutofToleranceDisable = false;
             ZeroOutPLCCommands();
 
             if (CommunicatonPLCFailure == false)
