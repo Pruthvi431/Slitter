@@ -38,6 +38,7 @@ namespace SlittersWPF
         private void TimerEventProcessor3(Object myObject,
                                         EventArgs myEventArgs)
         {
+            UpdateLimtTextBoxes();
             ReadLifeCycle();
             
             if ((RollParam.SlitterLifeCycleResets[0] > 0 || RollParam.SlitterLifeCycleResets[1] > 0 || RollParam.SlitterLifeCycleResets[2] > 0)  && LifeReset == false)

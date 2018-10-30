@@ -269,7 +269,8 @@ namespace SlittersWPF
         {
             dt = DateTime.Now;
             DateTimeTxtBx.Text = dt.ToString("f");
-            
+
+            SelectionOfSlittersLabelTextColor();
 
             // Stop timer while reading Registers
             Tmr1.Stop();
@@ -1462,6 +1463,30 @@ namespace SlittersWPF
             if (TM.SlittersSelected[16]) { this.S17Lbl.Background = Brushes.PaleGoldenrod; } else { this.S17Lbl.Background = Brushes.Transparent; }
             if (TM.SlittersSelected[17]) { this.S18Lbl.Background = Brushes.PaleGoldenrod; } else { this.S18Lbl.Background = Brushes.Transparent; }
             if (TM.SlittersSelected[18]) { this.S19Lbl.Background = Brushes.PaleGoldenrod; } else { this.S19Lbl.Background = Brushes.Transparent; }
+        }
+
+        private void SelectionOfSlittersLabelTextColor()
+        {
+           
+            if (TM.SlittersSelected[0] && TM.SlitterDisable[0]) { this.S1Lbl.Foreground = Brushes.Red; } else { this.S1Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[1] && TM.SlitterDisable[1]) { this.S2Lbl.Foreground = Brushes.Red; } else { this.S2Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[2] && TM.SlitterDisable[2]) { this.S3Lbl.Foreground = Brushes.Red; } else { this.S3Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[3] && TM.SlitterDisable[3]) { this.S4Lbl.Foreground = Brushes.Red; } else { this.S4Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[4] && TM.SlitterDisable[4]) { this.S5Lbl.Foreground = Brushes.Red; } else { this.S5Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[5] && TM.SlitterDisable[5]) { this.S6Lbl.Foreground = Brushes.Red; } else { this.S6Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[6] && TM.SlitterDisable[6]) { this.S7Lbl.Foreground = Brushes.Red; } else { this.S7Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[7] && TM.SlitterDisable[7]) { this.S8Lbl.Foreground = Brushes.Red; } else { this.S8Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[8] && TM.SlitterDisable[8]) { this.S9Lbl.Foreground = Brushes.Red; } else { this.S9Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[9] && TM.SlitterDisable[9]) { this.S10Lbl.Foreground = Brushes.Red; } else { this.S10Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[10] && TM.SlitterDisable[10]) { this.S11Lbl.Foreground = Brushes.Red; } else { this.S11Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[11] && TM.SlitterDisable[11]) { this.S12Lbl.Foreground = Brushes.Red; } else { this.S12Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[12] && TM.SlitterDisable[12]) { this.S13Lbl.Foreground = Brushes.Red; } else { this.S13Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[13] && TM.SlitterDisable[13]) { this.S14Lbl.Foreground = Brushes.Red; } else { this.S14Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[14] && TM.SlitterDisable[14]) { this.S15Lbl.Foreground = Brushes.Red; } else { this.S15Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[15] && TM.SlitterDisable[15]) { this.S16Lbl.Foreground = Brushes.Red; } else { this.S16Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[16] && TM.SlitterDisable[16]) { this.S17Lbl.Foreground = Brushes.Red; } else { this.S17Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[17] && TM.SlitterDisable[17]) { this.S18Lbl.Foreground = Brushes.Red; } else { this.S18Lbl.Foreground = Brushes.Black; }
+            if (TM.SlittersSelected[18] && TM.SlitterDisable[18]) { this.S19Lbl.Foreground = Brushes.Red; } else { this.S19Lbl.Foreground = Brushes.Black; }
         }
 
         private void SelectionOfSlittersLabelsBorder()
