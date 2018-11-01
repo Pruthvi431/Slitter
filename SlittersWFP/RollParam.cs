@@ -74,12 +74,12 @@ namespace SlittersWPF
         public bool[] BandParkLimitSelected = { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
         public bool[] CalibrateCmdSelected = { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
         public double[] BandLowerLimit = {0.0,150.0,350.0,1000.0,1300.0,1600.0,1900.0,2200.0,2500.0,3550.0,3700.0,3850.0,4000.0,4500.0,5000.0,5500.0,6000.0,6500.0,8000.0};
-	    public double[] BandUpperLimit = {500.0,2350.0,2600.0,3300.0,3600.0,3900.0,4200.0,4500.0,4800.0,5850.0,6000.0,6150.0,6300.0,6800.0,7300.0,7800.0,8300.0,8300.0,8500.0};
+	    public double[] BandUpperLimit = {500.0,2350.0,2600.0,3300.0,3600.0,3900.0,4200.0,4500.0,4800.0,5850.0,6000.0,6150.0,6300.0,6800.0,7300.0,7800.0,8300.0,8320.0,8500.0};
 	    public double[] BladeLowerLimit = {0.0,150.0,350.0,1000.0,1300.0,1600.0,1900.0,2200.0,2500.0,3550.0,3700.0,3850.0,4000.0,4500.0,5000.0,5500.0,6000.0,6500.0,8000.0};
-	    public double[] BladeUpperLimit = {500.0,2350.0,2600.0,3300.0,3600.0,3900.0,4200.0,4500.0,4800.0,5850.0,6000.0,6150.0,6300.0,6800.0,7300.0,7800.0,8300.0,8300.0,8500.0};
+	    public double[] BladeUpperLimit = {500.0,2350.0,2600.0,3300.0,3600.0,3900.0,4200.0,4500.0,4800.0,5850.0,6000.0,6150.0,6300.0,6800.0,7300.0,7800.0,8300.0,8320.0,8500.0};
         public double[] SlitterLowerLimit = new double[19];
         public double[] SlitterUpperLimit = new double[19];
-        //Chamged Band and Blade Upper limit for Slitter 18 to prevent if from being trim slitter.  8500 to 8300
+        //Chamged Band and Blade Upper limit for Slitter 18 to prevent if from being trim slitter.  8500 to 8320.0
 
         public double[] BandCalibration = { 10.00, 470.00, 940.00, 1410.00, 1880.00, 2350.00, 2820.00, 3290.00, 3760.00, 4230.00, 4700.00, 5170.00, 5640.00, 6110.00, 6580.00, 7050.00, 7520.00, 7990.00, 8490.00 };
 	    public double[] BladeCalibration = {10.00, 470.00, 940.00, 1410.00, 1880.00, 2350.00, 2820.00, 3290.00, 3760.00, 4230.00, 4700.00, 5170.00, 5640.00, 6110.00, 6580.00, 7050.00, 7520.00, 7990.00, 8490.00 };
@@ -404,7 +404,6 @@ namespace SlittersWPF
         // // Calculate using Park Position - Select Slitter for Cut
         public void SelectslitterforCutsParkPosn()
         {
-            
             //Cycle through how many cuts in set
             for (int i = 0; i < MaxCuts; i++)
             {
@@ -413,10 +412,19 @@ namespace SlittersWPF
                 {
                     double SlitDiff = Math.Abs(RollSPWithDsTrim[i] - ParkPosn[j]);
                     double SlitMin = Math.Min(SlitDiff, MaxRollWidth);
-                    if ((RollSPWithDsTrim[i] > 0.0) && (BandParkSelected[j] == false) && (SlitterDisable[j] == false) && RollParam.SlitCut[i, j])
+                    if ((SlitMin < MaxRollWidth) && (RollSPWithDsTrim[i] > 0.0) && (BandParkSelected[j] == false) && (SlitterDisable[j] == false) && SlitCut[i, j])
                     {
-                        MaxRollWidth = SlitDiff;
                         SolutionSelectPark[i, j] = true;
+                        //Ensure slitter 1 is always selected
+                        if(i == 0 && j == 0)
+                        {
+                            MaxRollWidth = 0.0;
+                        }
+                        else
+                        {
+                            MaxRollWidth = SlitDiff;
+                        }
+
                         // if above statement true then set lower slitters to false
                         for (int k1 = (j - 1); k1 != -1; --k1)
                         {
@@ -437,7 +445,6 @@ namespace SlittersWPF
         // Calculate using Acutal Slitter Position - Select Slitter for Cut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public void SelectSitterforCutsActPosn()
         {
-            
             for (int x = 0; x < MaxCuts; x++)
             {
                 MaxRollWidth = 8500.0;
@@ -447,8 +454,17 @@ namespace SlittersWPF
                     double SlitMin = Math.Min(SlitDiff, MaxRollWidth);
                     if ((SlitMin < MaxRollWidth) && (RollSPWithDsTrim[x] > 0.0) && (BandActPosnSelected[y] == false) && (SlitterDisable[y] == false) && SlitCut[x, y])
                     {
-                        MaxRollWidth = SlitDiff;
                         SolutionSelectAct[x, y] = true;
+                        //Ensure slitter 1 is always selected
+                        if (x == 0 && y == 0)
+                        {
+                            MaxRollWidth = 0.0;
+                        }
+                        else
+                        {
+                            MaxRollWidth = SlitDiff;
+                        }
+
                         for (int z = (y - 1); z != -1; --z)
                         {
                             SolutionSelectAct[x, z] = false;
@@ -468,7 +484,6 @@ namespace SlittersWPF
         // Calculate using Slitter Upper Band Limit - Select Slitter for Cut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public void SelectSitterforCutsParkLimit()
         {
-           
             for (int x = 0; x < MaxCuts; x++)
             {
                 MaxRollWidth = 8500.0;
@@ -476,21 +491,44 @@ namespace SlittersWPF
                 {
                     double SlitDiff = Math.Abs(RollSPWithDsTrim[x] - SlitterUpperLimit[y]);
                     double SlitMin = Math.Min(SlitDiff, MaxRollWidth);
-                    if ((SlitMin < MaxRollWidth) && (RollSPWithDsTrim[x] > MinRollWidth) && (BandParkLimitSelected[y] == false) && (SlitterDisable[y] == false ) && SlitCut[x, y])
+                    if ((SlitMin < MaxRollWidth) && (RollSPWithDsTrim[x] > 0.0) && (BandParkLimitSelected[y] == false) && (SlitterDisable[y] == false) && SlitCut[x, y])
                     {
-                        MaxRollWidth = SlitDiff;
                         SolutionSelectParkLmt[x, y] = true;
+                        //Ensure slitter 1 is always selected
+                        if (x == 0 && y == 0)
+                        {
+                            MaxRollWidth = 0.0;
+                        }
+                        else
+                        {
+                            MaxRollWidth = SlitDiff;
+                        }
+
+
                         for (int z = (y - 1); z != -1; --z)
                         {
                             SolutionSelectParkLmt[x, z] = false;
                         }
                     }
+
                 }
                 for (int k = 0; k < MaxSlitters; k++)
                 {
                     if (SolutionSelectParkLmt[x, k] == true)
                     {
                         BandParkLimitSelected[k] = true;
+                    }
+                }
+            }
+
+            for (int a = 17; a > 10; a--)
+            {
+                if (BandParkLimitSelected[18] == false)
+                {
+                    if (BandParkLimitSelected[a])
+                    {
+                        BandParkLimitSelected[a] = false;
+                        BandParkLimitSelected[18] = true;
                     }
                 }
             }
@@ -502,27 +540,37 @@ namespace SlittersWPF
             NumbOfSlitParkSelected = 0;
             NumbOfSlitActPosSelected = 0;
             NumbOfslitParkSelectdLmt = 0;
-            for (int x = 0; x < MaxSlitters; x++)
+
+            if (BandActPosnSelected[0] && BandActPosnSelected[18])
             {
-                if (BandActPosnSelected[x])
+                for (int x = 0; x < MaxSlitters; x++)
                 {
-                    NumbOfSlitActPosSelected = NumbOfSlitActPosSelected + 1;
+                    if (BandActPosnSelected[x])
+                    {
+                        NumbOfSlitActPosSelected = NumbOfSlitActPosSelected + 1;
+                    }
                 }
             }
 
-            for (int y = 0; y < MaxSlitters; y++)
+            if (BandParkSelected[0] && BandParkSelected[18])
             {
-                if (BandParkSelected[y])
+                for (int y = 0; y < MaxSlitters; y++)
                 {
-                    NumbOfSlitParkSelected = NumbOfSlitParkSelected + 1;
+                    if (BandParkSelected[y])
+                    {
+                        NumbOfSlitParkSelected = NumbOfSlitParkSelected + 1;
+                    }
                 }
             }
 
-            for (int z = 0; z < MaxSlitters; z++)
+            if (BandParkLimitSelected[0] && BandParkLimitSelected[18])
             {
-                if (BandParkLimitSelected[z])
+                for (int z = 0; z < MaxSlitters; z++)
                 {
-                    NumbOfslitParkSelectdLmt = NumbOfslitParkSelectdLmt + 1;
+                    if (BandParkLimitSelected[z])
+                    {
+                        NumbOfslitParkSelectdLmt = NumbOfslitParkSelectdLmt + 1;
+                    }
                 }
             }
 
@@ -534,7 +582,7 @@ namespace SlittersWPF
             ParkSelected = false;
             ParkSelectedLimit = false;
             bool SolutionFailed = false;
-            
+                                  
             if ((NumbOfRolls + 1) == NumbOfSlitActPosSelected)
             {
                 SolutionSelect = SolutionSelectAct;

@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlittersWPF"
         mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
-        Title="Malcolm Huntley = ANC SLITTER Version 2.7" Height="1080" Width="1920">
+        Title="Malcolm Huntley = ANC SLITTER Version 3.0" Height="1080" Width="1920">
     <Window.Resources>
         <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}"   
