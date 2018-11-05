@@ -567,6 +567,9 @@ namespace SlittersWPF
         //Calculate Band Setpoints
         public void CalcSelectedBandStpts()
         {
+            //Always select slitter 1 and slitter 19 for trim slitters
+            SolutionSelect[0, 0] = true;
+            SolutionSelect[18, 18] = true;
             for (int i = 0; i < MaxSlitters; i++) //increment cuts
             {
                 for (int j = 0; j < MaxSlitters; j++) // increment slitters
