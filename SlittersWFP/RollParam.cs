@@ -435,6 +435,8 @@ namespace SlittersWPF
             }
             BandParkSelected[0] = true;
             BandParkSelected[18] = true;
+            SolutionSelectPark[0, 0] = true;
+            SolutionSelectPark[(NumbOfRolls), 18] = true;
         }
 
         // Calculate using Acutal Slitter Position - Select Slitter for Cut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -468,6 +470,8 @@ namespace SlittersWPF
             }
             BandActPosnSelected[0] = true;
             BandActPosnSelected[18] = true;
+            SolutionSelectAct[0, 0] = true;
+            SolutionSelectAct[(NumbOfRolls), 18] = true;
         }
 
         // Calculate using Slitter Upper Band Limit - Select Slitter for Cut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -503,6 +507,8 @@ namespace SlittersWPF
             }
             BandParkLimitSelected[0] = true;
             BandParkLimitSelected[18] = true;
+            SolutionSelectParkLmt[0, 0] = true;
+            SolutionSelectParkLmt[(NumbOfRolls), 18] = true;
         }
 
         public void CompareSlittersUsedToCuts()
@@ -568,8 +574,6 @@ namespace SlittersWPF
         public void CalcSelectedBandStpts()
         {
             //Always select slitter 1 and slitter 19 for trim slitters
-            SolutionSelect[0, 0] = true;
-            SolutionSelect[18, 18] = true;
             for (int i = 0; i < MaxSlitters; i++) //increment cuts
             {
                 for (int j = 0; j < MaxSlitters; j++) // increment slitters
