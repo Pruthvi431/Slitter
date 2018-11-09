@@ -642,17 +642,16 @@ namespace SlittersWPF
             Int32[] FirstRollCut = new Int32[19];
             Int32[] SecondRollCut = new Int32[19];
             Int32 z = 0;
-            double RollWidthDiff = 0.0;
             Boolean ExcessiveError = false;
 
-            for (int x = 0; x < MaxRolls; x++) // Cycle through Rolls
+            for (Int32 x = 0; x < MaxRolls; x++) // Cycle through Rolls
             {
                 z = 0;
                 FirstCutSelected = false;
                 SecondCutSelected = false;
                 RollWidthCalculated = false;
 
-                for (int y = 0; y < MaxSlitters; y++)
+                for (Int32 y = 0; y < MaxSlitters; y++)
                 {
                     if (SlittersSelectedPLC[y] && !FirstCutSelected)
                     {
@@ -669,10 +668,8 @@ namespace SlittersWPF
                     if (FirstCutSelected && SecondCutSelected && !RollWidthCalculated)
                     {
                         RollWidthBand[x] = Math.Abs(BandActPosn[z] - BandActPosn[y]);
-                        RollWidthBlade[x] = Math.Abs(BladeActPosn[z] - BladeActPosn[y]);
-                        RollWidthDiff = Math.Max((RollWidthBand[x]), RollWidthBlade[x]);
                         RollWidthCalculated = true;
-                        if (Math.Abs(RollWidthDiff - RollWidthChecker[x]) > OutOfTolerance)
+                        if (Math.Abs(RollWidthBand[x] - RollWidthChecker[x]) > OutOfTolerance)
                         {
                             ExcessiveError = true;
                         }
