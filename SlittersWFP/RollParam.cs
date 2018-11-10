@@ -586,9 +586,7 @@ namespace SlittersWPF
                 }
             }
         }
-
-       
-
+      
         // Calculate Setpoint for Slitters not used.  
         public void CalcBandStptsNotUsed()
         {
