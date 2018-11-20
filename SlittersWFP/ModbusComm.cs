@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace WSMBT
+    
 {
-    class ModbusComm
+    class ModbusComm 
     {
         WSMBT.WSMBTControl wsmbtControl1 = new WSMBT.WSMBTControl();
 
@@ -20,13 +22,12 @@ namespace WSMBT
         public Int16[] PLcControlInputs = new Int16[2];
         public String ModbusMessage = "Checking Communication";
         public Int16[] PLCWrites = new Int16[2];
-        
+                
         //Constructor
         public ModbusComm()
         {
             
         }
-
         //DeConstructor
         ~ModbusComm()
         {
@@ -36,13 +37,13 @@ namespace WSMBT
 
         public string ModbusOpenConnection()
         {
-            
-           
                 wsmbtControl1.LicenseKey("172D-939E-7B24-6DB2-6CEA-3987");
                 WSMBT.Result Result;
                 wsmbtControl1.Mode = WSMBT.Mode.TCP_IP;
                 wsmbtControl1.ResponseTimeout = 1000;
-               Result = wsmbtControl1.Connect("10.10.10.110", 502); 
+                //ANC PLC Address = "10.10.10.112"
+                String plcaddr = SlittersWPF.Properties.Settings.Default.PLCAddr;
+            Result = wsmbtControl1.Connect(plcaddr, 502); 
                 if (Result != WSMBT.Result.SUCCESS)
                 {
                     ModbusMessage = (wsmbtControl1.GetLastErrorString());
@@ -51,7 +52,6 @@ namespace WSMBT
                 {
                     ModbusMessage = "Connected";
                 }
-            
             
                 return ModbusMessage;
 

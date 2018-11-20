@@ -80,6 +80,7 @@ namespace SlittersWPF
 	    public double[] BladeUpperLimit = {500.0,2350.0,2600.0,3300.0,3600.0,3900.0,4200.0,4500.0,4800.0,5850.0,6000.0,6150.0,6300.0,6800.0,7300.0,7800.0,8300.0,8320.0,8500.0};
         public double[] SlitterLowerLimit = new double[19];
         public double[] SlitterUpperLimit = new double[19];
+        public Boolean[] ManualSelect = new Boolean[19];
         //Chamged Band and Blade Upper limit for Slitter 18 to prevent if from being trim slitter.  8500 to 8320.0
 
         public double[] BandCalibration = { 10.00, 470.00, 940.00, 1410.00, 1880.00, 2350.00, 2820.00, 3290.00, 3760.00, 4230.00, 4700.00, 5170.00, 5640.00, 6110.00, 6580.00, 7050.00, 7520.00, 7990.00, 8490.00 };

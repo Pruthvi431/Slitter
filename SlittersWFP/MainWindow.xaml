@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlittersWPF"
         mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
-        Title="ANC SLITTER OPTIMIZER Version 3.3" Height="1080" Width="1920">
+        Title="ANC SLITTER OPTIMIZER Version 3.4" Height="1080" Width="1920">
     <Window.Resources>
         <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}"   
@@ -26,7 +26,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="Images\Clouds.jpg"/>
             </Grid.Background>
-            <StackPanel Margin="0,0,0,0" Grid.ColumnSpan="3" >
+            <StackPanel Margin="0,0,0.2,-0.4" Grid.ColumnSpan="3" >
 
                 <!-- Slitter Version Top Row-->
                 <Grid>
@@ -627,7 +627,7 @@
                     <Label x:Name="DSTrimLbl" Content="DS Trim" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="DSTrimPosnTxtBx" Template="{StaticResource SlitterTxt}"   Text="50.00" IsReadOnly="True" Margin="80 10" Grid.Column="2" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
                     <Label x:Name="TSTrimLbl" Content="TS Trim" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                    <TextBox x:Name="TSTrimPosnTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="50.01" Margin="80 10" Grid.Column="3" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <TextBox x:Name="TSTrimPosnTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="50.00" Margin="80 10" Grid.Column="3" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
                     <Label x:Name="RemainingLbl" Content="Remaining" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="RemainingTrimTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="100.00" Margin="80 10" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
                     <Label x:Name="ShrinkmmLbl" Content="Shrk mm" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
@@ -660,25 +660,26 @@
                         <ColumnDefinition Width=" *" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="S1CalibLbl" Text=" S1" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="0" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S2CalibLbl" Text=" S2" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="1" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S3CalibLbl" Text=" S3" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="2" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S4CalibLbl" Text=" S4" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="3" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S5CalibLbl" Text=" S5" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="4" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S6CalibLbl" Text=" S6" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="5" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S7CalibLbl" Text=" S7" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="6" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S8CalibLbl" Text=" S8" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="7" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S9CalibLbl" Text=" S9" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="8" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S10CalibLbl" Text="S10" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="9" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S11CalibLbl" Text="S11" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="10" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S12CalibLbl" Text="S12" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="11" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S13CalibLbl" Text="S13" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="12" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S14CalibLbl" Text="S14" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="13" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S15CalibLbl" Text="S15" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="14" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S16CalibLbl" Text="S16" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="15" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S17CalibLbl" Text="S17" Template="{StaticResource SlitterTxt}" IsReadOnly="True"  HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="16" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S18CalibLbl" Text="S18" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="17" Background="PaleGoldenrod" />
-                    <TextBox x:Name="S19CalibLbl" Text="S19" Template="{StaticResource SlitterTxt}" IsReadOnly="True" HorizontalContentAlignment="Center" Margin="15 10 15 10" Grid.Column="18" Background="PaleGoldenrod" />
+                    <Button x:Name="S1ManSelectBtn" Content="S1" Style="{DynamicResource SlitterBtn}" Grid.Column="0" Margin="20 10" Background="PaleGoldenrod" Click="S1ManSelectBtn_Click"/>
+                    <Button x:Name="S2ManSelectBtn" Content="S2" Style="{DynamicResource SlitterBtn}" Grid.Column="1" Margin="20 10" Background="PaleGoldenrod" Click="S2ManSelectBtn_Click"/>
+                    <Button x:Name="S3ManSelectBtn" Content="S3" Style="{DynamicResource SlitterBtn}" Grid.Column="2" Margin="20 10" Background="PaleGoldenrod" Click="S3ManSelectBtn_Click"/>
+                    <Button x:Name="S4ManSelectBtn" Content="S4" Style="{DynamicResource SlitterBtn}" Grid.Column="3" Margin="20 10" Background="PaleGoldenrod" Click="S4ManSelectBtn_Click"/>
+                    <Button x:Name="S5ManSelectBtn" Content="S5" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Margin="20 10" Background="PaleGoldenrod" Click="S5ManSelectBtn_Click"/>
+                    <Button x:Name="S6ManSelectBtn" Content="S6" Style="{DynamicResource SlitterBtn}" Grid.Column="5" Margin="20 10" Background="PaleGoldenrod" Click="S6ManSelectBtn_Click"/>
+                    <Button x:Name="S7ManSelectBtn" Content="S7" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Margin="20 10" Background="PaleGoldenrod" Click="S7ManSelectBtn_Click"/>
+                    <Button x:Name="S8ManSelectBtn" Content="S8" Style="{DynamicResource SlitterBtn}" Grid.Column="7" Margin="20 10" Background="PaleGoldenrod" Click="S8ManSelectBtn_Click"/>
+                    <Button x:Name="S9ManSelectBtn" Content="S9" Style="{DynamicResource SlitterBtn}" Grid.Column="8" Margin="20 10" Background="PaleGoldenrod" Click="S9ManSelectBtn_Click"/>
+                    <Button x:Name="S10ManSelectBtn" Content="S10" Style="{DynamicResource SlitterBtn}" Grid.Column="9" Margin="20 10" Background="PaleGoldenrod" Click="S10ManSelectBtn_Click"/>
+                    <Button x:Name="S11ManSelectBtn" Content="S11" Style="{DynamicResource SlitterBtn}" Grid.Column="10" Margin="20 10" Background="PaleGoldenrod" Click="S11ManSelectBtn_Click"/>
+                    <Button x:Name="S12ManSelectBtn" Content="S12" Style="{DynamicResource SlitterBtn}" Grid.Column="11" Margin="20 10" Background="PaleGoldenrod" Click="S12ManSelectBtn_Click"/>
+                    <Button x:Name="S13ManSelectBtn" Content="S13" Style="{DynamicResource SlitterBtn}" Grid.Column="12" Margin="20 10" Background="PaleGoldenrod" Click="S13ManSelectBtn_Click"/>
+                    <Button x:Name="S14ManSelectBtn" Content="S14" Style="{DynamicResource SlitterBtn}" Grid.Column="13" Margin="20 10" Background="PaleGoldenrod" Click="S14ManSelectBtn_Click"/>
+                    <Button x:Name="S15ManSelectBtn" Content="S15" Style="{DynamicResource SlitterBtn}" Grid.Column="14" Margin="20 10" Background="PaleGoldenrod" Click="S15ManSelectBtn_Click"/>
+                    <Button x:Name="S16ManSelectBtn" Content="S16" Style="{DynamicResource SlitterBtn}" Grid.Column="15" Margin="20 10" Background="PaleGoldenrod" Click="S16ManSelectBtn_Click"/>
+                    <Button x:Name="S17ManSelectBtn" Content="S17" Style="{DynamicResource SlitterBtn}" Grid.Column="16" Margin="20 10" Background="PaleGoldenrod" Click="S17ManSelectBtn_Click"/>
+                    <Button x:Name="S18ManSelectBtn" Content="S18" Style="{DynamicResource SlitterBtn}" Grid.Column="17" Margin="20 10" Background="PaleGoldenrod" Click="S18ManSelectBtn_Click"/>
+                    <Button x:Name="S19ManSelectBtn" Content="S19" Style="{DynamicResource SlitterBtn}" Grid.Column="18" Margin="20 10" Background="PaleGoldenrod" Click="S19ManSelectBtn_Click"/>
+                    
 
                 </Grid>
 
@@ -751,6 +752,7 @@
                     <Button x:Name="TransferOffsetsToPLCBtn" Content="Transfer" Style="{DynamicResource SlitterBtn}"  Grid.Column="1" Grid.Row="0" Margin="60 0" Click="TransferOffsetsToPLCBtn_Click"/>
                     <Button x:Name="CleanOnBtn" Content="Clean On" Style="{DynamicResource SlitterBtn}" Grid.Column="3" Grid.Row="0" Margin="60 0" Click="CleanOnBtn_Click"/>
                     <Button x:Name="CLeanOffBtn" Content="Clean Off" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Grid.Row="0" Margin="60 0" Click="CLeanOffBtn_Click"/>
+                    <Button x:Name="MaintModeBtn" Content="Maint" Style="{DynamicResource SlitterBtn}" Grid.Column="5" Grid.Row="0" Margin="60 0" Click="MaintModeBtn_Click"/>
                     <Button x:Name="LifeCycleBtn" Content="LifeCycle" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Grid.Row="0" Margin="60 0" Click="LifeCycleBtn_Click"/>
                     <CheckBox x:Name="AutoCtrTrimChkBx" Content="Center Trim" Grid.Column="2" Grid.Row="0" Margin="50 0" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="Yellow" IsChecked="false" Checked="AutoCtrTrimChkBx_Checked" Unchecked="AutoCtrTrimChkBx_Unchecked" />
                     <Label x:Name="NoRollsLbl" Content="No. Of Rolls" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
@@ -761,11 +763,8 @@
                     <TextBox x:Name="TotalParkSlitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Park" Margin="100 10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
                     <Label x:Name="ParkLimitLbl" Content="Park Posn LImit" Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="TotalParkSlitLimitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Max Lmt" Margin="100 10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
-                    <Label x:Name="ShrinkageLbl" Content="Shrinkage" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <TextBox x:Name="ShrkTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Shrinkage" Margin="100 10" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen" />
+                    <Button x:Name="SlitterAppExit" Content="Exit Prog" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Grid.Row="2" Margin="60 0" Click="SlitterAppExit_Click"/>
                 </Grid>
-
-
 
             </StackPanel>
         </Grid>

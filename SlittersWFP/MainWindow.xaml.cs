@@ -17,12 +17,13 @@ using System.Windows.Threading;
 using Xceed.Wpf.Toolkit;
 using System.Xml.Serialization;
 using System.IO;
+using System.Configuration;
 
 
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.112 Version 3.3
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.112 Version 3.4
     /// </summary>
     
    
@@ -50,6 +51,7 @@ namespace SlittersWPF
         public Boolean DiagOn = false;
         Boolean OutOfTolerance = false;
         Boolean OutofToleranceDisable = false;
+        Boolean MaintMode = false;
         
         
 
@@ -60,6 +62,13 @@ namespace SlittersWPF
             InitializeComponent();
 
             #region StartUp
+            //Read Properties.Settings from App.config
+            TM.MaxWidth = Properties.Settings.Default.MaxWidth;
+            TM.MaxRollWidth = Properties.Settings.Default.MaxRollWidth;
+            TM.OutOfTolerance = Properties.Settings.Default.OutOfTolerance;
+            TM.CoarseWindow = Properties.Settings.Default.CoarseWindow;
+            TM.UnSelectedPosWindow = Properties.Settings.Default.UnSelectedPosWindow;
+            TM.InPosWindow = Properties.Settings.Default.InPosWindow;
             Tmr1.Interval = new TimeSpan(0,0,0,0,300);
             Tmr2.Interval = new TimeSpan(0,0,0,15,000); //days , hours, minutes, seconds, milliseconds
             Tmr1.Tick += new EventHandler(TimerEventProcessor1);
@@ -92,6 +101,7 @@ namespace SlittersWPF
         #region Load Initial PLC Data from Rx3i 
         private void LoadInitialPlcData()
         {
+            CenterTrimOn = true;
             TM.CalibrateMode = false;
             DSTrimPosnTxtBx.Text = "0.0";
             TSTrimPosnTxtBx.Text = "0.0";
@@ -276,8 +286,6 @@ namespace SlittersWPF
             Tmr1.Stop();
             SlitterPositionColorCntrl();
             UpdateSlitterError();
-            
-            ShrkTxtBx.Text = Convert.ToString(TM.Shrinkage);
 
             String ConnectedMessage = "Connected";
             String ReadMessage = "Waiting for Connection";
@@ -605,7 +613,15 @@ namespace SlittersWPF
                          ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14261) Method SlitterPLCWrites \n ";
                     }
             // Pack Slitter Selected, CalibrateCmdSelected and SlitterOutofService into CmdWriteRegisters
+            if (MaintMode)
+            {
+                PLC.BitAssignmentForActiveSlitters(TM.ManualSelect);
+            }
+            else
+            {
                 PLC.BitAssignmentForActiveSlitters(TM.SlittersSelected);
+            }
+              
                 PLC.BitAssignmentForCalibrateCmd(TM.CalibrateCmdSelected);
                 PLC.BitAssignmentForOutofServiceCmd(TM.SlitterOutofService);
                 PLC.CmdWriteRegisters = PLC.BitRegConvertor(PLC.CmdReg);
@@ -2935,6 +2951,11 @@ namespace SlittersWPF
 
             //Calculate Setpoints for Slitters selected for cuts
             TM.CalcSelectedBandStpts();
+            if (TM.BandStpt[18] < TM.BandLowerLimit[18])
+            {
+                System.Windows.MessageBox.Show("Invalid Roll Data");
+            }
+
 
             // Calculate Setpoints for Slitters not selected for cuts
             TM.CalcBandStptsNotUsed();
@@ -3039,25 +3060,25 @@ namespace SlittersWPF
             BandCalibTxt17.Text = ZeroOut.ToString("F2");
             BandCalibTxt18.Text = ZeroOut.ToString("F2");
             BandCalibTxt19.Text = ZeroOut.ToString("F2");
-            S1CalibLbl.Visibility = Visibility.Visible;
-            S2CalibLbl.Visibility = Visibility.Visible;
-            S3CalibLbl.Visibility = Visibility.Visible;
-            S4CalibLbl.Visibility = Visibility.Visible;
-            S5CalibLbl.Visibility = Visibility.Visible;
-            S6CalibLbl.Visibility = Visibility.Visible;
-            S7CalibLbl.Visibility = Visibility.Visible;
-            S8CalibLbl.Visibility = Visibility.Visible;
-            S9CalibLbl.Visibility = Visibility.Visible;
-            S10CalibLbl.Visibility = Visibility.Visible;
-            S11CalibLbl.Visibility = Visibility.Visible;
-            S12CalibLbl.Visibility = Visibility.Visible;
-            S13CalibLbl.Visibility = Visibility.Visible;
-            S14CalibLbl.Visibility = Visibility.Visible;
-            S15CalibLbl.Visibility = Visibility.Visible;
-            S16CalibLbl.Visibility = Visibility.Visible;
-            S17CalibLbl.Visibility = Visibility.Visible;
-            S18CalibLbl.Visibility = Visibility.Visible;
-            S19CalibLbl.Visibility = Visibility.Visible;
+            S1ManSelectBtn.Visibility = Visibility.Visible;
+            S2ManSelectBtn.Visibility = Visibility.Visible;
+            S3ManSelectBtn.Visibility = Visibility.Visible;
+            S4ManSelectBtn.Visibility = Visibility.Visible;
+            S5ManSelectBtn.Visibility = Visibility.Visible;
+            S6ManSelectBtn.Visibility = Visibility.Visible;
+            S7ManSelectBtn.Visibility = Visibility.Visible;
+            S8ManSelectBtn.Visibility = Visibility.Visible;
+            S9ManSelectBtn.Visibility = Visibility.Visible;
+            S10ManSelectBtn.Visibility = Visibility.Visible;
+            S11ManSelectBtn.Visibility = Visibility.Visible;
+            S12ManSelectBtn.Visibility = Visibility.Visible;
+            S13ManSelectBtn.Visibility = Visibility.Visible;
+            S14ManSelectBtn.Visibility = Visibility.Visible;
+            S15ManSelectBtn.Visibility = Visibility.Visible;
+            S16ManSelectBtn.Visibility = Visibility.Visible;
+            S17ManSelectBtn.Visibility = Visibility.Visible;
+            S18ManSelectBtn.Visibility = Visibility.Visible;
+            S19ManSelectBtn.Visibility = Visibility.Visible;
             LoadParambtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Background = Brushes.Transparent;
@@ -3343,6 +3364,316 @@ namespace SlittersWPF
 
         #endregion
 
+        #region Manual Select Buttons
+
+        private void MaintModeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode)
+            {
+                MaintModeBtn.Background = Brushes.Transparent;
+                MaintMode = false;
+                S1ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S2ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S3ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S4ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S5ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S6ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S7ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S8ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S9ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S10ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S11ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S12ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S13ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S14ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S15ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S16ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S17ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S18ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                S19ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            else
+            {
+                MaintModeBtn.Background = Brushes.Firebrick;
+                MaintMode = true;
+
+                for(Int32 x= 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ManualSelect[x] = false;
+                }
+            }
+
+        }
+
+        private void S1ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[0])
+            {
+                S1ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[0] = true;
+            }
+            else
+            {
+                S1ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[0] = false;
+            }
+            
+        }
+
+        private void S2ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[1])
+            {
+                S2ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[1] = true;
+            }
+            else
+            {
+                S2ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[1] = false;
+            }
+        }
+
+        private void S3ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[2])
+            {
+                S3ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[2] = true;
+            }
+            else
+            {
+                S3ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[2] = false;
+            }
+        }
+
+
+        private void S4ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[3])
+            {
+                S4ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[3] = true;
+            }
+            else
+            {
+                S4ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[3] = false;
+            }
+        }
+
+        private void S5ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[4])
+            {
+                S5ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[4] = true;
+            }
+            else
+            {
+                S5ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[4] = false;
+            }
+        }
+
+        private void S6ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[5])
+            {
+                S6ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[5] = true;
+            }
+            else
+            {
+                S6ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[5] = false;
+            }
+        }
+
+        private void S7ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[6])
+            {
+                S7ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[6] = true;
+            }
+            else
+            {
+                S7ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[6] = false;
+            }
+        }
+
+        private void S8ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[7])
+            {
+                S8ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[7] = true;
+            }
+            else
+            {
+                S8ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[7] = false;
+            }
+        }
+
+        private void S9ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[8])
+            {
+                S9ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[8] = true;
+            }
+            else
+            {
+                S9ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[8] = false;
+            }
+        }
+
+        private void S10ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[9])
+            {
+                S10ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[9] = true;
+            }
+            else
+            {
+                S10ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[9] = false;
+            }
+        }
+        private void S11ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[10])
+            {
+                S11ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[10] = true;
+            }
+            else
+            {
+                S11ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[10] = false;
+            }
+        }
+
+        private void S12ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[11])
+            {
+                S12ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[11] = true;
+            }
+            else
+            {
+                S12ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[11] = false;
+            }
+        }
+
+        private void S13ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[12])
+            {
+                S13ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[12] = true;
+            }
+            else
+            {
+                S13ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[12] = false;
+            }
+        }
+
+        private void S14ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[13])
+            {
+                S14ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[13] = true;
+            }
+            else
+            {
+                S14ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[13] = false;
+            }
+        }
+
+        private void S15ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[14])
+            {
+                S15ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[14] = true;
+            }
+            else
+            {
+                S15ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[14] = false;
+            }
+        }
+
+        private void S16ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[15])
+            {
+                S16ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[15] = true;
+            }
+            else
+            {
+                S16ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[15] = false;
+            }
+        }
+
+        private void S17ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[16])
+            {
+                S17ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[16] = true;
+            }
+            else
+            {
+                S17ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[16] = false;
+            }
+        }
+
+        private void S18ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[17])
+            {
+                S18ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[17] = true;
+            }
+            else
+            {
+                S18ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[17] = false;
+            }
+        }
+
+        private void S19ManSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaintMode && !TM.ManualSelect[18])
+            {
+                S19ManSelectBtn.Background = Brushes.Yellow;
+                TM.ManualSelect[18] = true;
+            }
+            else
+            {
+                S19ManSelectBtn.Background = Brushes.PaleGoldenrod;
+                TM.ManualSelect[18] = false;
+            }
+        }
+
+        #endregion
+
         #region Diagnostic Logic
         private void DiagReset()
         {
@@ -3352,7 +3683,6 @@ namespace SlittersWPF
             LoadParambtn.Visibility = Visibility.Hidden;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Hidden;
             OrderInfoTxtBx.Visibility = Visibility.Hidden;
-            ShrinkageLbl.Visibility = Visibility.Hidden;
             NoRollsLbl.Visibility = Visibility.Hidden;
             NumbOfRollsTxt.Visibility = Visibility.Hidden;
             ActCtsLbl.Visibility = Visibility.Hidden;
@@ -3361,7 +3691,6 @@ namespace SlittersWPF
             TotalParkSlitTxt.Visibility = Visibility.Hidden;
             TotalActSlitTxt.Visibility = Visibility.Hidden;
             TotalParkSlitLimitTxt.Visibility = Visibility.Hidden;
-            ShrkTxtBx.Visibility = Visibility.Hidden;
             AutoCtrTrimChkBx.Visibility = Visibility.Hidden;
             Roll1ShrinkTxt.Visibility = Visibility.Hidden;
             Roll2ShrinkTxt.Visibility = Visibility.Hidden;
@@ -3439,26 +3768,27 @@ namespace SlittersWPF
             BandCalibTxt17.Visibility = Visibility.Hidden;
             BandCalibTxt18.Visibility = Visibility.Hidden;
             BandCalibTxt19.Visibility = Visibility.Hidden;
-            S1CalibLbl.Visibility = Visibility.Hidden;
-            S2CalibLbl.Visibility = Visibility.Hidden;
-            S3CalibLbl.Visibility = Visibility.Hidden;
-            S4CalibLbl.Visibility = Visibility.Hidden;
-            S5CalibLbl.Visibility = Visibility.Hidden;
-            S6CalibLbl.Visibility = Visibility.Hidden;
-            S7CalibLbl.Visibility = Visibility.Hidden;
-            S8CalibLbl.Visibility = Visibility.Hidden;
-            S9CalibLbl.Visibility = Visibility.Hidden;
-            S10CalibLbl.Visibility = Visibility.Hidden;
-            S11CalibLbl.Visibility = Visibility.Hidden;
-            S12CalibLbl.Visibility = Visibility.Hidden;
-            S13CalibLbl.Visibility = Visibility.Hidden;
-            S14CalibLbl.Visibility = Visibility.Hidden;
-            S15CalibLbl.Visibility = Visibility.Hidden;
-            S16CalibLbl.Visibility = Visibility.Hidden;
-            S17CalibLbl.Visibility = Visibility.Hidden;
-            S18CalibLbl.Visibility = Visibility.Hidden;
-            S19CalibLbl.Visibility = Visibility.Hidden;
-            
+            S1ManSelectBtn.Visibility = Visibility.Hidden;
+            S2ManSelectBtn.Visibility = Visibility.Hidden;
+            S3ManSelectBtn.Visibility = Visibility.Hidden;
+            S4ManSelectBtn.Visibility = Visibility.Hidden;
+            S5ManSelectBtn.Visibility = Visibility.Hidden;
+            S6ManSelectBtn.Visibility = Visibility.Hidden;
+            S7ManSelectBtn.Visibility = Visibility.Hidden;
+            S8ManSelectBtn.Visibility = Visibility.Hidden;
+            S9ManSelectBtn.Visibility = Visibility.Hidden;
+            S10ManSelectBtn.Visibility = Visibility.Hidden;
+            S11ManSelectBtn.Visibility = Visibility.Hidden;
+            S12ManSelectBtn.Visibility = Visibility.Hidden;
+            S13ManSelectBtn.Visibility = Visibility.Hidden;
+            S14ManSelectBtn.Visibility = Visibility.Hidden;
+            S15ManSelectBtn.Visibility = Visibility.Hidden;
+            S16ManSelectBtn.Visibility = Visibility.Hidden;
+            S17ManSelectBtn.Visibility = Visibility.Hidden;
+            S18ManSelectBtn.Visibility = Visibility.Hidden;
+            S19ManSelectBtn.Visibility = Visibility.Hidden;
+            MaintModeBtn.Visibility = Visibility.Hidden;
+
         }
 
         #endregion
@@ -3847,7 +4177,6 @@ namespace SlittersWPF
             LoadParambtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Visible;
             OrderInfoTxtBx.Visibility = Visibility.Visible;
-            ShrinkageLbl.Visibility = Visibility.Visible;
             NoRollsLbl.Visibility = Visibility.Visible;
             NumbOfRollsTxt.Visibility = Visibility.Visible;
             ActCtsLbl.Visibility = Visibility.Visible;
@@ -3856,7 +4185,6 @@ namespace SlittersWPF
             TotalParkSlitTxt.Visibility = Visibility.Visible;
             TotalActSlitTxt.Visibility = Visibility.Visible;
             TotalParkSlitLimitTxt.Visibility = Visibility.Visible;
-            ShrkTxtBx.Visibility = Visibility.Visible;
             AutoCtrTrimChkBx.Visibility = Visibility.Visible;
             Roll1ShrinkTxt.Visibility = Visibility.Visible;
             Roll2ShrinkTxt.Visibility = Visibility.Visible;
@@ -3934,25 +4262,26 @@ namespace SlittersWPF
             BandCalibTxt17.Visibility = Visibility.Visible;
             BandCalibTxt18.Visibility = Visibility.Visible;
             BandCalibTxt19.Visibility = Visibility.Visible;
-            S1CalibLbl.Visibility = Visibility.Visible;
-            S2CalibLbl.Visibility = Visibility.Visible;
-            S3CalibLbl.Visibility = Visibility.Visible;
-            S4CalibLbl.Visibility = Visibility.Visible;
-            S5CalibLbl.Visibility = Visibility.Visible;
-            S6CalibLbl.Visibility = Visibility.Visible;
-            S7CalibLbl.Visibility = Visibility.Visible;
-            S8CalibLbl.Visibility = Visibility.Visible;
-            S9CalibLbl.Visibility = Visibility.Visible;
-            S10CalibLbl.Visibility = Visibility.Visible;
-            S11CalibLbl.Visibility = Visibility.Visible;
-            S12CalibLbl.Visibility = Visibility.Visible;
-            S13CalibLbl.Visibility = Visibility.Visible;
-            S14CalibLbl.Visibility = Visibility.Visible;
-            S15CalibLbl.Visibility = Visibility.Visible;
-            S16CalibLbl.Visibility = Visibility.Visible;
-            S17CalibLbl.Visibility = Visibility.Visible;
-            S18CalibLbl.Visibility = Visibility.Visible;
-            S19CalibLbl.Visibility = Visibility.Visible;
+            S1ManSelectBtn.Visibility = Visibility.Visible;
+            S2ManSelectBtn.Visibility = Visibility.Visible;
+            S3ManSelectBtn.Visibility = Visibility.Visible;
+            S4ManSelectBtn.Visibility = Visibility.Visible;
+            S5ManSelectBtn.Visibility = Visibility.Visible;
+            S6ManSelectBtn.Visibility = Visibility.Visible;
+            S7ManSelectBtn.Visibility = Visibility.Visible;
+            S8ManSelectBtn.Visibility = Visibility.Visible;
+            S9ManSelectBtn.Visibility = Visibility.Visible;
+            S10ManSelectBtn.Visibility = Visibility.Visible;
+            S11ManSelectBtn.Visibility = Visibility.Visible;
+            S12ManSelectBtn.Visibility = Visibility.Visible;
+            S13ManSelectBtn.Visibility = Visibility.Visible;
+            S14ManSelectBtn.Visibility = Visibility.Visible;
+            S15ManSelectBtn.Visibility = Visibility.Visible;
+            S16ManSelectBtn.Visibility = Visibility.Visible;
+            S17ManSelectBtn.Visibility = Visibility.Visible;
+            S18ManSelectBtn.Visibility = Visibility.Visible;
+            S19ManSelectBtn.Visibility = Visibility.Visible;
+            MaintModeBtn.Visibility = Visibility.Visible;
 
             //Clear out Slitter Calib Text Changed in case value is entered but view of calibration is invisible
             for (int x = 0; x < TM.MaxSlitters; x++)
@@ -3972,7 +4301,6 @@ namespace SlittersWPF
             CleanOnBtn.Visibility = Visibility.Hidden;
             CLeanOffBtn.Visibility = Visibility.Hidden;
             OrderInfoTxtBx.Visibility = Visibility.Hidden;
-            ShrinkageLbl.Visibility = Visibility.Hidden;
             NoRollsLbl.Visibility = Visibility.Hidden;
             ActCtsLbl.Visibility = Visibility.Hidden;
             ParkLimitLbl.Visibility = Visibility.Hidden;
@@ -3981,7 +4309,6 @@ namespace SlittersWPF
             TotalActSlitTxt.Visibility = Visibility.Hidden;
             TotalParkSlitLimitTxt.Visibility = Visibility.Hidden;
             NumbOfRollsTxt.Visibility = Visibility.Hidden;
-            ShrkTxtBx.Visibility = Visibility.Hidden;
             AutoCtrTrimChkBx.Visibility = Visibility.Hidden;
             Roll1ShrinkTxt.Visibility = Visibility.Hidden;
             Roll2ShrinkTxt.Visibility = Visibility.Hidden;
@@ -4059,34 +4386,57 @@ namespace SlittersWPF
             BandCalibTxt17.Visibility = Visibility.Hidden;
             BandCalibTxt18.Visibility = Visibility.Hidden;
             BandCalibTxt19.Visibility = Visibility.Hidden;
-            S1CalibLbl.Visibility = Visibility.Hidden;
-            S2CalibLbl.Visibility = Visibility.Hidden;
-            S3CalibLbl.Visibility = Visibility.Hidden;
-            S4CalibLbl.Visibility = Visibility.Hidden;
-            S5CalibLbl.Visibility = Visibility.Hidden;
-            S6CalibLbl.Visibility = Visibility.Hidden;
-            S7CalibLbl.Visibility = Visibility.Hidden;
-            S8CalibLbl.Visibility = Visibility.Hidden;
-            S9CalibLbl.Visibility = Visibility.Hidden;
-            S10CalibLbl.Visibility = Visibility.Hidden;
-            S11CalibLbl.Visibility = Visibility.Hidden;
-            S12CalibLbl.Visibility = Visibility.Hidden;
-            S13CalibLbl.Visibility = Visibility.Hidden;
-            S14CalibLbl.Visibility = Visibility.Hidden;
-            S15CalibLbl.Visibility = Visibility.Hidden;
-            S16CalibLbl.Visibility = Visibility.Hidden;
-            S17CalibLbl.Visibility = Visibility.Hidden;
-            S18CalibLbl.Visibility = Visibility.Hidden;
-            S19CalibLbl.Visibility = Visibility.Hidden;
+            S1ManSelectBtn.Visibility = Visibility.Hidden;
+            S2ManSelectBtn.Visibility = Visibility.Hidden;
+            S3ManSelectBtn.Visibility = Visibility.Hidden;
+            S4ManSelectBtn.Visibility = Visibility.Hidden;
+            S5ManSelectBtn.Visibility = Visibility.Hidden;
+            S6ManSelectBtn.Visibility = Visibility.Hidden;
+            S7ManSelectBtn.Visibility = Visibility.Hidden;
+            S8ManSelectBtn.Visibility = Visibility.Hidden;
+            S9ManSelectBtn.Visibility = Visibility.Hidden;
+            S10ManSelectBtn.Visibility = Visibility.Hidden;
+            S11ManSelectBtn.Visibility = Visibility.Hidden;
+            S12ManSelectBtn.Visibility = Visibility.Hidden;
+            S13ManSelectBtn.Visibility = Visibility.Hidden;
+            S14ManSelectBtn.Visibility = Visibility.Hidden;
+            S15ManSelectBtn.Visibility = Visibility.Hidden;
+            S16ManSelectBtn.Visibility = Visibility.Hidden;
+            S17ManSelectBtn.Visibility = Visibility.Hidden;
+            S18ManSelectBtn.Visibility = Visibility.Hidden;
+            S19ManSelectBtn.Visibility = Visibility.Hidden;
+            MaintModeBtn.Background = Brushes.Transparent;
+            MaintModeBtn.Visibility = Visibility.Hidden;
+            MaintMode = false;
+            S1ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S2ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S3ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S4ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S5ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S6ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S7ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S8ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S9ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S10ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S11ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S12ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S13ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S14ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S15ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S16ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S17ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S18ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            S19ManSelectBtn.Background = Brushes.PaleGoldenrod;
+
             //Clear out Slitter Calib Text Changed in case value is entered but view of calibration is invisible
             for (int x = 0; x < TM.MaxSlitters; x++)
             {
                 TM.SlitterCalibTextChgd[x] = false;
                 TM.CalibrateCmdSelected[x] = false;
+                TM.ManualSelect[x] = false;
             }
            
         }
-
 
         #endregion
 
@@ -4173,5 +4523,10 @@ namespace SlittersWPF
             
         }
 
+        private void SlitterAppExit_Click(object sender, RoutedEventArgs e)
+        {
+            SerializeDataSet();
+            Application.Current.Shutdown();
+        }
     }
 }

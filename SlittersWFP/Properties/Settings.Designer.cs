@@ -25,22 +25,64 @@ namespace SlittersWPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Roll1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("10.10.10.112")]
+        public string PLCAddr {
             get {
-                return ((double)(this["Roll1"]));
+                return ((string)(this["PLCAddr"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string Roll2 {
+        [global::System.Configuration.DefaultSettingValueAttribute("8514")]
+        public double MaxWidth {
             get {
-                return ((string)(this["Roll2"]));
+                return ((double)(this["MaxWidth"]));
             }
-            set {
-                this["Roll2"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2500")]
+        public double MaxRollWidth {
+            get {
+                return ((double)(this["MaxRollWidth"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public double OutOfTolerance {
+            get {
+                return ((double)(this["OutOfTolerance"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.5")]
+        public double CoarseWindow {
+            get {
+                return ((double)(this["CoarseWindow"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double UnSelectedPosWindow {
+            get {
+                return ((double)(this["UnSelectedPosWindow"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.125")]
+        public double InPosWindow {
+            get {
+                return ((double)(this["InPosWindow"]));
             }
         }
     }
