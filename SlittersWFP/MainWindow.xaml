@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlittersWPF"
         mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
-        Title="ANC SLITTER OPTIMIZER Version 3.4" Height="1080" Width="1920">
+        Title="ANC SLITTER OPTIMIZER Version 3.6" Height="1080" Width="1920">
     <Window.Resources>
         <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}"   
@@ -660,25 +660,25 @@
                         <ColumnDefinition Width=" *" />
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="S1ManSelectBtn" Content="S1" Style="{DynamicResource SlitterBtn}" Grid.Column="0" Margin="20 10" Background="PaleGoldenrod" Click="S1ManSelectBtn_Click"/>
-                    <Button x:Name="S2ManSelectBtn" Content="S2" Style="{DynamicResource SlitterBtn}" Grid.Column="1" Margin="20 10" Background="PaleGoldenrod" Click="S2ManSelectBtn_Click"/>
-                    <Button x:Name="S3ManSelectBtn" Content="S3" Style="{DynamicResource SlitterBtn}" Grid.Column="2" Margin="20 10" Background="PaleGoldenrod" Click="S3ManSelectBtn_Click"/>
-                    <Button x:Name="S4ManSelectBtn" Content="S4" Style="{DynamicResource SlitterBtn}" Grid.Column="3" Margin="20 10" Background="PaleGoldenrod" Click="S4ManSelectBtn_Click"/>
-                    <Button x:Name="S5ManSelectBtn" Content="S5" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Margin="20 10" Background="PaleGoldenrod" Click="S5ManSelectBtn_Click"/>
-                    <Button x:Name="S6ManSelectBtn" Content="S6" Style="{DynamicResource SlitterBtn}" Grid.Column="5" Margin="20 10" Background="PaleGoldenrod" Click="S6ManSelectBtn_Click"/>
-                    <Button x:Name="S7ManSelectBtn" Content="S7" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Margin="20 10" Background="PaleGoldenrod" Click="S7ManSelectBtn_Click"/>
-                    <Button x:Name="S8ManSelectBtn" Content="S8" Style="{DynamicResource SlitterBtn}" Grid.Column="7" Margin="20 10" Background="PaleGoldenrod" Click="S8ManSelectBtn_Click"/>
-                    <Button x:Name="S9ManSelectBtn" Content="S9" Style="{DynamicResource SlitterBtn}" Grid.Column="8" Margin="20 10" Background="PaleGoldenrod" Click="S9ManSelectBtn_Click"/>
-                    <Button x:Name="S10ManSelectBtn" Content="S10" Style="{DynamicResource SlitterBtn}" Grid.Column="9" Margin="20 10" Background="PaleGoldenrod" Click="S10ManSelectBtn_Click"/>
-                    <Button x:Name="S11ManSelectBtn" Content="S11" Style="{DynamicResource SlitterBtn}" Grid.Column="10" Margin="20 10" Background="PaleGoldenrod" Click="S11ManSelectBtn_Click"/>
-                    <Button x:Name="S12ManSelectBtn" Content="S12" Style="{DynamicResource SlitterBtn}" Grid.Column="11" Margin="20 10" Background="PaleGoldenrod" Click="S12ManSelectBtn_Click"/>
-                    <Button x:Name="S13ManSelectBtn" Content="S13" Style="{DynamicResource SlitterBtn}" Grid.Column="12" Margin="20 10" Background="PaleGoldenrod" Click="S13ManSelectBtn_Click"/>
-                    <Button x:Name="S14ManSelectBtn" Content="S14" Style="{DynamicResource SlitterBtn}" Grid.Column="13" Margin="20 10" Background="PaleGoldenrod" Click="S14ManSelectBtn_Click"/>
-                    <Button x:Name="S15ManSelectBtn" Content="S15" Style="{DynamicResource SlitterBtn}" Grid.Column="14" Margin="20 10" Background="PaleGoldenrod" Click="S15ManSelectBtn_Click"/>
-                    <Button x:Name="S16ManSelectBtn" Content="S16" Style="{DynamicResource SlitterBtn}" Grid.Column="15" Margin="20 10" Background="PaleGoldenrod" Click="S16ManSelectBtn_Click"/>
-                    <Button x:Name="S17ManSelectBtn" Content="S17" Style="{DynamicResource SlitterBtn}" Grid.Column="16" Margin="20 10" Background="PaleGoldenrod" Click="S17ManSelectBtn_Click"/>
-                    <Button x:Name="S18ManSelectBtn" Content="S18" Style="{DynamicResource SlitterBtn}" Grid.Column="17" Margin="20 10" Background="PaleGoldenrod" Click="S18ManSelectBtn_Click"/>
-                    <Button x:Name="S19ManSelectBtn" Content="S19" Style="{DynamicResource SlitterBtn}" Grid.Column="18" Margin="20 10" Background="PaleGoldenrod" Click="S19ManSelectBtn_Click"/>
+                    <Button x:Name="S1ManSelectBtn" Content="S1" Style="{DynamicResource SlitterBtn}" Grid.Column="0" Margin="10 10" Background="PaleGoldenrod" Click="S1ManSelectBtn_Click"/>
+                    <Button x:Name="S2ManSelectBtn" Content="S2" Style="{DynamicResource SlitterBtn}" Grid.Column="1" Margin="10 10" Background="PaleGoldenrod" Click="S2ManSelectBtn_Click"/>
+                    <Button x:Name="S3ManSelectBtn" Content="S3" Style="{DynamicResource SlitterBtn}" Grid.Column="2" Margin="10 10" Background="PaleGoldenrod" Click="S3ManSelectBtn_Click"/>
+                    <Button x:Name="S4ManSelectBtn" Content="S4" Style="{DynamicResource SlitterBtn}" Grid.Column="3" Margin="10 10" Background="PaleGoldenrod" Click="S4ManSelectBtn_Click"/>
+                    <Button x:Name="S5ManSelectBtn" Content="S5" Style="{DynamicResource SlitterBtn}" Grid.Column="4" Margin="10 10" Background="PaleGoldenrod" Click="S5ManSelectBtn_Click"/>
+                    <Button x:Name="S6ManSelectBtn" Content="S6" Style="{DynamicResource SlitterBtn}" Grid.Column="5" Margin="10 10" Background="PaleGoldenrod" Click="S6ManSelectBtn_Click"/>
+                    <Button x:Name="S7ManSelectBtn" Content="S7" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Margin="10 10" Background="PaleGoldenrod" Click="S7ManSelectBtn_Click"/>
+                    <Button x:Name="S8ManSelectBtn" Content="S8" Style="{DynamicResource SlitterBtn}" Grid.Column="7" Margin="10 10" Background="PaleGoldenrod" Click="S8ManSelectBtn_Click"/>
+                    <Button x:Name="S9ManSelectBtn" Content="S9" Style="{DynamicResource SlitterBtn}" Grid.Column="8" Margin="10 10" Background="PaleGoldenrod" Click="S9ManSelectBtn_Click"/>
+                    <Button x:Name="S10ManSelectBtn" Content="S10" Style="{DynamicResource SlitterBtn}" Grid.Column="9" Margin="10 10" Background="PaleGoldenrod" Click="S10ManSelectBtn_Click"/>
+                    <Button x:Name="S11ManSelectBtn" Content="S11" Style="{DynamicResource SlitterBtn}" Grid.Column="10" Margin="10 10" Background="PaleGoldenrod" Click="S11ManSelectBtn_Click"/>
+                    <Button x:Name="S12ManSelectBtn" Content="S12" Style="{DynamicResource SlitterBtn}" Grid.Column="11" Margin="10 10" Background="PaleGoldenrod" Click="S12ManSelectBtn_Click"/>
+                    <Button x:Name="S13ManSelectBtn" Content="S13" Style="{DynamicResource SlitterBtn}" Grid.Column="12" Margin="10 10" Background="PaleGoldenrod" Click="S13ManSelectBtn_Click"/>
+                    <Button x:Name="S14ManSelectBtn" Content="S14" Style="{DynamicResource SlitterBtn}" Grid.Column="13" Margin="10 10" Background="PaleGoldenrod" Click="S14ManSelectBtn_Click"/>
+                    <Button x:Name="S15ManSelectBtn" Content="S15" Style="{DynamicResource SlitterBtn}" Grid.Column="14" Margin="10 10" Background="PaleGoldenrod" Click="S15ManSelectBtn_Click"/>
+                    <Button x:Name="S16ManSelectBtn" Content="S16" Style="{DynamicResource SlitterBtn}" Grid.Column="15" Margin="10 10" Background="PaleGoldenrod" Click="S16ManSelectBtn_Click"/>
+                    <Button x:Name="S17ManSelectBtn" Content="S17" Style="{DynamicResource SlitterBtn}" Grid.Column="16" Margin="10 10" Background="PaleGoldenrod" Click="S17ManSelectBtn_Click"/>
+                    <Button x:Name="S18ManSelectBtn" Content="S18" Style="{DynamicResource SlitterBtn}" Grid.Column="17" Margin="10 10" Background="PaleGoldenrod" Click="S18ManSelectBtn_Click"/>
+                    <Button x:Name="S19ManSelectBtn" Content="S19" Style="{DynamicResource SlitterBtn}" Grid.Column="18" Margin="10 10" Background="PaleGoldenrod" Click="S19ManSelectBtn_Click"/>
                     
 
                 </Grid>

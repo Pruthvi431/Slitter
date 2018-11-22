@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.112 Version 3.4
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.112 Version 3.6
     /// </summary>
     
    
@@ -52,9 +52,8 @@ namespace SlittersWPF
         Boolean OutOfTolerance = false;
         Boolean OutofToleranceDisable = false;
         Boolean MaintMode = false;
-        
-        
-
+        Boolean SlitStptVerified = false;
+          
         #endregion
 
         public MainWindow()
@@ -69,6 +68,15 @@ namespace SlittersWPF
             TM.CoarseWindow = Properties.Settings.Default.CoarseWindow;
             TM.UnSelectedPosWindow = Properties.Settings.Default.UnSelectedPosWindow;
             TM.InPosWindow = Properties.Settings.Default.InPosWindow;
+            if (Properties.Settings.Default.MaintModeEn)
+            {
+                MaintModeBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MaintModeBtn.Visibility = Visibility.Hidden;
+            }
+            
             Tmr1.Interval = new TimeSpan(0,0,0,0,300);
             Tmr2.Interval = new TimeSpan(0,0,0,15,000); //days , hours, minutes, seconds, milliseconds
             Tmr1.Tick += new EventHandler(TimerEventProcessor1);
@@ -559,6 +567,17 @@ namespace SlittersWPF
 
             // Calculate Setpoints for Slitters not selected for cuts
             TM.CalcBandStptsNotUsed();
+
+            // Verify Slitters are minimum distance from each other (153.00 mm)
+            SlitStptVerified = TM.VerifySlitterSetpoints();
+            if (!SlitStptVerified)
+            {
+                TM.SlitCutsUsedToRollCuts();
+                TM.CalcSelectedBandStpts();
+                TM.CalcBandStptsNotUsed();
+            }
+
+
             TM.BladeStpt = TM.BandStpt;
             UpdateSlitterStpt();
             RemainingTrimTxtBx.Text = (TM.MaxWidth - TM.TotalWidth).ToString("F2"); ;
@@ -2951,6 +2970,18 @@ namespace SlittersWPF
 
             //Calculate Setpoints for Slitters selected for cuts
             TM.CalcSelectedBandStpts();
+            // Calculate Setpoints for Slitters not selected for cuts
+            TM.CalcBandStptsNotUsed();
+
+            // Verify Slitters are minimum distance from each other (153.00 mm)
+            SlitStptVerified = TM.VerifySlitterSetpoints();
+            if (!SlitStptVerified)
+            {
+                TM.SlitCutsUsedToRollCuts();
+                TM.CalcSelectedBandStpts();
+                TM.CalcBandStptsNotUsed();
+            }
+
             if (TM.BandStpt[18] < TM.BandLowerLimit[18])
             {
                 System.Windows.MessageBox.Show("Invalid Roll Data");
@@ -2959,6 +2990,7 @@ namespace SlittersWPF
 
             // Calculate Setpoints for Slitters not selected for cuts
             TM.CalcBandStptsNotUsed();
+            
             TM.BladeStpt = TM.BandStpt;
             UpdateSlitterStpt();
             RemainingTrimTxtBx.Text = (TM.MaxWidth - TM.TotalWidth).ToString("F2"); ;

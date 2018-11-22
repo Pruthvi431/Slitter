@@ -20,6 +20,9 @@ namespace SlittersWPF
         public int MaxSlitters = 19;
         public int MaxCuts = 19;
         public double MinSlitStpt = 0.0;
+        public double MinDistBetweenSlitters = 153.0;
+        public Boolean StptActPosnValidated = true;
+        public Boolean StptParkPosnValidated = true;
         public double[,] WrapExcel2 = new double[100,18];
         public double[] RollWidth = new double[18];
         public double[] RollWidthNoShrk = new double[18];
@@ -81,6 +84,7 @@ namespace SlittersWPF
         public double[] SlitterLowerLimit = new double[19];
         public double[] SlitterUpperLimit = new double[19];
         public Boolean[] ManualSelect = new Boolean[19];
+        public Boolean InvalidStpt = false;
         //Chamged Band and Blade Upper limit for Slitter 18 to prevent if from being trim slitter.  8500 to 8320.0
 
         public double[] BandCalibration = { 10.00, 470.00, 940.00, 1410.00, 1880.00, 2350.00, 2820.00, 3290.00, 3760.00, 4230.00, 4700.00, 5170.00, 5640.00, 6110.00, 6580.00, 7050.00, 7520.00, 7990.00, 8490.00 };
@@ -518,7 +522,9 @@ namespace SlittersWPF
             NumbOfSlitParkSelected = 0;
             NumbOfSlitActPosSelected = 0;
             NumbOfslitParkSelectdLmt = 0;
-
+            StptActPosnValidated = true;
+            StptParkPosnValidated = true;
+            
             for (int x = 0; x < MaxSlitters; x++)
             {
                 if (BandActPosnSelected[x])
@@ -551,12 +557,12 @@ namespace SlittersWPF
             ParkSelectedLimit = false;
             bool SolutionFailed = false;
                                   
-            if ((NumbOfRolls + 1) == NumbOfSlitActPosSelected)
+            if (((NumbOfRolls + 1) == NumbOfSlitActPosSelected) && StptActPosnValidated)
             {
                 SolutionSelect = SolutionSelectAct;
                 ActPosSelected = true;
             }
-            else if ((NumbOfRolls + 1) == NumbOfSlitParkSelected)
+            else if (((NumbOfRolls + 1) == NumbOfSlitParkSelected) && StptParkPosnValidated)
             {
                 SolutionSelect = SolutionSelectPark;
                 ParkSelected = true;
@@ -594,15 +600,15 @@ namespace SlittersWPF
             double SlitterCount = 0.0;
             double LowerStptCaptured = 0.0;
             double UpperStptCaptured = 0.0;
-            bool FirstSlitDetected = false;
-            bool SecondSlitDetected = false;
-
+            Boolean FirstSlitDetected = false;
+            Boolean SecondSlitDetected = false;
+                       
             for (int i = 0; i < MaxSlitters; i++)
             {
                 FirstSlitDetected = false;
                 SecondSlitDetected = false;
                 SlitterCount = 0.0;
-
+                
                 for (int k = i; k >= 0; k--)
                 {
                     if ((BandStpt[k] > 0.0) && (FirstSlitDetected == false))
@@ -628,10 +634,34 @@ namespace SlittersWPF
                 {
                     BandStpt[i] = LowerStptCaptured + ((UpperStptCaptured - LowerStptCaptured) / (SlitterCount + 1));
                 }
+                             
             }
-        
+            
         }
-
+        // Verify Slitter Setpoints are minimum 153.00 mm apart. zero out solutionselect and slittersselected
+        public Boolean VerifySlitterSetpoints()
+        {
+            Boolean Passed = true;
+            for (int z = 0; z < MaxRolls; z++)
+            {
+                    if (((Math.Abs(BandStpt[z] - BandStpt[z+1]) < MinDistBetweenSlitters) && Passed))
+                    {
+                            Passed = false;
+                            StptActPosnValidated = false;
+                            StptParkPosnValidated = false;
+                                for (int x = 0; x < MaxSlitters; x++)
+                                { 
+                                        for (int y = 0; y < MaxSlitters; y++)
+                                        {
+                                                SolutionSelect[x, y] = false;
+                                                SlittersSelected[y] = false;
+                                        }
+                                }
+                    }
+            }
+            return Passed;
+        }
+                
         //RollWidthCheck Monitors RollWidths and sets a bit in the plc if Out of Tolerance  Set at 2.0mm
         public Boolean RollWidthCheck()
         {

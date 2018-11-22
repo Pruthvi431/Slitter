@@ -41,9 +41,9 @@ namespace WSMBT
                 WSMBT.Result Result;
                 wsmbtControl1.Mode = WSMBT.Mode.TCP_IP;
                 wsmbtControl1.ResponseTimeout = 1000;
-                //ANC PLC Address = "10.10.10.112"
-                String plcaddr = SlittersWPF.Properties.Settings.Default.PLCAddr;
-            Result = wsmbtControl1.Connect(plcaddr, 502); 
+            //ANC PLC Address = "10.10.10.110"
+            String PLCAddress = SlittersWPF.Properties.Settings.Default.PLCAddr;
+                Result = wsmbtControl1.Connect(PLCAddress, 502); 
                 if (Result != WSMBT.Result.SUCCESS)
                 {
                     ModbusMessage = (wsmbtControl1.GetLastErrorString());

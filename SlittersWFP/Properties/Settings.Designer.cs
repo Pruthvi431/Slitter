@@ -25,7 +25,7 @@ namespace SlittersWPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.10.10.112")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.10.10.110")]
         public string PLCAddr {
             get {
                 return ((string)(this["PLCAddr"]));
@@ -83,6 +83,15 @@ namespace SlittersWPF.Properties {
         public double InPosWindow {
             get {
                 return ((double)(this["InPosWindow"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MaintModeEn {
+            get {
+                return ((bool)(this["MaintModeEn"]));
             }
         }
     }
