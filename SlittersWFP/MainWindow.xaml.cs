@@ -68,15 +68,7 @@ namespace SlittersWPF
             TM.CoarseWindow = Properties.Settings.Default.CoarseWindow;
             TM.UnSelectedPosWindow = Properties.Settings.Default.UnSelectedPosWindow;
             TM.InPosWindow = Properties.Settings.Default.InPosWindow;
-            if (Properties.Settings.Default.MaintModeEn)
-            {
-                MaintModeBtn.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                MaintModeBtn.Visibility = Visibility.Hidden;
-            }
-            
+                        
             Tmr1.Interval = new TimeSpan(0,0,0,0,300);
             Tmr2.Interval = new TimeSpan(0,0,0,15,000); //days , hours, minutes, seconds, milliseconds
             Tmr1.Tick += new EventHandler(TimerEventProcessor1);
@@ -117,7 +109,7 @@ namespace SlittersWPF
             OrderWidthTxtBx.Text = "0.0";
             ShrkWidthTxtBx.Text = "0.0";
             ShrinkIncDecBtn.Text = Convert.ToString(TM.Shrinkage);
-
+                        
             string ConnectedMessage = "Connected";
             string ReadMessage = "Waiting for Connection";
             bool CmpResult = false;
@@ -3022,7 +3014,6 @@ namespace SlittersWPF
            
         }
         
-
         private void ExecuteBtn_Click(object sender, EventArgs e)
         {
             //New Slitter Assignment = 1, Auto Slitter Position Command = 32, Core Chucks Comand = 64  *** Write to PLC 64 + 32 + 1 = 97
@@ -4313,8 +4304,16 @@ namespace SlittersWPF
             S17ManSelectBtn.Visibility = Visibility.Visible;
             S18ManSelectBtn.Visibility = Visibility.Visible;
             S19ManSelectBtn.Visibility = Visibility.Visible;
-            MaintModeBtn.Visibility = Visibility.Visible;
 
+            if (Properties.Settings.Default.MaintModeEn)
+            {
+                MaintModeBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MaintModeBtn.Visibility = Visibility.Hidden;
+            }
+            
             //Clear out Slitter Calib Text Changed in case value is entered but view of calibration is invisible
             for (int x = 0; x < TM.MaxSlitters; x++)
             {
