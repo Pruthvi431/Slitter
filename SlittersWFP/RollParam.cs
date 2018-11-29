@@ -642,11 +642,13 @@ namespace SlittersWPF
         public Boolean VerifySlitterSetpoints()
         {
             Boolean Passed = true;
+            Boolean Spacing = true;
+            Boolean StptCheck = true;
             for (int z = 0; z < MaxRolls; z++)
             {
-                    if (((Math.Abs(BandStpt[z] - BandStpt[z+1]) < MinDistBetweenSlitters) && Passed))
+                    if (((Math.Abs(BandStpt[z] - BandStpt[z+1]) < MinDistBetweenSlitters) && Spacing))
                     {
-                            Passed = false;
+                            Spacing = false;
                             StptActPosnValidated = false;
                             StptParkPosnValidated = false;
                                 for (int x = 0; x < MaxSlitters; x++)
@@ -658,6 +660,20 @@ namespace SlittersWPF
                                         }
                                 }
                     }
+            }
+
+            for(int a = 0; a < MaxRolls; a++)
+            {
+                if((BandStpt[a] > BandStpt[a + 1]) && StptCheck)
+                {
+                    StptCheck = false;
+                }
+
+            }
+
+            if(!StptCheck || !Spacing)
+            {
+                Passed = false;
             }
             return Passed;
         }
