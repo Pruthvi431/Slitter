@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 3.7
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 3.8
     /// </summary>
     
    
@@ -567,6 +567,12 @@ namespace SlittersWPF
                 TM.SlitCutsUsedToRollCuts();
                 TM.CalcSelectedBandStpts();
                 TM.CalcBandStptsNotUsed();
+            }
+            // Verify Slitters set points after first failure.
+            SlitStptVerified = TM.VerifySlitterSetpoints();
+            if (!SlitStptVerified)
+            {
+                System.Windows.MessageBox.Show("No Solution Available");
             }
 
 
@@ -2973,6 +2979,13 @@ namespace SlittersWPF
                 TM.CalcSelectedBandStpts();
                 TM.CalcBandStptsNotUsed();
             }
+            //verify Slitters set points are correct after first failure.
+            SlitStptVerified = TM.VerifySlitterSetpoints();
+            if (!SlitStptVerified)
+            {
+                System.Windows.MessageBox.Show("No Solution Available");
+            }
+                
 
             if (TM.BandStpt[18] < TM.BandLowerLimit[18])
             {

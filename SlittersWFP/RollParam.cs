@@ -644,6 +644,8 @@ namespace SlittersWPF
             Boolean Passed = true;
             Boolean Spacing = true;
             Boolean StptCheck = true;
+            Boolean LimitViolation = true;
+
             for (int z = 0; z < MaxRolls; z++)
             {
                     if (((Math.Abs(BandStpt[z] - BandStpt[z+1]) < MinDistBetweenSlitters) && Spacing))
@@ -658,20 +660,32 @@ namespace SlittersWPF
                                                 SolutionSelect[x, y] = false;
                                                 SlittersSelected[y] = false;
                                         }
+
+                                         BandStpt[x] = 0.0;
                                 }
                     }
             }
 
             for(int a = 0; a < MaxRolls; a++)
             {
-                if((BandStpt[a] > BandStpt[a + 1]) && StptCheck)
+                if((BandStpt[a] > (BandStpt[a + 1] - MinDistBetweenSlitters)) && StptCheck)
                 {
                     StptCheck = false;
                 }
 
             }
 
-            if(!StptCheck || !Spacing)
+            
+            for(int x = 0; x < MaxSlitters; x++)
+            {
+                if(((BandStpt[x] > BandUpperLimit[x]) || (BandStpt[x] < BandLowerLimit[x])) && LimitViolation)
+                {
+                   LimitViolation = false;
+                }
+            }
+            
+
+            if(!StptCheck || !Spacing || !LimitViolation)
             {
                 Passed = false;
             }
