@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 3.8
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 4.0
     /// </summary>
     
    
@@ -520,7 +520,11 @@ namespace SlittersWPF
 
         private void WrapOrderInit()
         {
-            
+            Int32 SlitterCheck = 0;
+            Boolean ActPosnCheck = false;
+            Boolean ParkPosnCheck = false;
+            Boolean ParkLimitCheck = false;
+
             TM.ZeroOutWrapData();
             TM.ZeroOutSlitterData();
             TM.WrapData = DataSort.GetData();
@@ -553,28 +557,63 @@ namespace SlittersWPF
 
             //Select Best Solution from methods TotalActPosnMovement() and TotalParkMovement()
             TM.SlitCutsUsedToRollCuts();
-
-            //Calculate Setpoints for Slitters selected for cuts
-            TM.CalcSelectedBandStpts();
-
-            // Calculate Setpoints for Slitters not selected for cuts
-            TM.CalcBandStptsNotUsed();
-
-            // Verify Slitters are minimum distance from each other (153.00 mm)
-            SlitStptVerified = TM.VerifySlitterSetpoints();
-            if (!SlitStptVerified)
+                        
+            SlitterCheck = TM.SlitCutsUsedToRollCuts();
+            //Check Calibration Position mode for alogorithum
+            if (((SlitterCheck == 2) || (SlitterCheck == 3) || (SlitterCheck == 6) || (SlitterCheck == 7)))
             {
-                TM.SlitCutsUsedToRollCuts();
-                TM.CalcSelectedBandStpts();
-                TM.CalcBandStptsNotUsed();
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ParkPosnSp[x] = 0.0;
+                    TM.ParkPosnSpPartial[x] = 0.0;
+                }
+                TM.ParkPosnSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectPark);
+                TM.ParkPosnSp = TM.CalcBandStptsNotUsedParkPosn(TM.ParkPosnSpPartial, TM.BandParkSelected);
+                ParkPosnCheck = TM.VerifySlitterSetpoints(TM.ParkPosnSp);
+                if (ParkPosnCheck)
+                {
+                    TM.BandStpt = TM.ParkPosnSp;
+                    
+                }
             }
-            // Verify Slitters set points after first failure.
-            SlitStptVerified = TM.VerifySlitterSetpoints();
-            if (!SlitStptVerified)
+            //Check Actual Position mode for alogorithum
+            if (((SlitterCheck == 1) || (SlitterCheck == 3) || (SlitterCheck == 5) || (SlitterCheck == 7)) && !ParkPosnCheck)
             {
-                System.Windows.MessageBox.Show("No Solution Available");
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ActPosnSp[x] = 0.0;
+                    TM.ActPosnSpPartial[x] = 0.0;
+                }
+                TM.ActPosnSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectAct);
+                TM.ActPosnSp = TM.CalcBandStptsNotUsedActPosn(TM.ActPosnSpPartial, TM.BandActPosnSelected);
+                ActPosnCheck = TM.VerifySlitterSetpoints(TM.ActPosnSp);
+                if (ActPosnCheck)
+                {
+                    TM.BandStpt = TM.ActPosnSp;
+                }
+            }
+            //Check Park Limit Position mode for alogorithum
+            if (((SlitterCheck == 4) || (SlitterCheck == 5) || (SlitterCheck == 6) || (SlitterCheck == 7)) && !ParkPosnCheck && !ActPosnCheck)
+            {
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ParkLmtSp[x] = 0.0;
+                    TM.ParkLmtSpPartial[x] = 0.0;
+                }
+                TM.ParkLmtSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectParkLmt);
+                TM.ParkLmtSp = TM.CalcBandStptsNotUsedParkLmt(TM.ParkLmtSpPartial, TM.BandParkLimitSelected);
+                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSpPartial);
+                if (ParkLimitCheck)
+                {
+                    TM.BandStpt = TM.ParkLmtSp;
+                }
             }
 
+            if (!ActPosnCheck && !ParkPosnCheck && !ParkLimitCheck)
+            {
+                System.Windows.MessageBox.Show("Solution not Possible, Try Swapping Rolls");
+
+            }
 
             TM.BladeStpt = TM.BandStpt;
             UpdateSlitterStpt();
@@ -2923,7 +2962,11 @@ namespace SlittersWPF
 
         private void AcceptBtn_Click(object sender, EventArgs e)
         {
-            bool SolutionFailed = false;
+            Int32 SlitterCheck = 0;
+            Boolean ActPosnCheck = false;
+            Boolean ParkPosnCheck = false;
+            Boolean ParkLimitCheck = false;
+            
             AcceptBtn.Background = Brushes.Transparent;
             TM.ZeroOutSlitterData();
             if (CenterTrimOn || TM.CalibrateMode)
@@ -2959,43 +3002,69 @@ namespace SlittersWPF
             //Checks to ses if selected slitters matches number of cuts needed
             TM.CompareSlittersUsedToCuts();
 
-            //Select Best Solution from methods TotalActPosnMovement() and TotalParkMovement()
-            SolutionFailed = TM.SlitCutsUsedToRollCuts();
-            if (SolutionFailed)
+            SlitterCheck = TM.SlitCutsUsedToRollCuts();
+            //Check Calibration Position mode for alogorithum
+            if (((SlitterCheck == 2) || (SlitterCheck == 3) || (SlitterCheck == 6) || (SlitterCheck == 7)))
             {
-                System.Windows.MessageBox.Show("Solution Failed, Swap Rolls");
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ParkPosnSp[x] = 0.0;
+                    TM.ParkPosnSpPartial[x] = 0.0;
+                }
+                TM.ParkPosnSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectPark);
+                TM.ParkPosnSp = TM.CalcBandStptsNotUsedParkPosn(TM.ParkPosnSpPartial, TM.BandParkSelected);
+                ParkPosnCheck = TM.VerifySlitterSetpoints(TM.ParkPosnSp);
+                if (ParkPosnCheck)
+                {
+                    TM.BandStpt = TM.ParkPosnSp;
+
+                }
+            }
+            //Check Actual Position mode for alogorithum
+            if (((SlitterCheck == 1) || (SlitterCheck == 3) || (SlitterCheck == 5) || (SlitterCheck == 7)) && !ParkPosnCheck)
+            {
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ActPosnSp[x] = 0.0;
+                    TM.ActPosnSpPartial[x] = 0.0;
+                }
+                TM.ActPosnSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectAct);
+                TM.ActPosnSp = TM.CalcBandStptsNotUsedActPosn(TM.ActPosnSpPartial, TM.BandActPosnSelected);
+                ActPosnCheck = TM.VerifySlitterSetpoints(TM.ActPosnSp);
+                if (ActPosnCheck)
+                {
+                    TM.BandStpt = TM.ActPosnSp;
+                }
+            }
+            //Check Park Limit Position mode for alogorithum
+            if (((SlitterCheck == 4) || (SlitterCheck == 5) || (SlitterCheck == 6) || (SlitterCheck == 7)) && !ParkPosnCheck && !ActPosnCheck)
+            {
+                for (int x = 0; x < TM.MaxSlitters; x++)
+                {
+                    TM.ParkLmtSp[x] = 0.0;
+                    TM.ParkLmtSpPartial[x] = 0.0;
+                }
+                TM.ParkLmtSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectParkLmt);
+                TM.ParkLmtSp = TM.CalcBandStptsNotUsedParkLmt(TM.ParkLmtSpPartial, TM.BandParkLimitSelected);
+                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSpPartial);
+                if (ParkLimitCheck)
+                {
+                    TM.BandStpt = TM.ParkLmtSp;
+                }
             }
 
-            //Calculate Setpoints for Slitters selected for cuts
-            TM.CalcSelectedBandStpts();
-            // Calculate Setpoints for Slitters not selected for cuts
-            TM.CalcBandStptsNotUsed();
+            if (!ActPosnCheck && !ParkPosnCheck && !ParkLimitCheck)
+            {
+                System.Windows.MessageBox.Show("Solution not Possible, Try Swapping Rolls");
 
-            // Verify Slitters are minimum distance from each other (153.00 mm)
-            SlitStptVerified = TM.VerifySlitterSetpoints();
-            if (!SlitStptVerified)
-            {
-                TM.SlitCutsUsedToRollCuts();
-                TM.CalcSelectedBandStpts();
-                TM.CalcBandStptsNotUsed();
             }
-            //verify Slitters set points are correct after first failure.
-            SlitStptVerified = TM.VerifySlitterSetpoints();
-            if (!SlitStptVerified)
-            {
-                System.Windows.MessageBox.Show("No Solution Available");
-            }
-                
+
 
             if (TM.BandStpt[18] < TM.BandLowerLimit[18])
             {
                 System.Windows.MessageBox.Show("Invalid Roll Data");
             }
 
-
-            // Calculate Setpoints for Slitters not selected for cuts
-            TM.CalcBandStptsNotUsed();
-            
             TM.BladeStpt = TM.BandStpt;
             UpdateSlitterStpt();
             RemainingTrimTxtBx.Text = (TM.MaxWidth - TM.TotalWidth).ToString("F2"); ;
