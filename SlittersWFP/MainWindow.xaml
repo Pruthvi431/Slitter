@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlittersWPF"
         mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
-        Title="ANC SLITTER OPTIMIZER Version 4.0" Height="1080" Width="1920">
+        Title="ANC SLITTER OPTIMIZER Version 5.0" Height="1080" Width="1920">
     <Window.Resources>
         <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}"   
@@ -140,10 +140,6 @@
 
                 </Grid>
 
-
-
-
-
                 <!-- Configuraton for Slitter Labels -->
 
                 <Grid>
@@ -192,87 +188,125 @@
 
 
                 <!-- Configuraton for Disable and Out of Service -->
-
-
+                
                 <Grid>
                     <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
-                        <ColumnDefinition Width=" *" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <CheckBox x:Name="S1LblEn" Margin="10 5 5 5" Grid.Column="0" Background="LimeGreen" Checked="S1LblEn_Checked" Unchecked="S1LblEn_Unchecked"/>
-                    <CheckBox x:Name="S1LblServ" Margin="10 5 0 5" Grid.Column="1" Background="LimeGreen" Checked="S1LblServ_Checked" Unchecked="S1LblServ_Unchecked"/>
-                    <CheckBox x:Name="S2LblEn" Margin="10 5 5 5" Grid.Column="2" Background="LimeGreen" Checked="S2LblEn_Checked" Unchecked="S2LblEn_Unchecked"/>
-                    <CheckBox x:Name="S2LblServ" Margin="10 5 0 5" Grid.Column="3" Background="LimeGreen" Checked="S2LblServ_Checked" Unchecked="S2LblServ_Unchecked"/>
-                    <CheckBox x:Name="S3LblEn" Margin="10 5 5 5" Grid.Column="4" Background="LimeGreen" Checked="S3LblEn_Checked" Unchecked="S3LblEn_Unchecked"/>
-                    <CheckBox x:Name="S3LblServ" Margin="10 5 0 5" Grid.Column="5" Background="LimeGreen" Checked="S3LblServ_Checked" Unchecked="S3LblServ_Unchecked"/>
-                    <CheckBox x:Name="S4LblEn" Margin="10 5 5 5" Grid.Column="6" Background="LimeGreen" Checked="S4LblEn_Checked" Unchecked="S4LblEn_Unchecked"/>
-                    <CheckBox x:Name="S4LblServ" Margin="10 5 0 5" Grid.Column="7" Background="LimeGreen" Checked="S4LblServ_Checked" Unchecked="S4LblServ_Unchecked"/>
-                    <CheckBox x:Name="S5LblEn" Margin="10 5 5 5" Grid.Column="8" Background="LimeGreen" Checked="S5LblEn_Checked" Unchecked="S5LblEn_Unchecked"/>
-                    <CheckBox x:Name="S5LblServ" Margin="10 5 0 5" Grid.Column="9" Background="LimeGreen" Checked="S5LblServ_Checked" Unchecked="S5LblServ_Unchecked"/>
-                    <CheckBox x:Name="S6LblEn" Margin="10 5 5 5" Grid.Column="10" Background="LimeGreen" Checked="S6LblEn_Checked" Unchecked="S6LblEn_Unchecked"/>
-                    <CheckBox x:Name="S6LblServ" Margin="10 5 0 5" Grid.Column="11" Background="LimeGreen" Checked="S6LblServ_Checked" Unchecked="S6LblServ_Unchecked"/>
-                    <CheckBox x:Name="S7LblEn" Margin="10 5 5 5" Grid.Column="12" Background="LimeGreen" Checked="S7LblEn_Checked" Unchecked="S7LblEn_Unchecked"/>
-                    <CheckBox x:Name="S7LblServ" Margin="10 5 0 5" Grid.Column="13" Background="LimeGreen" Checked="S7LblServ_Checked" Unchecked="S7LblServ_Unchecked"/>
-                    <CheckBox x:Name="S8LblEn" Margin="10 5 5 5" Grid.Column="14" Background="LimeGreen" Checked="S8LblEn_Checked" Unchecked="S8LblEn_Unchecked"/>
-                    <CheckBox x:Name="S8LblServ" Margin="10 5 0 5" Grid.Column="15" Background="LimeGreen" Checked="S8LblServ_Checked" Unchecked="S8LblServ_Unchecked"/>
-                    <CheckBox x:Name="S9LblEn" Margin="10 5 5 5" Grid.Column="16" Background="LimeGreen" Checked="S9LblEn_Checked" Unchecked="S9LblEn_Unchecked"/>
-                    <CheckBox x:Name="S9LblServ" Margin="10 5 0 5" Grid.Column="17" Background="LimeGreen" Checked="S9LblServ_Checked" Unchecked="S9LblServ_Unchecked"/>
-                    <CheckBox x:Name="S10LblEn" Margin="10 5 5 5" Grid.Column="18" Background="LimeGreen" Checked="S10LblEn_Checked" Unchecked="S10LblEn_Unchecked"/>
-                    <CheckBox x:Name="S10LblServ" Margin="10 5 0 5" Grid.Column="19" Background="LimeGreen" Checked="S10LblServ_Checked" Unchecked="S10LblServ_Unchecked"/>
-                    <CheckBox x:Name="S11LblEn" Margin="10 5 5 5" Grid.Column="20" Background="LimeGreen" Checked="S11LblEn_Checked" Unchecked="S11LblEn_Unchecked"/>
-                    <CheckBox x:Name="S11LblServ" Margin="10 5 0 5" Grid.Column="21" Background="LimeGreen" Checked="S11LblServ_Checked" Unchecked="S11LblServ_Unchecked"/>
-                    <CheckBox x:Name="S12LblEn" Margin="10 5 5 5" Grid.Column="22" Background="LimeGreen" Checked="S12LblEn_Checked" Unchecked="S12LblEn_Unchecked"/>
-                    <CheckBox x:Name="S12LblServ" Margin="10 5 0 5" Grid.Column="23" Background="LimeGreen" Checked="S12LblServ_Checked" Unchecked="S12LblServ_Unchecked"/>
-                    <CheckBox x:Name="S13LblEn" Margin="10 5 5 5" Grid.Column="24" Background="LimeGreen" Checked="S13LblEn_Checked" Unchecked="S13LblEn_Unchecked"/>
-                    <CheckBox x:Name="S13LblServ" Margin="10 5 0 5" Grid.Column="25" Background="LimeGreen" Checked="S13LblServ_Checked" Unchecked="S13LblServ_Unchecked"/>
-                    <CheckBox x:Name="S14LblEn" Margin="10 5 5 5" Grid.Column="26" Background="LimeGreen" Checked="S14LblEn_Checked" Unchecked="S14LblEn_Unchecked"/>
-                    <CheckBox x:Name="S14LblServ" Margin="10 5 0 5" Grid.Column="27" Background="LimeGreen" Checked="S14LblServ_Checked" Unchecked="S14LblServ_Unchecked"/>
-                    <CheckBox x:Name="S15LblEn" Margin="10 5 5 5" Grid.Column="28" Background="LimeGreen" Checked="S15LblEn_Checked" Unchecked="S15LblEn_Unchecked"/>
-                    <CheckBox x:Name="S15LblServ" Margin="10 5 0 5" Grid.Column="29" Background="LimeGreen" Checked="S15LblServ_Checked" Unchecked="S15LblServ_Unchecked"/>
-                    <CheckBox x:Name="S16LblEn" Margin="10 5 5 5" Grid.Column="30" Background="LimeGreen" Checked="S16LblEn_Checked" Unchecked="S16LblEn_Unchecked"/>
-                    <CheckBox x:Name="S16LblServ" Margin="10 5 0 5" Grid.Column="31" Background="LimeGreen" Checked="S16LblServ_Checked" Unchecked="S16LblServ_Unchecked"/>
-                    <CheckBox x:Name="S17LblEn" Margin="10 5 5 5" Grid.Column="32" Background="LimeGreen" Checked="S17LblEn_Checked" Unchecked="S17LblEn_Unchecked"/>
-                    <CheckBox x:Name="S17LblServ" Margin="10 5 0 5" Grid.Column="33" Background="LimeGreen" Checked="S17LblServ_Checked" Unchecked="S17LblServ_Unchecked"/>
-                    <CheckBox x:Name="S18LblEn" Margin="10 5 5 5" Grid.Column="34" Background="LimeGreen" Checked="S18LblEn_Checked" Unchecked="S18LblEn_Unchecked"/>
-                    <CheckBox x:Name="S18LblServ" Margin="10 5 0 5" Grid.Column="35" Background="LimeGreen" Checked="S18LblServ_Checked" Unchecked="S18LblServ_Unchecked"/>
-                    <CheckBox x:Name="S19LblEn" Margin="10 5 5 5" Grid.Column="36" Background="LimeGreen" Checked="S19LblEn_Checked" Unchecked="S19LblEn_Unchecked"/>
-                    <CheckBox x:Name="S19LblServ" Margin="10 5 0 5" Grid.Column="37" Background="LimeGreen" Checked="S19LblServ_Checked" Unchecked="S19LblServ_Unchecked"/>
+                    <ComboBox x:Name="S1ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"  SelectionChanged="S1ComboBox_SelectionChanged" MouseEnter="S1ComboBox_MouseEnter" MouseLeave="S1ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S2ComboBox"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="1"  HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S2ComboBox_SelectionChanged" MouseEnter="S2ComboBox_MouseEnter" MouseLeave="S2ComboBox_MouseLeave">
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                    </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S3ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="2" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S3ComboBox_SelectionChanged" MouseEnter="S3ComboBox_MouseEnter" MouseLeave="S3ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S4ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S4ComboBox_SelectionChanged" MouseEnter="S4ComboBox_MouseEnter" MouseLeave="S4ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S5ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="4" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S5ComboBox_SelectionChanged" MouseEnter="S5ComboBox_MouseEnter" MouseLeave="S5ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S6ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S6ComboBox_SelectionChanged" MouseEnter="S6ComboBox_MouseEnter" MouseLeave="S6ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S7ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="6" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S7ComboBox_SelectionChanged" MouseEnter="S7ComboBox_MouseEnter" MouseLeave="S7ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S8ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="7" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S8ComboBox_SelectionChanged" MouseEnter="S8ComboBox_MouseEnter" MouseLeave="S8ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S9ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="8" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S9ComboBox_SelectionChanged" MouseEnter="S9ComboBox_MouseEnter" MouseLeave="S9ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S10ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="9"  HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S10ComboBox_SelectionChanged" MouseEnter="S10ComboBox_MouseEnter" MouseLeave="S10ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S11ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S11ComboBox_SelectionChanged" MouseEnter="S11ComboBox_MouseEnter" MouseLeave="S11ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S12ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="11" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S12ComboBox_SelectionChanged" MouseEnter="S12ComboBox_MouseEnter" MouseLeave="S12ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S13ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S13ComboBox_SelectionChanged" MouseEnter="S13ComboBox_MouseEnter" MouseLeave="S13ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S14ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="13" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S14ComboBox_SelectionChanged" MouseEnter="S14ComboBox_MouseEnter" MouseLeave="S14ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S15ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="14" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S15ComboBox_SelectionChanged" MouseEnter="S15ComboBox_MouseEnter" MouseLeave="S15ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S16ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S16ComboBox_SelectionChanged" MouseEnter="S16ComboBox_MouseEnter" MouseLeave="S16ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S17ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S17ComboBox_SelectionChanged" MouseEnter="S17ComboBox_MouseEnter" MouseLeave="S17ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S18ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="17" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S18ComboBox_SelectionChanged" MouseEnter="S18ComboBox_MouseEnter" MouseLeave="S18ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    <ComboBox x:Name="S19ComboBox" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="15" Height="25" Width="120" Margin="5 5 5 5" Grid.Column="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="S19ComboBox_SelectionChanged" MouseEnter="S19ComboBox_MouseEnter" MouseLeave="S19ComboBox_MouseLeave">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    
                 </Grid>
 
 

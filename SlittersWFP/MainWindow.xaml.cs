@@ -23,7 +23,8 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 4.0
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.0
+    /// Drop Down boxes added for slitter disable and out of service
     /// </summary>
     
    
@@ -49,11 +50,13 @@ namespace SlittersWPF
         public bool CalibParamsLoaded = false;
         public Int32 TimeSlice = 0;
         public Boolean DiagOn = false;
+        public float ComboboxWidthMouseEnter = 400.0f;
+        public float ComboboxWidthMouseLeave = 130.0f;
+        public Int32 OutOfServBrkPtComboBox = 6;
         Boolean OutOfTolerance = false;
         Boolean OutofToleranceDisable = false;
         Boolean MaintMode = false;
-        Boolean SlitStptVerified = false;
-          
+                  
         #endregion
 
         public MainWindow()
@@ -68,7 +71,7 @@ namespace SlittersWPF
             TM.CoarseWindow = Properties.Settings.Default.CoarseWindow;
             TM.UnSelectedPosWindow = Properties.Settings.Default.UnSelectedPosWindow;
             TM.InPosWindow = Properties.Settings.Default.InPosWindow;
-                        
+            InitDropBox();            
             Tmr1.Interval = new TimeSpan(0,0,0,0,300);
             Tmr2.Interval = new TimeSpan(0,0,0,15,000); //days , hours, minutes, seconds, milliseconds
             Tmr1.Tick += new EventHandler(TimerEventProcessor1);
@@ -86,6 +89,267 @@ namespace SlittersWPF
             
             #endregion
         }
+
+        #region Initialize Combo boxes
+        private void InitDropBox()
+        {
+            S1ComboBox.SelectedIndex = 0;
+            S2ComboBox.SelectedIndex = 0;
+            S3ComboBox.SelectedIndex = 0;
+            S4ComboBox.SelectedIndex = 0;
+            S5ComboBox.SelectedIndex = 0;
+            S6ComboBox.SelectedIndex = 0;
+            S7ComboBox.SelectedIndex = 0;
+            S8ComboBox.SelectedIndex = 0;
+            S9ComboBox.SelectedIndex = 0;
+            S10ComboBox.SelectedIndex = 0;
+            S11ComboBox.SelectedIndex = 0;
+            S12ComboBox.SelectedIndex = 0;
+            S13ComboBox.SelectedIndex = 0;
+            S14ComboBox.SelectedIndex = 0;
+            S15ComboBox.SelectedIndex = 0;
+            S16ComboBox.SelectedIndex = 0;
+            S17ComboBox.SelectedIndex = 0;
+            S18ComboBox.SelectedIndex = 0;
+            S19ComboBox.SelectedIndex = 0;
+
+            String Msg0 = "Enabled";
+            String Msg1 = "Side Load";
+            String Msg2 = "Air Failure";
+            String Msg3 = "Rough Cut";
+            String Msg4 = "Bad Band";
+            String Msg5 = "Bad Blade";
+            String Msg6 = "Dis Other";
+            String Msg7 = "OOS Elec";
+            String Msg8 = "OOS Mech";
+            String Msg9 = "OOS PosnErr";
+            String Msg10 = "OOS Other";
+
+
+            S1ComboBox.Items.Add(Msg0);
+            /*S1ComboBox.Items.Add(Msg1);
+            S1ComboBox.Items.Add(Msg2);
+            S1ComboBox.Items.Add(Msg3);
+            S1ComboBox.Items.Add(Msg4);
+            S1ComboBox.Items.Add(Msg5);
+            S1ComboBox.Items.Add(Msg6);
+            S1ComboBox.Items.Add(Msg7);
+            S1ComboBox.Items.Add(Msg8);
+            S1ComboBox.Items.Add(Msg9);
+            S1ComboBox.Items.Add(Msg10);*/
+            
+            S2ComboBox.Items.Add(Msg0);
+            S2ComboBox.Items.Add(Msg1);
+            S2ComboBox.Items.Add(Msg2);
+            S2ComboBox.Items.Add(Msg3);
+            S2ComboBox.Items.Add(Msg4);
+            S2ComboBox.Items.Add(Msg5);
+            S2ComboBox.Items.Add(Msg6);
+            S2ComboBox.Items.Add(Msg7);
+            S2ComboBox.Items.Add(Msg8);
+            S2ComboBox.Items.Add(Msg9);
+            S2ComboBox.Items.Add(Msg10);
+            
+            S3ComboBox.Items.Add(Msg0);
+            S3ComboBox.Items.Add(Msg1);
+            S3ComboBox.Items.Add(Msg2);
+            S3ComboBox.Items.Add(Msg3);
+            S3ComboBox.Items.Add(Msg4);
+            S3ComboBox.Items.Add(Msg5);
+            S3ComboBox.Items.Add(Msg6);
+            S3ComboBox.Items.Add(Msg8);
+            S3ComboBox.Items.Add(Msg9);
+            S3ComboBox.Items.Add(Msg10);
+            
+            S4ComboBox.Items.Add(Msg0);
+            S4ComboBox.Items.Add(Msg1);
+            S4ComboBox.Items.Add(Msg2);
+            S4ComboBox.Items.Add(Msg3);
+            S4ComboBox.Items.Add(Msg4);
+            S4ComboBox.Items.Add(Msg5);
+            S4ComboBox.Items.Add(Msg6);
+            S4ComboBox.Items.Add(Msg8);
+            S4ComboBox.Items.Add(Msg9);
+            S4ComboBox.Items.Add(Msg10);
+            
+            S5ComboBox.Items.Add(Msg0);
+            S5ComboBox.Items.Add(Msg1);
+            S5ComboBox.Items.Add(Msg2);
+            S5ComboBox.Items.Add(Msg3);
+            S5ComboBox.Items.Add(Msg4);
+            S5ComboBox.Items.Add(Msg5);
+            S5ComboBox.Items.Add(Msg6);
+            S5ComboBox.Items.Add(Msg8);
+            S5ComboBox.Items.Add(Msg9);
+            S5ComboBox.Items.Add(Msg10);
+            
+            S6ComboBox.Items.Add(Msg0);
+            S6ComboBox.Items.Add(Msg1);
+            S6ComboBox.Items.Add(Msg2);
+            S6ComboBox.Items.Add(Msg3);
+            S6ComboBox.Items.Add(Msg4);
+            S6ComboBox.Items.Add(Msg5);
+            S6ComboBox.Items.Add(Msg6);
+            S6ComboBox.Items.Add(Msg8);
+            S6ComboBox.Items.Add(Msg9);
+            S6ComboBox.Items.Add(Msg10);
+            
+            S7ComboBox.Items.Add(Msg0);
+            S7ComboBox.Items.Add(Msg1);
+            S7ComboBox.Items.Add(Msg2);
+            S7ComboBox.Items.Add(Msg3);
+            S7ComboBox.Items.Add(Msg4);
+            S7ComboBox.Items.Add(Msg5);
+            S7ComboBox.Items.Add(Msg6);
+            S7ComboBox.Items.Add(Msg8);
+            S7ComboBox.Items.Add(Msg9);
+            S7ComboBox.Items.Add(Msg10);
+            
+            S8ComboBox.Items.Add(Msg0);
+            S8ComboBox.Items.Add(Msg1);
+            S8ComboBox.Items.Add(Msg2);
+            S8ComboBox.Items.Add(Msg3);
+            S8ComboBox.Items.Add(Msg4);
+            S8ComboBox.Items.Add(Msg5);
+            S8ComboBox.Items.Add(Msg6);
+            S8ComboBox.Items.Add(Msg7);
+            S8ComboBox.Items.Add(Msg8);
+            S8ComboBox.Items.Add(Msg9);
+            S8ComboBox.Items.Add(Msg10);
+            
+            S9ComboBox.Items.Add(Msg0);
+            S9ComboBox.Items.Add(Msg1);
+            S9ComboBox.Items.Add(Msg2);
+            S9ComboBox.Items.Add(Msg3);
+            S9ComboBox.Items.Add(Msg4);
+            S9ComboBox.Items.Add(Msg5);
+            S9ComboBox.Items.Add(Msg6);
+            S9ComboBox.Items.Add(Msg7);
+            S9ComboBox.Items.Add(Msg8);
+            S9ComboBox.Items.Add(Msg9);
+            S9ComboBox.Items.Add(Msg10);
+            
+            S10ComboBox.Items.Add(Msg0);
+            S10ComboBox.Items.Add(Msg1);
+            S10ComboBox.Items.Add(Msg2);
+            S10ComboBox.Items.Add(Msg3);
+            S10ComboBox.Items.Add(Msg4);
+            S10ComboBox.Items.Add(Msg5);
+            S10ComboBox.Items.Add(Msg6);
+            S10ComboBox.Items.Add(Msg7);
+            S10ComboBox.Items.Add(Msg8);
+            S10ComboBox.Items.Add(Msg9);
+            S10ComboBox.Items.Add(Msg10);
+            
+            S11ComboBox.Items.Add(Msg0);
+            S11ComboBox.Items.Add(Msg1);
+            S11ComboBox.Items.Add(Msg2);
+            S11ComboBox.Items.Add(Msg3);
+            S11ComboBox.Items.Add(Msg4);
+            S11ComboBox.Items.Add(Msg5);
+            S11ComboBox.Items.Add(Msg6);
+            S11ComboBox.Items.Add(Msg7);
+            S11ComboBox.Items.Add(Msg8);
+            S11ComboBox.Items.Add(Msg9);
+            S11ComboBox.Items.Add(Msg10);
+            
+            S12ComboBox.Items.Add(Msg0);
+            S12ComboBox.Items.Add(Msg1);
+            S12ComboBox.Items.Add(Msg2);
+            S12ComboBox.Items.Add(Msg3);
+            S12ComboBox.Items.Add(Msg4);
+            S12ComboBox.Items.Add(Msg5);
+            S12ComboBox.Items.Add(Msg6);
+            S12ComboBox.Items.Add(Msg7);
+            S12ComboBox.Items.Add(Msg8);
+            S12ComboBox.Items.Add(Msg9);
+            S12ComboBox.Items.Add(Msg10);
+
+            S13ComboBox.Items.Add(Msg0);
+            S13ComboBox.Items.Add(Msg1);
+            S13ComboBox.Items.Add(Msg2);
+            S13ComboBox.Items.Add(Msg3);
+            S13ComboBox.Items.Add(Msg4);
+            S13ComboBox.Items.Add(Msg5);
+            S13ComboBox.Items.Add(Msg6);
+            S13ComboBox.Items.Add(Msg7);
+            S13ComboBox.Items.Add(Msg8);
+            S13ComboBox.Items.Add(Msg9);
+            S13ComboBox.Items.Add(Msg10);
+            
+            S14ComboBox.Items.Add(Msg0);
+            S14ComboBox.Items.Add(Msg1);
+            S14ComboBox.Items.Add(Msg2);
+            S14ComboBox.Items.Add(Msg3);
+            S14ComboBox.Items.Add(Msg4);
+            S14ComboBox.Items.Add(Msg5);
+            S14ComboBox.Items.Add(Msg6);
+            S14ComboBox.Items.Add(Msg7);
+            S14ComboBox.Items.Add(Msg8);
+            S14ComboBox.Items.Add(Msg10);
+            
+            S15ComboBox.Items.Add(Msg0);
+            S15ComboBox.Items.Add(Msg1);
+            S15ComboBox.Items.Add(Msg2);
+            S15ComboBox.Items.Add(Msg3);
+            S15ComboBox.Items.Add(Msg4);
+            S15ComboBox.Items.Add(Msg5);
+            S15ComboBox.Items.Add(Msg6);
+            S15ComboBox.Items.Add(Msg7);
+            S15ComboBox.Items.Add(Msg8);
+            S15ComboBox.Items.Add(Msg9);
+            S15ComboBox.Items.Add(Msg10);
+            
+            S16ComboBox.Items.Add(Msg0);
+            S16ComboBox.Items.Add(Msg1);
+            S16ComboBox.Items.Add(Msg2);
+            S16ComboBox.Items.Add(Msg3);
+            S16ComboBox.Items.Add(Msg4);
+            S16ComboBox.Items.Add(Msg5);
+            S16ComboBox.Items.Add(Msg6);
+            S16ComboBox.Items.Add(Msg7);
+            S16ComboBox.Items.Add(Msg8);
+            S16ComboBox.Items.Add(Msg9);
+            S16ComboBox.Items.Add(Msg10);
+
+            S17ComboBox.Items.Add(Msg0);
+            S17ComboBox.Items.Add(Msg1);
+            S17ComboBox.Items.Add(Msg2);
+            S17ComboBox.Items.Add(Msg3);
+            S17ComboBox.Items.Add(Msg4);
+            S17ComboBox.Items.Add(Msg5);
+            S17ComboBox.Items.Add(Msg6);
+            S17ComboBox.Items.Add(Msg7);
+            S17ComboBox.Items.Add(Msg8);
+            S17ComboBox.Items.Add(Msg9);
+            S17ComboBox.Items.Add(Msg10);
+
+            S18ComboBox.Items.Add(Msg0);
+            S18ComboBox.Items.Add(Msg1);
+            S18ComboBox.Items.Add(Msg2);
+            S18ComboBox.Items.Add(Msg3);
+            S18ComboBox.Items.Add(Msg4);
+            S18ComboBox.Items.Add(Msg5);
+            S18ComboBox.Items.Add(Msg6);
+            S18ComboBox.Items.Add(Msg7);
+            S18ComboBox.Items.Add(Msg8);
+            S18ComboBox.Items.Add(Msg9);
+            S18ComboBox.Items.Add(Msg10);
+
+            S19ComboBox.Items.Add(Msg0);
+            /*S19ComboBox.Items.Add(Msg1);
+            S19ComboBox.Items.Add(Msg2);
+            S19ComboBox.Items.Add(Msg3);
+            S19ComboBox.Items.Add(Msg4);
+            S19ComboBox.Items.Add(Msg5);
+            S19ComboBox.Items.Add(Msg6);
+            S19ComboBox.Items.Add(Msg7);
+            S19ComboBox.Items.Add(Msg8);
+            S19ComboBox.Items.Add(Msg9);
+            S19ComboBox.Items.Add(Msg10);*/
+        }
+
+        #endregion
 
         #region Open Modbus Connection
         private void OpenModbusConnection()
@@ -1249,25 +1513,13 @@ namespace SlittersWPF
         {
             if (PLC.PLCControlBits[0, 11])
             {
-            /*TM.SlitterDisable[0] = true;
-            S1LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S1LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[0] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true; */
+                S1ComboBox.SelectedIndex = 10;
+                System.Windows.MessageBox.Show("Out of Service", "Slitter 1");
             }
-            
+
             if (PLC.PLCControlBits[0, 12])
             {
-                TM.SlitterDisable[1] = true;
-                S2LblServ.BorderBrush = Brushes.Magenta;
-                S2LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S2LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[1] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S2ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 2");
             }
            
@@ -1275,238 +1527,120 @@ namespace SlittersWPF
             
             if (PLC.PLCControlBits[0, 13])
             {
-                TM.SlitterDisable[2] = true;
-                S3LblServ.BorderBrush = Brushes.Magenta;
-                S3LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S3LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[2] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S3ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 3");
             } 
             
 
             if (PLC.PLCControlBits[0, 14])
             {
-                TM.SlitterDisable[3] = true;
-                S4LblServ.BorderBrush = Brushes.Magenta;
-                S4LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S4LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[3] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S4ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 4");
             }
             
 
             if (PLC.PLCControlBits[1, 0])
             {
-                TM.SlitterDisable[4] = true;
-                S5LblServ.BorderBrush = Brushes.Magenta;
-                S5LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S5LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[4] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S5ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 5");
 
             }
             
             if (PLC.PLCControlBits[1, 1])
             {
-                TM.SlitterDisable[5] = true;
-                S6LblServ.BorderBrush = Brushes.Magenta;
-                S6LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S6LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[5] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S6ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 6");
 
             }
            
             if (PLC.PLCControlBits[1, 2])
             {
-                TM.SlitterDisable[6] = true;
-                S7LblServ.BorderBrush = Brushes.Magenta;
-                S7LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S7LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[6] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S7ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 7");
 
             }
             
             if (PLC.PLCControlBits[1, 3])
             {
-                TM.SlitterDisable[7] = true;
-                S8LblServ.BorderBrush = Brushes.Magenta;
-                S8LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S8LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[7] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S8ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 8");
 
             }
             
             if (PLC.PLCControlBits[1, 4])
             {
-                TM.SlitterDisable[8] = true;
-                S9LblServ.BorderBrush = Brushes.Magenta;
-                S9LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S9LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[8] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S9ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 9");
 
             }
             
             if (PLC.PLCControlBits[1, 5])
             {
-                TM.SlitterDisable[9] = true;
-                S10LblServ.BorderBrush = Brushes.Magenta;
-                S10LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S10LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[9] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S10ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 10");
 
             }
             
             if (PLC.PLCControlBits[1, 6])
             {
-                TM.SlitterDisable[10] = true;
-                S11LblServ.BorderBrush = Brushes.Magenta;
-                S11LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S11LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[10] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S11ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 11");
 
             }
             
             if (PLC.PLCControlBits[1, 7])
             {
-                TM.SlitterDisable[11] = true;
-                S12LblServ.BorderBrush = Brushes.Magenta;
-                S12LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S12LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[11] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S12ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 12");
 
             }
             
             if (PLC.PLCControlBits[1, 8])
             {
-                TM.SlitterDisable[12] = true;
-                S13LblServ.BorderBrush = Brushes.Magenta;
-                S13LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S13LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[12] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S13ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 13");
 
             }
             
             if (PLC.PLCControlBits[1, 9])
             {
-                TM.SlitterDisable[13] = true;
-                S14LblServ.BorderBrush = Brushes.Magenta;
-                S14LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S14LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[13] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S14ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 14");
 
             }
             
             if (PLC.PLCControlBits[1, 10])
             {
-                TM.SlitterDisable[14] = true;
-                S15LblServ.BorderBrush = Brushes.Magenta;
-                S15LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S15LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[14] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S15ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 15");
 
             }
             
             if (PLC.PLCControlBits[1, 11])
             {
-                TM.SlitterDisable[15] = true;
-                S16LblServ.BorderBrush = Brushes.Magenta;
-                S16LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S16LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[15] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S16ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 16");
 
             }
             
             if (PLC.PLCControlBits[1, 12])
             {
-                TM.SlitterDisable[16] = true;
-                S17LblServ.BorderBrush = Brushes.Magenta;
-                S17LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S17LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[16] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S17ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 17");
 
             }
             
             if (PLC.PLCControlBits[1, 13])
             {
-                TM.SlitterDisable[17] = true;
-                S18LblServ.BorderBrush = Brushes.Magenta;
-                S18LblServ.BorderThickness = new Thickness(5.0);
-                AcceptBtn.Background = Brushes.Yellow;
-                S18LblEn.Visibility = Visibility.Hidden;
-                TM.SlitterOutofService[17] = true;
-                ClearDataforDisableSliter();
-                TM.SlitOutOfServDetect = true;
+                S18ComboBox.SelectedIndex = 10;
                 System.Windows.MessageBox.Show("Out of Service", "Slitter 18");
 
             }
             
             if (PLC.PLCControlBits[1, 14])
             {
-                /* TM.SlitterDisable[18] = true;
-            S19LblServ.BorderBrush = Brushes.Magenta;
-            S19LblServ.BorderThickness = new Thickness(5.0);
-            AcceptBtn.Background = Brushes.Yellow;
-            S19LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[18] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;*/
+                S16ComboBox.SelectedIndex = 10;
+                System.Windows.MessageBox.Show("Out of Service", "Slitter 19");
 
             }
 
@@ -1771,822 +1905,644 @@ namespace SlittersWPF
 
         #region Slitter Enalbe Disable Out of Service and Service
 
-        private void S1LblEn_Checked(object sender, RoutedEventArgs e)
+        private void S1ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*TM.SlitterDisable[0] = true;
-            S1LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter(); */
+            S1ComboBox.Foreground = Brushes.Green;
         }
 
-        private void S1LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S2ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           /* TM.SlitterDisable[0] = false;
-            S1LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow; */
+            Int32 ItemSel = S2ComboBox.SelectedIndex;
+
+            // Enable and In Service
+            if (ItemSel == 0 )
+            {
+                TM.SlitterDisable[1] = false;
+                TM.SlitterOutofService[1] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S2ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 2");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            { 
+                TM.SlitterDisable[1] = true;
+                ClearDataforDisableSliter();
+                S2ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 2");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[1] = true;
+                TM.SlitterOutofService[1] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true; 
+                S2ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 2");
+            }
         }
 
-        private void S1LblServ_Checked(object sender, RoutedEventArgs e)
+        private void S3ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Int32 ItemSel = S3ComboBox.SelectedIndex;
 
-            /*TM.SlitterDisable[0] = true;
-            S1LblServ.BorderBrush = Brushes.Magenta;
-            S1LblServ.BorderThickness = new Thickness(1.0);
-            S1LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S1LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[0] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true; */
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[2] = false;
+                TM.SlitterOutofService[2] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S3ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 3");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[2] = true;
+                ClearDataforDisableSliter();
+                S3ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 3");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[2] = true;
+                TM.SlitterOutofService[2] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S3ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 3");
+            }
+
         }
 
-        private void S1LblServ_Unchecked(object sender, RoutedEventArgs e)
+        private void S4ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /* TM.SlitterDisable[0] = false;
-             * S1LblServ.BorderBrush = Brushes.Gray;
-             S1LblServ.BorderThickness = new Thickness(1.0);
-             S1LblServ.Background = Brushes.LimeGreen;
-             S1LblEn.Visibility = Visibility.Visible;
-             S1LblEn.Background = Brushes.LimeGreen;
-             TM.SlitterOutofService[0] = false;
-             AcceptBtn.Background = Brushes.Yellow;
-             TM.SlitOutOfServDetect = true; */
+            Int32 ItemSel = S4ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[3] = false;
+                TM.SlitterOutofService[3] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S4ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 4");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[3] = true;
+                ClearDataforDisableSliter();
+                S4ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 4");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[3] = true;
+                TM.SlitterOutofService[3] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S4ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 4");
+            }
         }
 
-        private void S2LblEn_Checked(object sender, RoutedEventArgs e)
+        private void S5ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-              TM.SlitterDisable[1] = true;
-              S2LblEn.Background = Brushes.Yellow;
-              AcceptBtn.Background = Brushes.Yellow;
-              ClearDataforDisableSliter();
-              System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 2");
+            Int32 ItemSel = S5ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[4] = false;
+                TM.SlitterOutofService[4] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S5ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 5");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[4] = true;
+                ClearDataforDisableSliter();
+                S5ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 5");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[4] = true;
+                TM.SlitterOutofService[4] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S5ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 5");
+            }
         }
 
-        private void S2LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S6ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             
-              TM.SlitterDisable[1] = false;
-              S2LblEn.Background = Brushes.LimeGreen;
-              AcceptBtn.Background = Brushes.Yellow;
-              System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 2");
+            Int32 ItemSel = S6ComboBox.SelectedIndex;
+
+            //Enalbe and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[5] = false;
+                TM.SlitterOutofService[5] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S6ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 6");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[5] = true;
+                ClearDataforDisableSliter();
+                S6ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 6");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[5] = true;
+                TM.SlitterOutofService[5] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S6ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 6");
+            }
         }
 
-        private void S2LblServ_Checked(object sender, RoutedEventArgs e)
+        private void S7ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-              TM.SlitterDisable[1] = true;
-              S2LblServ.Background = Brushes.Magenta;
-              AcceptBtn.Background = Brushes.Yellow;
-              S2LblEn.Visibility = Visibility.Hidden;
-              TM.SlitterOutofService[1] = true;
-              ClearDataforDisableSliter();
-              TM.SlitOutOfServDetect = true;
-              System.Windows.MessageBox.Show("Out of Service", "Slitter 2");
+            Int32 ItemSel = S7ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[6] = false;
+                TM.SlitterOutofService[6] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S7ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 7");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[6] = true;
+                ClearDataforDisableSliter();
+                S7ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 7");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[6] = true;
+                TM.SlitterOutofService[6] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S7ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 7");
+            }
         }
 
-        private void S2LblServ_Unchecked(object sender, RoutedEventArgs e)
+        private void S8ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-              TM.SlitterDisable[1] = false;
-              S2LblServ.BorderBrush = Brushes.Gray;
-              S2LblServ.BorderThickness = new Thickness(1.0);
-              S2LblServ.Background = Brushes.LimeGreen;
-              S2LblEn.Visibility = Visibility.Visible;
-              S2LblEn.Background = Brushes.LimeGreen;
-              TM.SlitterOutofService[1] = false;
-              AcceptBtn.Background = Brushes.Yellow;
-              TM.SlitOutOfServDetect = true;
-              System.Windows.MessageBox.Show("In Service", "Slitter 2");
+            Int32 ItemSel = S8ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[7] = false;
+                TM.SlitterOutofService[7] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S8ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 8");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[7] = true;
+                ClearDataforDisableSliter();
+                S8ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 8");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[7] = true;
+                TM.SlitterOutofService[7] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S8ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 8");
+            }
         }
 
-        private void S3LblEn_Checked(object sender, RoutedEventArgs e)
+        private void S9ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Int32 ItemSel = S9ComboBox.SelectedIndex;
             
-             TM.SlitterDisable[2] = true;
-             S3LblEn.Background = Brushes.Yellow;
-             AcceptBtn.Background = Brushes.Yellow;
-             ClearDataforDisableSliter();
-             System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 3");
-
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[8] = false;
+                TM.SlitterOutofService[8] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S9ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 9");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[8] = true;
+                ClearDataforDisableSliter();
+                S9ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 9");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[8] = true;
+                TM.SlitterOutofService[8] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S9ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 9");
+            }
         }
 
-        private void S3LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S10ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[2] = false;
-            S3LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 3");
+            Int32 ItemSel = S10ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[9] = false;
+                TM.SlitterOutofService[9] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S10ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 10");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[9] = true;
+                ClearDataforDisableSliter();
+                S10ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 10");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[9] = true;
+                TM.SlitterOutofService[9] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S10ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 10");
+            }
         }
 
-        private void S3LblServ_Checked(object sender, RoutedEventArgs e)
+        private void S11ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[2] = true;
-            S3LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S3LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[2] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 3");
+            Int32 ItemSel = S11ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[10] = false;
+                TM.SlitterOutofService[10] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S11ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 11");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[10] = true;
+                ClearDataforDisableSliter();
+                S11ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 11");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[10] = true;
+                TM.SlitterOutofService[10] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S11ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 11");
+            }
         }
 
-        private void S3LblServ_Unchecked(object sender, RoutedEventArgs e)
+        private void S12ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[2] = false;
-            S3LblServ.BorderBrush = Brushes.Gray;
-            S3LblServ.BorderThickness = new Thickness(1.0);
-            S3LblServ.Background = Brushes.LimeGreen;
-            S3LblEn.Visibility = Visibility.Visible;
-            S3LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[2] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 3");
+            Int32 ItemSel = S12ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[11] = false;
+                TM.SlitterOutofService[11] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S12ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 12");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[11] = true;
+                ClearDataforDisableSliter();
+                S12ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 12");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[11] = true;
+                TM.SlitterOutofService[11] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S12ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+               //System.Windows.MessageBox.Show("Out of Service", "Slitter 12");
+            }
         }
 
-        private void S4LblEn_Checked(object sender, RoutedEventArgs e)
+        private void S13ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-             TM.SlitterDisable[3] = true;
-             S4LblEn.Background = Brushes.Yellow;
-             AcceptBtn.Background = Brushes.Yellow;
-             ClearDataforDisableSliter();
-             System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 4");
+            Int32 ItemSel = S13ComboBox.SelectedIndex;
+
+            //Enalbe and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[12] = false;
+                TM.SlitterOutofService[12] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S13ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 13");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[12] = true;
+                ClearDataforDisableSliter();
+                S13ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 13");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[12] = true;
+                TM.SlitterOutofService[12] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S13ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 13");
+            }
         }
 
-        private void S4LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S14ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[3] = false;
-            S4LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 4");
-        }
-       
-        private void S4LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[3] = true;
-            S4LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S4LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[3] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 4");
-        }
+            Int32 ItemSel = S14ComboBox.SelectedIndex;
 
-        private void S4LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[3] = false;
-            S4LblServ.BorderBrush = Brushes.Gray;
-            S4LblServ.BorderThickness = new Thickness(1.0);
-            S4LblServ.Background = Brushes.LimeGreen;
-            S4LblEn.Visibility = Visibility.Visible;
-            S4LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[3] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 4");
-        }
-
-        private void S5LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[4] = true;
-            S5LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 5");
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[13] = false;
+                TM.SlitterOutofService[13] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S14ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 14");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[13] = true;
+                ClearDataforDisableSliter();
+                S14ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 14");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[13] = true;
+                TM.SlitterOutofService[13] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S14ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 14");
+            }
         }
 
-        private void S5LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S15ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[4] = false;
-            S5LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 5");
+            Int32 ItemSel = S15ComboBox.SelectedIndex;
+
+            //Enalbe and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[14] = false;
+                TM.SlitterOutofService[14] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S15ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 15");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[14] = true;
+                ClearDataforDisableSliter();
+                S15ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 15");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[14] = true;
+                TM.SlitterOutofService[14] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S15ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 15");
+            }
         }
 
-        private void S5LblServ_Checked(object sender, RoutedEventArgs e)
+        private void S16ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[4] = true;
-            S5LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S5LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[4] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 5");
+            Int32 ItemSel = S16ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[15] = false;
+                TM.SlitterOutofService[15] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S16ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 16");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[15] = true;
+                ClearDataforDisableSliter();
+                S16ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 16");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[15] = true;
+                TM.SlitterOutofService[15] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S16ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 16");
+            }
         }
 
-        private void S5LblServ_Unchecked(object sender, RoutedEventArgs e)
+        private void S17ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[4] = false;
-            S5LblServ.BorderBrush = Brushes.Gray;
-            S5LblServ.BorderThickness = new Thickness(1.0);
-            S5LblServ.Background = Brushes.LimeGreen;
-            S5LblEn.Visibility = Visibility.Visible;
-            S5LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[4] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 5");
+            Int32 ItemSel = S17ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[16] = false;
+                TM.SlitterOutofService[16] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S17ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 17");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[16] = true;
+                ClearDataforDisableSliter();
+                S17ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 17");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[16] = true;
+                TM.SlitterOutofService[16] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S17ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 17");
+            }
         }
 
-        private void S6LblEn_Checked(object sender, RoutedEventArgs e)
+        private void S18ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[5] = true;
-            S6LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 6");
+            Int32 ItemSel = S18ComboBox.SelectedIndex;
+
+            //Enable and In Service
+            if (ItemSel == 0)
+            {
+                TM.SlitterDisable[17] = false;
+                TM.SlitterOutofService[17] = false;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S18ComboBox.Foreground = Brushes.Green;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("In Service", "Slitter 18");
+            }
+            //Disable Slitter
+            if (ItemSel >= 1 && ItemSel <= OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[17] = true;
+                ClearDataforDisableSliter();
+                S18ComboBox.Foreground = Brushes.DarkBlue;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 18");
+            }
+            //Out of Service
+            if (ItemSel > OutOfServBrkPtComboBox)
+            {
+                TM.SlitterDisable[17] = true;
+                TM.SlitterOutofService[17] = true;
+                ClearDataforDisableSliter();
+                TM.SlitOutOfServDetect = true;
+                S18ComboBox.Foreground = Brushes.Magenta;
+                AcceptBtn.Background = Brushes.Yellow;
+                //System.Windows.MessageBox.Show("Out of Service", "Slitter 18");
+            }
         }
 
-        private void S6LblEn_Unchecked(object sender, RoutedEventArgs e)
+        private void S19ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TM.SlitterDisable[5] = false;
-            S6LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 6");
-        }
-
-        private void S6LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[5] = true;
-            S6LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S6LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[5] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 6");
-        }
-               
-        private void S6LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[5] = false;
-            S6LblServ.BorderBrush = Brushes.Gray;
-            S6LblServ.BorderThickness = new Thickness(1.0);
-            S6LblServ.Background = Brushes.LimeGreen;
-            S6LblEn.Visibility = Visibility.Visible;
-            S6LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[5] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 6");
-        }
-
-        private void S7LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[6] = true;
-            S7LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 7"); ;
-        }
-
-        private void S7LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[6] = false;
-            S7LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 7");
-        }
-
-        private void S7LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[6] = true;
-            S7LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S7LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[6] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 7");
-        }
-
-        private void S7LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[6] = false;
-            S7LblServ.BorderBrush = Brushes.Gray;
-            S7LblServ.BorderThickness = new Thickness(1.0);
-            S7LblServ.Background = Brushes.LimeGreen;
-            S7LblEn.Visibility = Visibility.Visible;
-            S7LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[6] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 7");
-        }
-
-        private void S8LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[7] = true;
-            S8LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 8");
-        }
-
-        private void S8LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[7] = false;
-            S8LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 8");
-        }
-
-        private void S8LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[7] = true;
-            S8LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S8LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[7] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 8");
-        }
-
-        private void S8LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[7] = false;
-            S8LblServ.BorderBrush = Brushes.Gray;
-            S8LblServ.BorderThickness = new Thickness(1.0);
-            S8LblServ.Background = Brushes.LimeGreen;
-            S8LblEn.Visibility = Visibility.Visible;
-            S8LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[7] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 8");
-        }
-
-        private void S9LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[8] = true;
-            S9LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 9");
-        }
-
-        private void S9LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[8] = false;
-            S9LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 9");
-        }
-
-        private void S9LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[8] = true;
-            S9LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S9LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[8] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 9");
-        }
-
-        private void S9LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[8] = false;
-            S9LblServ.BorderBrush = Brushes.Gray;
-            S9LblServ.BorderThickness = new Thickness(1.0);
-            S9LblServ.Background = Brushes.LimeGreen;
-            S9LblEn.Visibility = Visibility.Visible;
-            S9LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[8] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 9");
-        }
-
-        private void S10LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[9] = true;
-            S10LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 10");
-        }
-
-        private void S10LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[9] = false;
-            S10LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 10");
-        }
-
-        private void S10LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[9] = true;
-            S10LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S10LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[9] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 10");
-        }
-      
-        private void S10LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[9] = false;
-            S10LblServ.BorderBrush = Brushes.Gray;
-            S10LblServ.BorderThickness = new Thickness(1.0);
-            S10LblServ.Background = Brushes.LimeGreen;
-            S10LblEn.Visibility = Visibility.Visible;
-            S10LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[9] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 10");
-        }
-
-        private void S11LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[10] = true;
-            S11LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 11");
-        }
-
-        private void S11LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[10] = false;
-            S11LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 11");
-        }
-
-        private void S11LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[10] = true;
-            S11LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S11LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[10] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 11");
-        }
-       
-        private void S11LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[10] = false;
-            S11LblServ.BorderBrush = Brushes.Gray;
-            S11LblServ.BorderThickness = new Thickness(1.0);
-            S11LblServ.Background = Brushes.LimeGreen;
-            S11LblEn.Visibility = Visibility.Visible;
-            S11LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[10] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 11");
-        }
-
-        private void S12LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[11] = true;
-            S12LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 12");
-        }
-
-        private void S12LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[11] = false;
-            S12LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 12");
-        }
-
-        private void S12LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[11] = true;
-            S12LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S12LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[11] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 12");
-        }      
-
-        private void S12LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[11] = false;
-            S12LblServ.BorderBrush = Brushes.Gray;
-            S12LblServ.BorderThickness = new Thickness(1.0);
-            S12LblServ.Background = Brushes.LimeGreen;
-            S12LblEn.Visibility = Visibility.Visible;
-            S12LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[11] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 12");
-        }
-
-        private void S13LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[12] = true;
-            S13LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 13");
-        }
-
-        private void S13LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[12] = false;
-            S13LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 13");
-        }
-
-        private void S13LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[12] = true;
-            S13LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S13LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[12] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 13");
-        }
-        
-        private void S13LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[12] = false;
-            S13LblServ.BorderBrush = Brushes.Gray;
-            S13LblServ.BorderThickness = new Thickness(1.0);
-            S13LblServ.Background = Brushes.LimeGreen;
-            S13LblEn.Visibility = Visibility.Visible;
-            S13LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[12] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 13");
-        }
-
-        private void S14LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[13] = true;
-            S14LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 14");
-        }
-
-        private void S14LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[13] = false;
-            S14LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 14");
-        }
-
-        private void S14LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[13] = true;
-            S14LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S14LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[13] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 14");
-        }
-        
-        private void S14LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[13] = false;
-            S14LblServ.BorderBrush = Brushes.Gray;
-            S14LblServ.BorderThickness = new Thickness(1.0);
-            S14LblServ.Background = Brushes.LimeGreen;
-            S14LblEn.Visibility = Visibility.Visible;
-            S14LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[13] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 14");
-        }
-
-        private void S15LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[14] = true;
-            S15LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 15");
-        }
-
-        private void S15LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[14] = false;
-            S15LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 15");
-        }
-
-        private void S15LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[14] = true;
-            S15LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S15LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[14] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 15");
-        }        
-
-        private void S15LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[14] = false;
-            S15LblServ.BorderBrush = Brushes.Gray;
-            S15LblServ.BorderThickness = new Thickness(1.0);
-            S15LblServ.Background = Brushes.LimeGreen;
-            S15LblEn.Visibility = Visibility.Visible;
-            S15LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[14] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 15");
-        }
-
-        private void S16LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[15] = true;
-            S16LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 16");
-        }
-
-        private void S16LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[15] = false;
-            S16LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 16");
-        }
-
-        private void S16LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[15] = true;
-            S16LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S16LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[15] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 16");
-        }        
-
-        private void S16LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[15] = false;
-            S16LblServ.BorderBrush = Brushes.Gray;
-            S16LblServ.BorderThickness = new Thickness(1.0);
-            S16LblServ.Background = Brushes.LimeGreen;
-            S16LblEn.Visibility = Visibility.Visible;
-            S16LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[15] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 16");
-        }
-
-        private void S17LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[16] = true;
-            S17LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 17");
-        }
-
-        private void S17LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[16] = false;
-            S17LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 17");
-        }
-
-        private void S17LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[16] = true;
-            S17LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S17LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[16] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 17");
-        }       
-
-        private void S17LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[16] = false;
-            S17LblServ.BorderBrush = Brushes.Gray;
-            S17LblServ.BorderThickness = new Thickness(1.0);
-            S17LblServ.Background = Brushes.LimeGreen;
-            S17LblEn.Visibility = Visibility.Visible;
-            S17LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[16] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 17");
-        }
-
-        private void S18LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[17] = true;
-            S18LblEn.Background = Brushes.Yellow;
-            AcceptBtn.Background = Brushes.Yellow;
-            ClearDataforDisableSliter();
-            System.Windows.MessageBox.Show("Slitter Disabled", "Slitter 18");
-        }
-
-        private void S18LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[17] = false;
-            S18LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;
-            System.Windows.MessageBox.Show("Slitter Enabled", "Slitter 18");
-        }
-
-        private void S18LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[17] = true;
-            S18LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S18LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[17] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("Out of Service", "Slitter 18");
-        }       
-
-        private void S18LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TM.SlitterDisable[17] = false;
-            S18LblServ.BorderBrush = Brushes.Gray;
-            S18LblServ.BorderThickness = new Thickness(1.0);
-            S18LblServ.Background = Brushes.LimeGreen;
-            S18LblEn.Visibility = Visibility.Visible;
-            S18LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[17] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;
-            System.Windows.MessageBox.Show("In Service", "Slitter 18");
-        }
-
-        private void S19LblEn_Checked(object sender, RoutedEventArgs e)
-        {
-            //MessageBoxResult result = MessageBox.Show("Do you want to Disable Slitter?", "Slitter Enable or Disable?", MessageBoxButton.YesNoCancel);
-             /* TM.SlitterDisable[18] = true;
-              S19LblEn.Background = Brushes.Yellow;
-              AcceptBtn.Background = Brushes.Yellow;
-              ClearDataforDisableSliter();*/
-        }
-
-        private void S19LblEn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            /*TM.SlitterDisable[18] = false;
-            S19LblEn.Background = Brushes.LimeGreen;
-            AcceptBtn.Background = Brushes.Yellow;*/
-        }
-
-        private void S19LblServ_Checked(object sender, RoutedEventArgs e)
-        {
-           /* TM.SlitterDisable[18] = true;
-            S19LblServ.Background = Brushes.Magenta;
-            AcceptBtn.Background = Brushes.Yellow;
-            S19LblEn.Visibility = Visibility.Hidden;
-            TM.SlitterOutofService[18] = true;
-            ClearDataforDisableSliter();
-            TM.SlitOutOfServDetect = true;*/
-        }       
-
-        private void S19LblServ_Unchecked(object sender, RoutedEventArgs e)
-        {
-            /*TM.SlitterDisable[18] = false;
-            S19LblServ.BorderBrush = Brushes.Gray;
-            S19LblServ.BorderThickness = new Thickness(1.0);
-            S19LblServ.Background = Brushes.LimeGreen;
-            S19LblEn.Visibility = Visibility.Visible;
-            S19LblEn.Background = Brushes.LimeGreen;
-            TM.SlitterOutofService[18] = false;
-            AcceptBtn.Background = Brushes.Yellow;
-            TM.SlitOutOfServDetect = true;*/
+            S19ComboBox.Foreground = Brushes.Green;
         }
 
         #endregion
@@ -4641,5 +4597,198 @@ namespace SlittersWPF
             SerializeDataSet();
             Application.Current.Shutdown();
         }
+
+        #region MouseEnter MouseLeave ComboBox
+
+        private void S1ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S1ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S1ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S1ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S2ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S2ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S2ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S2ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S3ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S3ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S3ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S3ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S4ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S4ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S4ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S4ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S5ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S5ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S5ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S5ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S6ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S6ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S6ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S6ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S7ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S7ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S7ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S7ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S8ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S8ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S8ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S8ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S9ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S9ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S9ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S9ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S10ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S10ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S10ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S10ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S11ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S11ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S11ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S11ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S12ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S12ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S12ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S12ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S13ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S13ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S13ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S13ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S14ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S14ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S14ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S14ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S15ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S15ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S15ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S15ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S16ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S16ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S16ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S16ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S17ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S17ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S17ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S17ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S18ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S18ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S18ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S18ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+
+        private void S19ComboBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            S19ComboBox.Width = ComboboxWidthMouseEnter;
+        }
+
+        private void S19ComboBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            S19ComboBox.Width = ComboboxWidthMouseLeave;
+        }
+        #endregion
     }
 }
