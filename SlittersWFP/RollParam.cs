@@ -67,7 +67,7 @@ namespace SlittersWPF
         public double TotalParkPosn = 0.0;
         public double TotalActPosn = 0.0;
         public int NumbOfRolls = 0;
-        public double MaxWidth = 8514.0;
+        public double MaxWidth = 8500.0;
         public double MaxRollWidth = 2800.0;
         public double Shrinkage = 0.15; // Equals 0.15 %
         public double TotalWidthNoShrk = 0.0;
