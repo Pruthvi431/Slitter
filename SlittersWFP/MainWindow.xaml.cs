@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.0
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.1
     /// Drop Down boxes added for slitter disable and out of service
     /// </summary>
     
@@ -56,6 +56,7 @@ namespace SlittersWPF
         Boolean OutOfTolerance = false;
         Boolean OutofToleranceDisable = false;
         Boolean MaintMode = false;
+        public Boolean DisableBandCalibMsg = false;
                   
         #endregion
 
@@ -550,6 +551,7 @@ namespace SlittersWPF
             Tmr1.Stop();
             SlitterPositionColorCntrl();
             UpdateSlitterError();
+            SlitCalibTextChangedColor();
 
             String ConnectedMessage = "Connected";
             String ReadMessage = "Waiting for Connection";
@@ -2873,6 +2875,45 @@ namespace SlittersWPF
 
         #endregion R
 
+        // If operator doesn't commit to tranfer than deselecting or selecting diag checkbox or accept button will call this method.
+        private void OperatorNoTransferOffsetsToPLC()
+        {
+            Tmr1.Stop();
+            DisableBandCalibMsg = true;
+
+            BandCalibTxt1.Text = "0.0";
+            BandCalibTxt2.Text = "0.0";
+            BandCalibTxt3.Text = "0.0";
+            BandCalibTxt4.Text = "0.0";
+            BandCalibTxt5.Text = "0.0";
+            BandCalibTxt6.Text = "0.0";
+            BandCalibTxt7.Text = "0.0";
+            BandCalibTxt8.Text = "0.0";
+            BandCalibTxt9.Text = "0.0";
+            BandCalibTxt10.Text = "0.0";
+            BandCalibTxt11.Text = "0.0";
+            BandCalibTxt12.Text = "0.0";
+            BandCalibTxt13.Text = "0.0";
+            BandCalibTxt14.Text = "0.0";
+            BandCalibTxt15.Text = "0.0";
+            BandCalibTxt16.Text = "0.0";
+            BandCalibTxt17.Text = "0.0";
+            BandCalibTxt18.Text = "0.0";
+            BandCalibTxt19.Text = "0.0";
+            for (int x = 0; x < TM.MaxSlitters; x++)
+            {
+                TM.CalibrateCmdSelected[x] = false;
+                TM.SlitterCalibTextChgd[x] = false;
+                TM.CalibrateOffsets[x] = 0.0;
+            }
+            CalibParamsLoaded = false;
+            LoadParambtn.Background = Brushes.Transparent;
+            TransferOffsetsToPLCBtn.Background = Brushes.Transparent;
+            DisableBandCalibMsg = false;
+            Tmr1.Start();
+
+        }
+
         #region Buttons
 
         private void LifeCycleBtn_Click(object sender, RoutedEventArgs e)
@@ -2918,11 +2959,13 @@ namespace SlittersWPF
 
         private void AcceptBtn_Click(object sender, EventArgs e)
         {
+
             Int32 SlitterCheck = 0;
             Boolean ActPosnCheck = false;
             Boolean ParkPosnCheck = false;
             Boolean ParkLimitCheck = false;
-            
+
+            OperatorNoTransferOffsetsToPLC();
             AcceptBtn.Background = Brushes.Transparent;
             TM.ZeroOutSlitterData();
             if (CenterTrimOn || TM.CalibrateMode)
@@ -3140,6 +3183,7 @@ namespace SlittersWPF
             S17ManSelectBtn.Visibility = Visibility.Visible;
             S18ManSelectBtn.Visibility = Visibility.Visible;
             S19ManSelectBtn.Visibility = Visibility.Visible;
+            
             LoadParambtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Background = Brushes.Transparent;
@@ -4218,6 +4262,164 @@ namespace SlittersWPF
         }
         #endregion
 
+        #region Slitter Calibration Text Changed
+        private void SlitCalibTextChangedColor()
+        {
+            if(TM.SlitterCalibTextChgd[0])
+            {
+                S1ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S1ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[1])
+            {
+                S2ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S2ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[2])
+            {
+                S3ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S3ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[3])
+            {
+                S4ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S4ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[4])
+            {
+                S5ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S5ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[5])
+            {
+                S6ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S6ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[6])
+            {
+                S7ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S7ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[7])
+            {
+                S8ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S8ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[8])
+            {
+                S9ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S9ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[9])
+            {
+                S10ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S10ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[10])
+            {
+                S11ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S11ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[11])
+            {
+                S12ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S12ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[12])
+            {
+                S13ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S13ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[13])
+            {
+                S14ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S14ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[14])
+            {
+                S15ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S15ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[15])
+            {
+                S16ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S16ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[16])
+            {
+                S17ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S17ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[17])
+            {
+                S18ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S18ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+            if (TM.SlitterCalibTextChgd[18])
+            {
+                S19ManSelectBtn.Background = Brushes.Orange;
+            }
+            else
+            {
+                S19ManSelectBtn.Background = Brushes.PaleGoldenrod;
+            }
+        }
+        #endregion
+
         #region Auto Center Trim Chk Bx - Diag  Chk Bx
         private void AutoCtrTrimChkBx_Checked(object sender, RoutedEventArgs e)
         {
@@ -4343,7 +4545,7 @@ namespace SlittersWPF
             S17ManSelectBtn.Visibility = Visibility.Visible;
             S18ManSelectBtn.Visibility = Visibility.Visible;
             S19ManSelectBtn.Visibility = Visibility.Visible;
-
+            
             if (Properties.Settings.Default.MaintModeEn)
             {
                 MaintModeBtn.Visibility = Visibility.Visible;
@@ -4352,14 +4554,9 @@ namespace SlittersWPF
             {
                 MaintModeBtn.Visibility = Visibility.Hidden;
             }
-            
             //Clear out Slitter Calib Text Changed in case value is entered but view of calibration is invisible
-            for (int x = 0; x < TM.MaxSlitters; x++)
-            {
-                TM.SlitterCalibTextChgd[x] = false;
-                TM.CalibrateCmdSelected[x] = false;
-                TM.CalibrateOffsets[x] = 0.0;
-            }
+            OperatorNoTransferOffsetsToPLC();
+               
 
         }
 
@@ -4479,36 +4676,11 @@ namespace SlittersWPF
             MaintModeBtn.Background = Brushes.Transparent;
             MaintModeBtn.Visibility = Visibility.Hidden;
             MaintMode = false;
-            S1ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S2ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S3ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S4ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S5ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S6ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S7ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S8ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S9ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S10ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S11ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S12ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S13ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S14ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S15ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S16ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S17ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S18ManSelectBtn.Background = Brushes.PaleGoldenrod;
-            S19ManSelectBtn.Background = Brushes.PaleGoldenrod;
 
             //Clear out Slitter Calib Text Changed in case value is entered but view of calibration is invisible
-            for (int x = 0; x < TM.MaxSlitters; x++)
-            {
-                TM.SlitterCalibTextChgd[x] = false;
-                TM.CalibrateCmdSelected[x] = false;
-                TM.ManualSelect[x] = false;
-            }
-           
+            OperatorNoTransferOffsetsToPLC();
+                    
         }
-
         #endregion
 
         private void CheckXMLFileExists()

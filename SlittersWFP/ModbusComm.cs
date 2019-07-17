@@ -52,8 +52,9 @@ namespace WSMBT
                 {
                     ModbusMessage = "Connected";
                 }
-           
-                return ModbusMessage;
+            
+            return ModbusMessage;
+            
 
         }
         /// <summary>
