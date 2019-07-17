@@ -6,7 +6,7 @@
       <Value Profile="(Default)">10.10.10.110</Value>
     </Setting>
     <Setting Name="MaxWidth" Type="System.Double" Scope="Application">
-      <Value Profile="(Default)">8514</Value>
+      <Value Profile="(Default)">8500</Value>
     </Setting>
     <Setting Name="MaxRollWidth" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">2500</Value>

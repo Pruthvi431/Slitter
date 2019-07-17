@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.1
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.2
     /// Drop Down boxes added for slitter disable and out of service
     /// </summary>
     
