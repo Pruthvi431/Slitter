@@ -3151,12 +3151,13 @@ namespace SlittersWPF
             OrderWidthTxtBx.Text = TM.TotalWidthNoShrk.ToString("F2");
             NumbOfRollsTxt.Text = Convert.ToString(TM.NumbOfRolls);
             TM.Shrinkage = 0.0;
-            ShrinkIncDecBtn.Value = 0.0;
+            ShrinkIncDecBtn.Value = ZeroOut;
             ShrinkIncDecBtn.Background = Brushes.LightCoral;
             AcceptBtn.Background = Brushes.Orange;
             for (int x = 0; x < 19; x++)
             {
                 TM.SlitterCalibTextChgd[x] = false;
+                TM.CalibrateOffsets[x] = ZeroOut;
             }
 
             Tmr1.Start();
@@ -4357,6 +4358,7 @@ namespace SlittersWPF
             {
                 TM.SlitterCalibTextChgd[x] = false;
                 TM.CalibrateCmdSelected[x] = false;
+                TM.CalibrateOffsets[x] = 0.0;
             }
 
         }

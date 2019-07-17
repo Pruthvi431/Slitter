@@ -304,6 +304,7 @@ namespace SlittersWPF
                 BladeStpt[ZeroStps] = 0.0;
                 SlitterCalibTextChgd[ZeroStps] = false;
                 CalibrateCmdSelected[ZeroStps] = false;
+                CalibrateOffsets[ZeroStps] = 0.0;
             }
             //Zero Out Selected Slitters before Selecting 
             for (int ZeroOut = 0; ZeroOut < MaxSlitters; ZeroOut++)
