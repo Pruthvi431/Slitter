@@ -23,7 +23,7 @@ using System.Configuration;
 namespace SlittersWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.2
+    /// Interaction logic for MainWindow.xaml Node 10.10.10.110 Version 5.6
     /// Drop Down boxes added for slitter disable and out of service
     /// </summary>
     
@@ -57,7 +57,10 @@ namespace SlittersWPF
         Boolean OutofToleranceDisable = false;
         Boolean MaintMode = false;
         public Boolean DisableBandCalibMsg = false;
-                  
+        Boolean RollCheckFlt = false;
+        Int32 Ctr = 0;
+        public String OrderInfo = "";
+
         #endregion
 
         public MainWindow()
@@ -357,8 +360,8 @@ namespace SlittersWPF
 
         {
             String plciptype = " Rx3i 10.10.10.110 ";
-            ModbusMessageTxtBx.Text = MB.ModbusOpenConnection();
-            ModbusMessageTxtBx.Text += plciptype;
+            plciptype += MB.ModbusOpenConnection();
+            SysMsgListBx.Items.Add(plciptype);
             CommunicatonPLCFailure = false;
         }
         #endregion
@@ -385,8 +388,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14024) Method LoadInitialPLCData \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14024) Method LoadInitialPLCData");
             }
 
             //Read Last Ten Slitters Position Starting Register - Number of Registers - 2 = return data to slitter Position Array
@@ -396,8 +398,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14060) Method LoadInitialPLCData \n";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14060) Method LoadInitialPLCData");
             }
 
             //Transfer data from Modbus object to PLc object and seperate data for slitter position feedback
@@ -415,8 +416,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14225) Method LoadInitialPLCData \n";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14225) Method LoadInitialPLCData");
             }
 
             //Read Last Ten Slitters Setpoints and Calibrate Setpoints Starting Register - Number of Registers - 4 = return data to slitter and calibrate setpoint Array
@@ -426,8 +426,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14261) Method LoadInitialPLCData \n";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14261) Method LoadInitialPLCData");
             }
 
             //Transfer data from Modbus object to PLc object and seperate data for slitter setpoints and calibrate setpoints
@@ -446,8 +445,7 @@ namespace SlittersWPF
             if (CmpResult == false && CommunicatonPLCFailure == false)
             {
                 MB.ModbusCloseConnection();
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14000) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14000) Method TimerCyle1");
 
             }
             // PLCControlBits used to use color of Band and Blade Text Box  - Convert single dimensional array to boolean multi-dimensional array
@@ -460,8 +458,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14205) Method LoadInitialPLCData \n";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14205) Method LoadInitialPLCData");
             }
 
             //Transfer data from Modbus object to PLc object and convert registers into array bits
@@ -520,19 +517,15 @@ namespace SlittersWPF
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ModbusMessageTxtBx.Text = "";
-                    ModbusMessageTxtBx.Foreground = Brushes.Green;
                     OpenModbusConnection();
                     TimerCycle1();
                     Tmr2.Stop();
                     break;
                 case MessageBoxResult.No:
-                    ModbusMessageTxtBx.Text = "Ping 10.10.10.110 to Verify Communication";
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
+                    SysMsgListBx.Items.Add("Ping 10.10.10.110 to Verify Communication");
                     break;
                 case MessageBoxResult.Cancel:
-                    ModbusMessageTxtBx.Text = "Ping 10.10.10.110 to Verify Communication";
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
+                    SysMsgListBx.Items.Add("Ping 10.10.10.110 to Verify Communication");
                     break;
             }
             
@@ -542,6 +535,13 @@ namespace SlittersWPF
         #region Timer Cycle 1
         private void TimerCycle1()
         {
+            //Counter for delays
+            Ctr++;
+            if(Ctr > 10)
+            {
+                Ctr = 0;
+            }
+
             dt = DateTime.Now;
             DateTimeTxtBx.Text = dt.ToString("f");
 
@@ -566,8 +566,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14025) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14025) Method TimerCyle1");
                 
 
             }
@@ -579,8 +578,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14061) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14061) Method TimerCyle1");
             }
 
             //Transfer data from Modbus object to PLc object and seperate data for slitter position feedback
@@ -597,14 +595,13 @@ namespace SlittersWPF
             if (CmpResult == false && CommunicatonPLCFailure == false)
             {
                 MB.ModbusCloseConnection();
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14150) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14150) Method TimerCyle1");
                 
             }
 
             //Update Fault table on Main Window
             UpdateFltMsgListBox();
-            //**************************NEW
+            
             //Read Command Registers Starting Register - Number of Registers - 6 = return data to slitter and calibrate setpoint Array - goes to CommandRegisters
             ReadMessage = MB.ReadHoldingRegisters(14204, 8, 6);
             CmpResult = string.Equals(ReadMessage, ConnectedMessage);
@@ -612,8 +609,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14205) Method LoadInitialPLCData \n";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14205) Method LoadInitialPLCData");
             }
 
             //Transfer data from Modbus object to PLc object and convert registers into array bits
@@ -623,54 +619,55 @@ namespace SlittersWPF
             //Check to see if out of service bits are on in plc during application startup
             TM.SlitterOutofServicePLC = PLC.BitReadOutofServiceCmd();
 
-            //*****************************New
-
             //Read PLC Control Registers R14000 eg. Slitter Auto Positing On. Writes data to PLcControlInputs[] in ModbusComm class
             ReadMessage = MB.ReadHoldingRegisters(13999, 2, 8);
             CmpResult = String.Equals(ReadMessage, ConnectedMessage);
             if (CmpResult == false && CommunicatonPLCFailure == false)
             {
                 MB.ModbusCloseConnection();
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14000) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14000) Method TimerCyle1");
 
             }
-            // PLCControlBits used to use color of Band and Blade Text Box  Use different bit  this bit flashes.
+            // PLCControlBits used to use color of Band and Blade Text Box  Use different bit  this bit flashes. [0,1] = Auto Positioning, pusles on and off - [0,4] STF to VFD On
             PLC.PLCControlBits = PLC.CntrlRegisterBitConverter(MB.PLcControlInputs);
             if (PLC.PLCControlBits[0,4])
             {
                 BandTxtBx.Background = Brushes.LightGreen;
                 BladeTxtBx.Background = Brushes.LightGreen;
                 TM.InPosWindow = 0.125;
-                
+                OrderInfoLbl.Background = Brushes.GreenYellow;
+                OrderInfoLbl.Content = "Positioning";
+
             }
             else
             {
                 BandTxtBx.Background = Brushes.Transparent;
                 BladeTxtBx.Background = Brushes.Transparent;
                 TM.InPosWindow = 1.00;
-                
-            }
-            //Auto Position Detected Toggles on and off when positioning. [0,1] = Auto Positioning, pusles on and off - [0,4] STF to VFD On
-            if (PLC.PLCControlBits[0, 4])
-            {
-                OrderInfoLbl.Background = Brushes.GreenYellow;
-                OrderInfoLbl.Content = "Positioning";
-            }
-            else 
-            {
                 OrderInfoLbl.Background = Brushes.Transparent;
                 OrderInfoLbl.Content = "Order Number";
+
             }
 
+            // Check Roll Setpoints to slitters selected - [0,4] STF to VFD On
+            if (!PLC.PLCControlBits[0, 4] && PLC.PLCControlBits[0, 15] && Ctr > 8 && RollCheckFlt)
+            {
+               Boolean CheckRollFault = TM.RollWidthCheck();
+                if (CheckRollFault)
+                {
+                    SysMsgListBx.Items.Add("Order Mismatch to Slitters");
+                    RollCheckFlt = false;
+                }
+            }
+
+           
             //Write PLC Control Writes to PLCWrites in MB
             ReadMessage = MB.ReadHoldingRegisters(14199, 2, 9);
             CmpResult = String.Equals(ReadMessage, ConnectedMessage);
             if (CmpResult == false && CommunicatonPLCFailure == false)
             {
                 MB.ModbusCloseConnection();
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14200) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14200) Method TimerCyle1");
 
             }
             PLC.PLCWriteControlBits = PLC.CntrlRegisterBitConverter(MB.PLCWrites);
@@ -684,8 +681,7 @@ namespace SlittersWPF
                 {
                     MB.ModbusCloseConnection();
                     CommunicatonPLCFailure = true;
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
-                    ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14200) Method TimerCycle1 \n ";
+                    SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14200) Method TimerCycle1");
 
                 }
             }
@@ -721,8 +717,7 @@ namespace SlittersWPF
             if (CmpResult == false && CommunicatonPLCFailure == false)
             {
                 MB.ModbusCloseConnection();
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14300) Method TimerCyle1 \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14300) Method TimerCyle1");
                 
             }
             // Transfer Modbus Registers to RollParam
@@ -737,8 +732,7 @@ namespace SlittersWPF
                 {
                     MB.ModbusCloseConnection();
                     CommunicatonPLCFailure = true;
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
-                    ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14196) Method SlitterLifeCycleResets \n ";
+                    SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14196) Method SlitterLifeCycleResets");
                 }
                 TimeSlice = 1;
             }
@@ -763,8 +757,7 @@ namespace SlittersWPF
                 {
                     MB.ModbusCloseConnection();
                     CommunicatonPLCFailure = true;
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
-                    ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14196) Method SlitterLifeCycleResets \n ";
+                    SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14196) Method SlitterLifeCycleResets");
                 }
 
                 TimeSlice = 0;
@@ -782,11 +775,10 @@ namespace SlittersWPF
         }
         #endregion
 
-        #region Wrap Order Calculatons on Order Sent
+        #region Wrap Order Calculations on Order Sent
 
         private void WrapOrderInit()
         {
-            Int32 SlitterCheck = 0;
             Boolean ActPosnCheck = false;
             Boolean ParkPosnCheck = false;
             Boolean ParkLimitCheck = false;
@@ -794,7 +786,7 @@ namespace SlittersWPF
             TM.ZeroOutWrapData();
             TM.ZeroOutSlitterData();
             TM.WrapData = DataSort.GetData();
-            OrderInfoTxtBx.Text = TCPServSocket.wraptext;
+            OrderInfo = TCPServSocket.wraptext;
             OrderNoTxtBx.Text = SortData.OrderNumber;
             OrderNoTxtBx.Background = Brushes.Transparent;
             TM.CalcRollParam();
@@ -805,7 +797,7 @@ namespace SlittersWPF
             NumbOfRollsTxt.Text = Convert.ToString(TM.NumbOfRolls);
             if (TM.TotalWidth > TM.MaxWidth)
             {
-                System.Windows.MessageBox.Show("Maximum Trim Exceeded");
+                SysMsgListBx.Items.Add("Maximum Trim Exceeded");
             }
             // Select Slittes Available for Cut fro True False Grid on Form6
             TM.SelectSlittersForCuts();
@@ -821,12 +813,8 @@ namespace SlittersWPF
             //Checks to ses if selected slitters matches number of cuts needed
             TM.CompareSlittersUsedToCuts();
 
-            //Select Best Solution from methods TotalActPosnMovement() and TotalParkMovement()
-            TM.SlitCutsUsedToRollCuts();
-                        
-            SlitterCheck = TM.SlitCutsUsedToRollCuts();
             //Check Calibration Position mode for alogorithum
-            if (((SlitterCheck == 2) || (SlitterCheck == 3) || (SlitterCheck == 6) || (SlitterCheck == 7)))
+            if ((TM.NumbOfRolls + 1) == TM.NumbOfSlitParkSelected)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -839,11 +827,12 @@ namespace SlittersWPF
                 if (ParkPosnCheck)
                 {
                     TM.BandStpt = TM.ParkPosnSp;
-                    
+                    SysMsgListBx.Items.Add("Solution ParkPosn Selected");
                 }
+                SelectedSolutionTxt.Text = "ParkPosn";
             }
             //Check Actual Position mode for alogorithum
-            if (((SlitterCheck == 1) || (SlitterCheck == 3) || (SlitterCheck == 5) || (SlitterCheck == 7)) && !ParkPosnCheck)
+            if ((TM.NumbOfRolls + 1) == TM.NumbOfSlitActPosSelected && !ParkPosnCheck)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -856,10 +845,12 @@ namespace SlittersWPF
                 if (ActPosnCheck)
                 {
                     TM.BandStpt = TM.ActPosnSp;
+                    SysMsgListBx.Items.Add("Solution ActPosn Selected");
                 }
+                SelectedSolutionTxt.Text = "ActPosn";
             }
             //Check Park Limit Position mode for alogorithum
-            if (((SlitterCheck == 4) || (SlitterCheck == 5) || (SlitterCheck == 6) || (SlitterCheck == 7)) && !ParkPosnCheck && !ActPosnCheck)
+            if (((TM.NumbOfRolls + 1) == TM.NumbOfslitParkSelectdLmt) && !ParkPosnCheck && !ActPosnCheck)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -868,16 +859,18 @@ namespace SlittersWPF
                 }
                 TM.ParkLmtSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectParkLmt);
                 TM.ParkLmtSp = TM.CalcBandStptsNotUsedParkLmt(TM.ParkLmtSpPartial, TM.BandParkLimitSelected);
-                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSpPartial);
+                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSp);
                 if (ParkLimitCheck)
                 {
                     TM.BandStpt = TM.ParkLmtSp;
+                    SysMsgListBx.Items.Add("Solution ParkLmt Selected");
                 }
+                SelectedSolutionTxt.Text = "ParkLmt";
             }
 
             if (!ActPosnCheck && !ParkPosnCheck && !ParkLimitCheck)
             {
-                System.Windows.MessageBox.Show("Solution not Possible, Try Swapping Rolls");
+                SysMsgListBx.Items.Add("Solution not Possible, Try Swapping Rolls");
 
             }
 
@@ -920,8 +913,7 @@ namespace SlittersWPF
                     {
                         MB.ModbusCloseConnection();
                         CommunicatonPLCFailure = true;
-                        ModbusMessageTxtBx.Foreground = Brushes.Red;
-                        ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14225) Method SlitterPLCWrites \n ";
+                        SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14225) Method SlitterPLCWrites");
                     }
 
                 //Write Last Ten Slitter Calibrate Offsets and Slitter Setpoints- Starting Register - Number of Registers 
@@ -931,8 +923,7 @@ namespace SlittersWPF
                     {
                          MB.ModbusCloseConnection();
                          CommunicatonPLCFailure = true;
-                         ModbusMessageTxtBx.Foreground = Brushes.Red;
-                         ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14261) Method SlitterPLCWrites \n ";
+                         SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14261) Method SlitterPLCWrites");
                     }
             // Pack Slitter Selected, CalibrateCmdSelected and SlitterOutofService into CmdWriteRegisters
             if (MaintMode)
@@ -957,9 +948,7 @@ namespace SlittersWPF
                     {
                         MB.ModbusCloseConnection();
                         CommunicatonPLCFailure = true;
-                        ModbusMessageTxtBx.Foreground = Brushes.Red;
-                        ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14205) Method SlitterPLCWrites \n ";
-                
+                        SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14205) Method SlitterPLCWrites");
                     }
             // Zero out Slitter Calibrate Commands
             if (TM.CmdOffsetChgd == true || TM.SlitOutOfServDetect == true)
@@ -983,8 +972,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14200) Method SlitterPLCWrites \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14200) Method SlitterPLCWrites");
 
             }
 
@@ -1021,9 +1009,7 @@ namespace SlittersWPF
                 {
                     MB.ModbusCloseConnection();
                     CommunicatonPLCFailure = true;
-                    ModbusMessageTxtBx.Foreground = Brushes.Red;
-                    ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14200) Method ZeroOutPLCComands \n ";
-                    //MessageBox.Show("14200, Connection Closed " + ReadMessage);
+                    SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14200) Method ZeroOutPLCComands");
                 }
                 CommandWritten = false;
             }
@@ -1041,8 +1027,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14205) Method ZeroOutPLCComands \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14205) Method ZeroOutPLCComands");
 
             }
                        
@@ -2945,13 +2930,13 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14200) Method ResetBtn_Click \n ";
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14200) Method ResetBtn_Click");
 
             }
             OutOfTolerance = false;
             FM.MsgReset();
             FltMsgListBx.Items.Clear();
+            SysMsgListBx.Items.Clear();
             Tmr1.Start();
 
             
@@ -2960,7 +2945,6 @@ namespace SlittersWPF
         private void AcceptBtn_Click(object sender, EventArgs e)
         {
 
-            Int32 SlitterCheck = 0;
             Boolean ActPosnCheck = false;
             Boolean ParkPosnCheck = false;
             Boolean ParkLimitCheck = false;
@@ -2985,7 +2969,7 @@ namespace SlittersWPF
 
             if (TM.TotalWidth > TM.MaxWidth)
             {
-                System.Windows.MessageBox.Show("Maximum Trim Exceeded");
+                SysMsgListBx.Items.Add("Maximum Trim Exceeded");
             }
             // Select Slittes Available for Cut fro True False Grid on Form6
             TM.SelectSlittersForCuts();
@@ -3001,9 +2985,9 @@ namespace SlittersWPF
             //Checks to ses if selected slitters matches number of cuts needed
             TM.CompareSlittersUsedToCuts();
 
-            SlitterCheck = TM.SlitCutsUsedToRollCuts();
+            // Not Used SlitterCheck = TM.SlitCutsUsedToRollCuts();
             //Check Calibration Position mode for alogorithum
-            if (((SlitterCheck == 2) || (SlitterCheck == 3) || (SlitterCheck == 6) || (SlitterCheck == 7)))
+            if ((TM.NumbOfRolls + 1) == TM.NumbOfSlitParkSelected)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -3016,11 +3000,12 @@ namespace SlittersWPF
                 if (ParkPosnCheck)
                 {
                     TM.BandStpt = TM.ParkPosnSp;
-
+                    SysMsgListBx.Items.Add("Solution ParkPosn Selected");
                 }
+                SelectedSolutionTxt.Text = "ParkPosn";
             }
             //Check Actual Position mode for alogorithum
-            if (((SlitterCheck == 1) || (SlitterCheck == 3) || (SlitterCheck == 5) || (SlitterCheck == 7)) && !ParkPosnCheck)
+            if ((TM.NumbOfRolls + 1) == TM.NumbOfSlitActPosSelected && !ParkPosnCheck)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -3033,10 +3018,12 @@ namespace SlittersWPF
                 if (ActPosnCheck)
                 {
                     TM.BandStpt = TM.ActPosnSp;
+                    SysMsgListBx.Items.Add("Solution ActPosn Selected");
                 }
+                SelectedSolutionTxt.Text = "ActPosn";
             }
             //Check Park Limit Position mode for alogorithum
-            if (((SlitterCheck == 4) || (SlitterCheck == 5) || (SlitterCheck == 6) || (SlitterCheck == 7)) && !ParkPosnCheck && !ActPosnCheck)
+            if (((TM.NumbOfRolls + 1) == TM.NumbOfslitParkSelectdLmt) && !ParkPosnCheck && !ActPosnCheck)
             {
                 for (int x = 0; x < TM.MaxSlitters; x++)
                 {
@@ -3045,16 +3032,18 @@ namespace SlittersWPF
                 }
                 TM.ParkLmtSpPartial = TM.CalcSelectedBandStpts(TM.SolutionSelectParkLmt);
                 TM.ParkLmtSp = TM.CalcBandStptsNotUsedParkLmt(TM.ParkLmtSpPartial, TM.BandParkLimitSelected);
-                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSpPartial);
+                ParkLimitCheck = TM.VerifySlitterSetpoints(TM.ParkLmtSp);
                 if (ParkLimitCheck)
                 {
                     TM.BandStpt = TM.ParkLmtSp;
+                    SysMsgListBx.Items.Add("Solution ParkLmt Selected");
                 }
+                SelectedSolutionTxt.Text = "ParkLmt";
             }
 
             if (!ActPosnCheck && !ParkPosnCheck && !ParkLimitCheck)
             {
-                System.Windows.MessageBox.Show("Solution not Possible, Try Swapping Rolls");
+                SysMsgListBx.Items.Add("Solution not Possible, Try Swapping Rolls");
 
             }
 
@@ -3101,7 +3090,7 @@ namespace SlittersWPF
             SlitterPLCWrites(97);
             ExecuteBtn.Background = Brushes.Transparent;
             TM.RollWidthChecker = TM.RollWidth;
-
+            RollCheckFlt = true;
         }
 
         private void CalibOrdBtn_Click(object sender, EventArgs e)
@@ -3443,9 +3432,7 @@ namespace SlittersWPF
             {
                 MB.ModbusCloseConnection();
                 CommunicatonPLCFailure = true;
-                ModbusMessageTxtBx.Foreground = Brushes.Red;
-                ModbusMessageTxtBx.Text += "Rx3i 10.10.10.110 Comm Failure (R14199) Method SlitterPLCWrites \n ";
-                //MessageBox.Show("14200, Connection Closed " + ReadMessage);
+                SysMsgListBx.Items.Add("Rx3i 10.10.10.110 Comm Failure (R14199) Method SlitterPLCWrites");
             }
 
             ZeroOutPLCCommands();
@@ -3466,6 +3453,11 @@ namespace SlittersWPF
             CleanOnBtn.Background = Brushes.Transparent;
             //Write Command Registers Clean Off = 128 Mode ***Bit to plc*** 128 
             SlitterPLCWrites(128);
+        }
+
+        private void WrapOrderbtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show(OrderInfo);
         }
 
         #endregion
@@ -3783,12 +3775,14 @@ namespace SlittersWPF
         #region Diagnostic Logic
         private void DiagReset()
         {
+            WrapOrderbtn.Visibility = Visibility.Hidden;
+            SolutionLbl.Visibility = Visibility.Hidden;
+            SelectedSolutionTxt.Visibility = Visibility.Hidden;
             ShrinkTxtLbl.Visibility = Visibility.Hidden;
             CleanOnBtn.Visibility = Visibility.Hidden;
             CLeanOffBtn.Visibility = Visibility.Hidden;
             LoadParambtn.Visibility = Visibility.Hidden;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Hidden;
-            OrderInfoTxtBx.Visibility = Visibility.Hidden;
             NoRollsLbl.Visibility = Visibility.Hidden;
             NumbOfRollsTxt.Visibility = Visibility.Hidden;
             ActCtsLbl.Visibility = Visibility.Hidden;
@@ -4434,13 +4428,16 @@ namespace SlittersWPF
         }
         private void DiagChkBx_Checked(object sender, RoutedEventArgs e)
         {
+            SysMsgListBx.Items.Add("Diagnostics On");
             DiagOn = true;
+            WrapOrderbtn.Visibility = Visibility.Visible;
+            SolutionLbl.Visibility = Visibility.Visible;
+            SelectedSolutionTxt.Visibility = Visibility.Visible;
             ShrinkTxtLbl.Visibility = Visibility.Visible;
             CleanOnBtn.Visibility = Visibility.Visible;
             CLeanOffBtn.Visibility = Visibility.Visible;
             LoadParambtn.Visibility = Visibility.Visible;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Visible;
-            OrderInfoTxtBx.Visibility = Visibility.Visible;
             NoRollsLbl.Visibility = Visibility.Visible;
             NumbOfRollsTxt.Visibility = Visibility.Visible;
             ActCtsLbl.Visibility = Visibility.Visible;
@@ -4562,13 +4559,16 @@ namespace SlittersWPF
 
         private void DiagChkBx_Unchecked(object sender, RoutedEventArgs e)
         {
+            SysMsgListBx.Items.Add("Diagnostics Off");
             DiagOn = false;
+            WrapOrderbtn.Visibility = Visibility.Hidden;
+            SolutionLbl.Visibility = Visibility.Hidden;
+            SelectedSolutionTxt.Visibility = Visibility.Hidden;
             LoadParambtn.Visibility = Visibility.Hidden;
             TransferOffsetsToPLCBtn.Visibility = Visibility.Hidden;
             ShrinkTxtLbl.Visibility = Visibility.Hidden;
             CleanOnBtn.Visibility = Visibility.Hidden;
             CLeanOffBtn.Visibility = Visibility.Hidden;
-            OrderInfoTxtBx.Visibility = Visibility.Hidden;
             NoRollsLbl.Visibility = Visibility.Hidden;
             ActCtsLbl.Visibility = Visibility.Hidden;
             ParkLimitLbl.Visibility = Visibility.Hidden;
@@ -4964,5 +4964,7 @@ namespace SlittersWPF
             S19ComboBox.Width = ComboboxWidthMouseLeave;
         }
         #endregion
+
+        
     }
 }
