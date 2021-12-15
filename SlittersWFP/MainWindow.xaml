@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlittersWPF"
         mc:Ignorable="d"  FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="20"
-        Title="ANC SLITTER OPTIMIZER Version 5.2" Height="1080" Width="1920">
+        Title="ANC SLITTER OPTIMIZER Version 5.6" Height="1080" Width="1920">
     <Window.Resources>
         <ControlTemplate x:Key="SlitterTxt" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}"   
@@ -17,7 +17,7 @@
         </ControlTemplate>
     </Window.Resources>
     <Border Margin= "5 10 5 5" Background="DarkGray" >
-        <Grid>
+        <Grid Margin="0,-6,0,6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="211*"/>
                 <ColumnDefinition Width="230*"/>
@@ -31,20 +31,30 @@
                 <!-- Slitter Version Top Row-->
                 <Grid>
                     <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width="62*" />
-                        <ColumnDefinition Width="139*"/>
-                        <ColumnDefinition Width="201*" />
-                        <ColumnDefinition Width="201*" />
-                        <ColumnDefinition Width="202*" />
-                        <ColumnDefinition Width="201*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name ="OrderInfoTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="This holds order information coming from Wrapline" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue" TextWrapping="Wrap"/>
-                    <TextBox x:Name ="ModbusMessageTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Captures Communication Failures for Rx3i PLC" Grid.Column="4" Grid.ColumnSpan="2" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue"/>
-                    <TextBox x:Name ="DateTimeTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Date Time" Grid.Column="5" Margin="10,10,0,36" HorizontalAlignment="Left" Background="LightBlue"/>
+                    <ListBox x:Name="SysMsgListBx" Height="150" Background="Transparent" Foreground="Black" Grid.Column="3" Grid.ColumnSpan="3" FontFamily="Segoe UI" FontWeight="DemiBold" FontSize="16"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="Rolls" Template="{StaticResource SlitterTxt}" Grid.Column="0" HorizontalContentAlignment="Center" FontSize="14" Margin="0" HorizontalAlignment="Left" />
+                    <TextBox x:Name ="DateTimeTxtBx" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Date Time" Grid.Column="6" Margin="0" HorizontalAlignment="Left" Background="Transparent"/>
                 </Grid>
 
-
-                <TextBox Text="Rolls" Template="{StaticResource SlitterTxt}" HorizontalContentAlignment="Center" FontSize="14" Margin="0" HorizontalAlignment="Left" />
+                
 
 
                 <!-- Configuraton for Order Text Boxes -->
@@ -797,6 +807,9 @@
                     <TextBox x:Name="TotalParkSlitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Park" Margin="100 10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
                     <Label x:Name="ParkLimitLbl" Content="Park Posn LImit" Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="TotalParkSlitLimitTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Total Slit Max Lmt" Margin="100 10" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
+                    <Label x:Name="SolutionLbl" Content="Solution" Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="SelectedSolutionTxt" Template="{StaticResource SlitterTxt}" IsReadOnly="True" Text="Solution" Margin="20 10" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalContentAlignment="Center" Background="LightGreen"/>
+                    <Button x:Name="WrapOrderbtn" Content="Roll Order" Style="{DynamicResource SlitterBtn}"  Grid.Column="5" Grid.Row="2" Margin="60 0" Click="WrapOrderbtn_Click" />
                     <Button x:Name="SlitterAppExit" Content="Exit Prog" Style="{DynamicResource SlitterBtn}" Grid.Column="6" Grid.Row="2" Margin="60 0" Click="SlitterAppExit_Click"/>
                 </Grid>
 

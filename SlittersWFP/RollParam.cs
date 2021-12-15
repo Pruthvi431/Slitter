@@ -403,7 +403,7 @@ namespace SlittersWPF
 
         }
 
-        // Select Slitter for Cuts. Every slitter is evaluated for True and False depending on lower and upper limits >>>>>>>>>>>>>>>>>>
+        // Select Slitter for Cuts. Every slitter is evaluated for each cut. Slitter can be selected for several cuts.  True and False depending on lower and upper limits. i3 = cuts and j1 = slitters>>>>>>>>>>>>>>>>>>
         public void SelectSlittersForCuts()
         {
             for (int i3 = 0; i3 < MaxSlitters; i3++)
@@ -421,7 +421,7 @@ namespace SlittersWPF
         public void SelectslitterforCutsParkPosn()
         {
 
-            //Cycle through how many cuts in set
+            //Cycle through how many cuts in set.  Ignore Cut 0 and Slit 0 (Slitter 1) because it's is selected and setpoint assigned.
             for (int x = 1; x < NumbOfRolls; x++)
             {
                 MaxRollWidth = 8500.0;
@@ -558,35 +558,6 @@ namespace SlittersWPF
             }
         }
 
-        public Int32 SlitCutsUsedToRollCuts()
-        {
-            ActPosnCuts = 0;
-            ParkPosnCuts = 0;
-            ParkLmtCuts = 0;
-            Int32 SolutionCheck = 0;
-
-            if (((NumbOfRolls + 1) == NumbOfSlitActPosSelected))
-            {
-                //SolutionSelect = SolutionSelectAct;
-                ActPosnCuts = NumbOfRolls + 1;
-                SolutionCheck = SolutionCheck + 1;
-            }
-            if (((NumbOfRolls + 1) == NumbOfSlitParkSelected))
-            {
-                //SolutionSelect = SolutionSelectPark;
-                ParkPosnCuts = NumbOfRolls + 1;
-                SolutionCheck = SolutionCheck + 2;
-            }
-            if ((NumbOfRolls + 1) == NumbOfslitParkSelectdLmt)
-            {
-                //SolutionSelect = SolutionSelectParkLmt;
-                ParkLmtCuts = NumbOfRolls + 1;
-                SolutionCheck = SolutionCheck + 4;
-            }
-
-            return SolutionCheck;
-        }
-
         //Calculate Band Setpoints
         public double[] CalcSelectedBandStpts(bool[,] SlitterSolution)
         {
@@ -665,6 +636,7 @@ namespace SlittersWPF
 
 
         }
+
         // Calculate Setpoint for Slitters not used.  
         public double[] CalcBandStptsNotUsedParkPosn(double[] SetpointBandParkPosn, bool[] Sel)
         {
@@ -772,6 +744,7 @@ namespace SlittersWPF
 
 
         }
+
         // Verify Slitter Setpoints are minimum 153.00 mm apart. zero out solutionselect and slittersselected
         public Boolean VerifySlitterSetpoints(double[] VerifyBandStpts)
         {

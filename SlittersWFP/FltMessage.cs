@@ -15,6 +15,7 @@ namespace SlittersWPF
     {
         public int MaxNumMessages = 144;
         public String[] FaultMsg = new String[144];
+        public String[] SystemMsg = new string[20];
         //Constructor
         public FltMessage()
         {
@@ -285,6 +286,33 @@ namespace SlittersWPF
             FaultMsg[143] = "FLT3144: Slit #19 Overload OverTemp Fault";            //R14158 Bit 16
 
             return FaultMsg;
+        }
+
+        public String SystemFaultMessages(Int32 SystemMsgNo)
+        {
+
+            SystemMsg[SystemMsgNo] = "System Msg 0:";
+            SystemMsg[SystemMsgNo] = "System Msg 1:";
+            SystemMsg[SystemMsgNo] = "System Msg 2:";
+            SystemMsg[SystemMsgNo] = "System Msg 3:";
+            SystemMsg[SystemMsgNo] = "System Msg 4:";
+            SystemMsg[SystemMsgNo] = "System Msg 5:";
+            SystemMsg[SystemMsgNo] = "System Msg 6:";
+            SystemMsg[SystemMsgNo] = "System Msg 7:";
+            SystemMsg[SystemMsgNo] = "System Msg 8:";
+            SystemMsg[SystemMsgNo] = "System Msg 9:";
+            SystemMsg[SystemMsgNo] = "System Msg 10:";
+            SystemMsg[SystemMsgNo] = "System Msg 11:";
+            SystemMsg[SystemMsgNo] = "System Msg 12:";
+            SystemMsg[SystemMsgNo] = "System Msg 13:";
+            SystemMsg[SystemMsgNo] = "System Msg 14:";
+            SystemMsg[SystemMsgNo] = "System Msg 15:";
+            SystemMsg[SystemMsgNo] = "System Msg 16:";
+            SystemMsg[SystemMsgNo] = "System Msg 17:";
+            SystemMsg[SystemMsgNo] = "System Msg 18:";
+            SystemMsg[SystemMsgNo] = "System Msg 19:";
+
+            return SystemMsg[SystemMsgNo];
         }
     }
 }

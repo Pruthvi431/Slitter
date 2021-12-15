@@ -1,0 +1,15 @@
+To simplify the interface, I have created a new table - [production].[winder_set] in the production database. Just add roll widths to that table for each completed set.
+The table has the following columns
+
+pattern_no              - pattern number sent by JVCS interface
+pattern_set_no          - sequential set number (restarts with new pattern)
+position_no             - roll position
+width                    - roll width in cm
+grade_code              - grade code sent by JVCS
+diameter                - set diameter
+date_created            - date when the set was completed
+
+You can fill and clean the table for testing purposes. That will not cause any side effect.
+
+Regards,
+Vladimir Lvov
